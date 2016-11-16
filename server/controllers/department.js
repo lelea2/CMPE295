@@ -17,7 +17,7 @@ module.exports = {
     };
     Department.create(reqBody)
       .then(function (newDepartment) {
-        res.status(200).json(newDepartment);
+        res.status(201).json(newDepartment);
       })
       .catch(function (error) {
         res.status(500).json(error);
