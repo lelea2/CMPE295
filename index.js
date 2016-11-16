@@ -19,7 +19,9 @@ var express = require('express'),
     csrfCrypto = require('csrf-crypto'),
     expressHbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
-    routes = require('./app/routes');
+    routes = require('./app/routes'),
+    departments = require('./server/controllers/department');
+
 
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
@@ -63,6 +65,12 @@ app.get('*', express.static(path.join(__dirname, 'public'), { maxAge: oneWeek })
 /***************** API Routing ***********************/
 /*****************************************************/
 
+//Department
+app.get('/api/departments', departments.showall);
+app.get('/api/departments/:id', departments.show);
+app.post('/api/departments', departments.create);
+app.put('/api/departments/:id', departments.update);
+app.delete('/api/departments/:id', departments.delete);
 
 /*****************************************************/
 /***************** Views Routing *********************/

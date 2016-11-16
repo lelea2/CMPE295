@@ -26,8 +26,18 @@ module.exports = {
 
   show(req, res) {
     Department.findById(req.params.id)
-    .then(function (user) {
-      res.status(200).json(user);
+    .then(function (department) {
+      res.status(200).json(department);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
+  showall(req, res) {
+    Department.findAll()
+    .then(function (departments) {
+      res.status(200).json(departments);
     })
     .catch(function (error) {
       res.status(500).json(error);
