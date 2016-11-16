@@ -1,0 +1,24 @@
+{
+  "name": "cmpe295-project",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Khanh Dao"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "angular-ui": "^0.4.0",
+    "angular-ui-mask": "^1.8.7"
+  }
+}
