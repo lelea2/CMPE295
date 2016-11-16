@@ -13,7 +13,8 @@ module.exports = {
       description: data.description,
       phone: data.phone,
       group_email: data.group_email,
-      unique_code: data.unique_code
+      unique_code: data.unique_code,
+      department_id: req.params.department_id
     };
     Office.create(reqBody)
       .then(function (newOffice) {
@@ -25,7 +26,11 @@ module.exports = {
   },
 
   showall(req, res) {
-    Office.findAll()
+    Office.findAll({
+      where: {
+        department_id: req.params.department_id
+      }
+    })
     .then(function (offices) {
       res.status(200).json(offices);
     })

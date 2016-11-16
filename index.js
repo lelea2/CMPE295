@@ -20,8 +20,8 @@ var express = require('express'),
     expressHbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     routes = require('./app/routes'),
-    departments = require('./server/controllers/department');
-
+    departments = require('./server/controllers/department'),
+    offices = require('./server/controllers/office');
 
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
@@ -71,6 +71,11 @@ app.get('/api/departments/:id', departments.show);
 app.post('/api/departments', departments.create);
 app.put('/api/departments/:id', departments.update);
 app.delete('/api/departments/:id', departments.delete);
+
+//Offices
+app.post('/api/departments/:department_id/offices', offices.create);
+app.get('/api/departments/:department_id/offices', offices.showall);
+
 
 /*****************************************************/
 /***************** Views Routing *********************/

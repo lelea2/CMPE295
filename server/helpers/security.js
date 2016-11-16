@@ -3,7 +3,7 @@
 var Cookies = require('cookies'),
     crypto = require('crypto'),
     scheme = 'aes-256-cbc',
-    key = 'cmpe281secret',
+    key = 'cmpe295finalsecret',
     USER_COOKIE = 'u',
     TTL = 15 * 24 * 3600 * 1000; //15 days
 
