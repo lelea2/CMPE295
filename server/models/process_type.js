@@ -1,21 +1,19 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Permissions = sequelize.define('Permissions', {
+  var ProcessTypes = sequelize.define('ProcessTypes', {
     id: {
       type: DataTypes.STRING,
       primaryKey: true
     },
-    manage_member: DataTypes.BOOLEAN,
-    manage_read: DataTypes.BOOLEAN,
-    manage_delete: DataTypes.BOOLEAN
+    name: DataTypes.STRING,
+    description: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
       }
-    },
-    timestamp: false
+    }
   });
-  return Permissions;
+  return ProcessTypes;
 };

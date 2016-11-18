@@ -1,6 +1,6 @@
 'use strict';
 
-var Office = require('../models/').Offices;
+var Tag = require('../models/').Tags;
 var uuid = require('node-uuid');
 
 module.exports = {
@@ -10,31 +10,34 @@ module.exports = {
     var reqBody = {
       id: uuid.v4(),
       name: data.name,
-      description: data.description,
-      phone: data.phone,
-      group_email: data.group_email,
-      unique_code: data.unique_code,
-      department_id: req.params.department_id
+      description: data.description
     };
-    Office.create(reqBody)
-      .then(function (newOffice) {
-        res.status(201).json(newOffice);
+    Tag.create(reqBody)
+      .then(function (newTag) {
+        res.status(201).json(newTag);
       })
       .catch(function (error) {
         res.status(500).json(error);
       });
   },
 
+  showall(req, res) {
+    Tag.findAll()
+    .then(function (tags) {
+      res.status(200).json(tags);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   update(req, res) {
     var data = req.body;
     var reqBody = {
       name: data.name,
-      description: data.description,
-      phone: data.phone,
-      group_email: data.group_email,
-      unique_code: data.unique_code
+      description: data.description
     };
-    Office.update(reqBody, {
+    Tag.update(reqBody, {
       where: {
         id: req.params.id
       }
@@ -47,22 +50,8 @@ module.exports = {
     });
   },
 
-  showall(req, res) {
-    Office.findAll({
-      where: {
-        department_id: req.params.department_id
-      }
-    })
-    .then(function (offices) {
-      res.status(200).json(offices);
-    })
-    .catch(function (error) {
-      res.status(500).json(error);
-    });
-  },
-
   delete(req, res) {
-    Office.destroy({
+    Tag.destroy({
       where: {
         id: req.params.id
       }
@@ -74,5 +63,4 @@ module.exports = {
       res.status(500).json(error);
     });
   }
-
-}
+};
