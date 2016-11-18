@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     password: DataTypes.STRING,
-    isAdmin: DataTypes.BOOLEAN //system admin key
+    isAdmin: DataTypes.BOOLEAN//system admin key
   }, {
     classMethods: {
       associate: function(models) {
