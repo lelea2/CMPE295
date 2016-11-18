@@ -4,7 +4,7 @@ var User = require('../models/').Users;
 var Role = require('../models/').Roles;
 var Membership = require('../models/').Memberships;
 var uuid = require('node-uuid');
-var passwordHelpers = require('../helpers/passwordHelpers');
+var passwordHelpers = require('../helpers/passwordHelper');
 var security = require('../helpers/security');
 
 module.exports = {

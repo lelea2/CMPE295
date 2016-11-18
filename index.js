@@ -22,7 +22,8 @@ var express = require('express'),
     routes = require('./app/routes'),
     departments = require('./server/controllers/department'),
     offices = require('./server/controllers/office'),
-    tags = require('./server/controllers/tag');
+    tags = require('./server/controllers/tag'),
+    users = require('./server/controllers/user');
 
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
@@ -77,11 +78,16 @@ app.delete('/api/departments/:id', departments.delete);
 app.post('/api/departments/:department_id/offices', offices.create);
 app.get('/api/departments/:department_id/offices', offices.showall);
 
-//Get Tags
+//Tags
 app.get('/api/tags', tags.showall);
 app.post('/api/tags', tags.create);
 app.post('/api/tags/:id', tags.update);
 app.delete('/api/tags/:id', tags.delete);
+
+//Account
+app.post('/api/accounts', users.create);
+app.post('/api/login', users.login);
+
 
 /*****************************************************/
 /***************** Views Routing *********************/
