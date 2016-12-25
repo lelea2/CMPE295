@@ -25,3 +25,15 @@ exports.signin = function(req, res, next) {
     res.send(minifyHTML(html));
   });
 };
+
+//Display intro page
+exports.intro = function(req, res, next) {
+
+  res.render('intro', { title: 'LinkedGov', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
