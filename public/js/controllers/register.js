@@ -1,4 +1,4 @@
-App.controller('signinController', ['$scope', '$http', function ($scope, $http) {
+App.controller('registerController', ['$scope', '$http', function ($scope, $http) {
   $scope.formSigninData = {};
   $scope.formSignupData = {};
 

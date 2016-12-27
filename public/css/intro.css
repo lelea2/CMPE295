@@ -5,6 +5,10 @@ body {
   background-color: #4A5459;
 }
 
+.container {
+  padding-top: 0;
+}
+
 span.period {
   display: inline-block;
   width: 12px;
@@ -13,3 +17,41 @@ span.period {
   border-radius: 50%;
   margin: 5px;
 }
+
+.register-form {
+  max-width: 550px;
+  margin: 440px auto 10px auto;
+  color: #fff;
+}
+
+.register-form a {
+  color: #00cc6a;
+  cursor: pointer;
+}
+
+.register-form button,
+.register-form button:focus,
+.register-form button:hover {
+  background: #00cc6a;
+  border: #00cc6a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.register-form h2 {
+  font-size: 26px;
+  color: #fff;
+}
+
+.register-form input {
+  border-radius: 0;
+}
+
+.register-form input:first-child {
+  border-radius: 3px 3px 0 0;
+}
+
+.register-form input:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
