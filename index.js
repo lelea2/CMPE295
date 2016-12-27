@@ -16,6 +16,7 @@ var express = require('express'),
     path = require('path'),
     compression = require('compression'),
     cookieParser = require('cookie-parser'),
+    swagger = require('swagger-express'), //swagger for API view
     csrfCrypto = require('csrf-crypto'),
     expressHbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
@@ -44,6 +45,22 @@ app.use(function(req, res, next) {
   // res.locals._userId = security.getUserId(req) || '';
   next();
 });
+
+//Allow origin
+app.all('/*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.use(swagger.init(app, {
+  apiVersion: '1.0',
+  swaggerVersion: '1.0',
+  basePath: 'http://localhost:3000',
+  swaggerURL: '/swagger',
+  swaggerJSON: '/api-docs.json',
+  swaggerUI: './public/swagger/',
+  apis: ['./api.js']
+}));
 
 //Using handlebar helper on both client and server side
 //http://codyrushing.com/using-handlebars-helpers-on-both-client-and-server/

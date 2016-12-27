@@ -30,5 +30,6 @@ DATABASE_PW=
 * Neo4j
 * Sequelize
 * ExpressJS
+* Swagger
 * Angular
 * HandleBar
