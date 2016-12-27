@@ -17,6 +17,7 @@ var express = require('express'),
     compression = require('compression'),
     cookieParser = require('cookie-parser'),
     swagger = require('swagger-express'), //swagger for API view
+    api = require('./api'), //API endpoint
     csrfCrypto = require('csrf-crypto'),
     expressHbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
