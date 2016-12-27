@@ -33,8 +33,8 @@ body {
 }
 
 .footer {
-  padding-top: 1.5rem;
-  color: #777;
-  text-align: center;
-  border-top: 1px solid #e5e5e5;
+  padding: 1.5em;
+  color: #fff;
+  text-align: left;
+  border-top: 1px solid #60707e;
 }
