@@ -1,0 +1,15 @@
+body {
+  background-image: url('../images/bg.png');
+  background-repeat: repeat-x;
+  background-size: 100% ;
+  background-color: #4A5459;
+}
+
+span.period {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #444;
+  border-radius: 50%;
+  margin: 5px;
+}

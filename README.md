@@ -7,7 +7,9 @@
 ```
 //Install node from https://nodejs.org/en/download/
 
+bower i
 npm i
+
 PORT=8000 nodemon index.js
 
 ```
