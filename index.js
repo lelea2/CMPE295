@@ -53,10 +53,11 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
+//Configure for swagger view
 app.use(swagger.init(app, {
   apiVersion: '1.0',
   swaggerVersion: '1.0',
-  basePath: 'http://localhost:3000',
+  basePath: 'http://localhost:' + (process.env.PORT || '8000'),
   swaggerURL: '/swagger',
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',
