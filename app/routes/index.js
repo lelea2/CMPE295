@@ -37,3 +37,15 @@ exports.intro = function(req, res, next) {
     res.send(minifyHTML(html));
   });
 };
+
+//Display dashboard page
+exports.dashboard = function(req, res, next) {
+
+  res.render('dashboard', { title: 'Dashboard', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
