@@ -1,8 +1,6 @@
 'use strict';
 
-var User = require('../models/').Users;
-var Role = require('../models/').Roles;
-var Membership = require('../models/').Memberships;
+var Customer = require('../models/').Customers;
 var uuid = require('node-uuid');
 var passwordHelpers = require('../helpers/passwordHelper');
 var security = require('../helpers/security');
@@ -21,9 +19,9 @@ module.exports = {
       lastName: data.lastName,
       password: hashPassword
     };
-    User.create(reqBody)
-      .then(function (newUser) {
-        res.status(201).json(newUser);
+    Customer.create(reqBody)
+      .then(function (newCustomer) {
+        res.status(201).json(newCustomer);
       })
       .catch(function (error) {
         res.status(500).json(error);
@@ -32,13 +30,13 @@ module.exports = {
 
   login(req, res) {
     var data = req.body;
-    User.findOne({
+    Customer.findOne({
       where: {
         email: data.email
       }
-    }).then(function(user) {
-      if (user) {
-        res.status(200).json(user);
+    }).then(function(customer) {
+      if (customer) {
+        res.status(200).json(customer);
       } else {
         res.status(500).json({
           errorCode: 4003,
@@ -60,7 +58,7 @@ module.exports = {
     if (data.password) {
       reqBody.password = passwordHelpers.hashPassword(data.password);
     }
-    User.update(reqBody, {
+    Customer.update(reqBody, {
       where: {
         id: req.params.id
       }

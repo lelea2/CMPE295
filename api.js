@@ -1,6 +1,6 @@
 /**
  * @swagger
- * resourcePath: /apiJs
+ * resourcePath: /api
  * description: All about API
  */
 
