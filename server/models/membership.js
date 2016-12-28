@@ -9,7 +9,10 @@ module.exports = function(sequelize, DataTypes) {
     group_id: {
       type: DataTypes.STRING
     },
-    group_type: DataTypes.ENUM('department', 'office')
+    group_type: DataTypes.ENUM('department', 'office'),
+    role_id: DataTypes.INTEGER,
+    permission_id: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
