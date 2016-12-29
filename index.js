@@ -44,6 +44,7 @@ app.use(cookieParser('keycatboard'));
 //Set up userId
 app.use(function(req, res, next) {
   // res.locals._userId = security.getUserId(req) || '';
+  res.locals._currentYear = new Date().getFullYear();
   next();
 });
 

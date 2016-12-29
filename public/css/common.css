@@ -79,6 +79,24 @@ h1 {
   color: #4A5459;
 }
 
+.left-rail .nav {
+  height: calc(100% - 100px);
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.left-rail .nav .nav-second-level a {
+  padding-left: 37px;
+}
+
+.left-rail .sidebar > ul > li {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.nav > li > a {
+  padding: 15px;
+}
+
 .footer {
   padding: 1.5em;
   color: #fff;

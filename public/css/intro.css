@@ -47,11 +47,11 @@ span.period {
   border-radius: 0;
 }
 
-.register-form input:first-child {
+.register-form input.first {
   border-radius: 3px 3px 0 0;
 }
 
-.register-form input:last-child {
+.register-form input.last {
   border-radius: 0 0 3px 3px;
 }
 
