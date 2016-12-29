@@ -29,7 +29,7 @@ exports.signin = function(req, res, next) {
 //Display intro page
 exports.intro = function(req, res, next) {
 
-  res.render('intro', { title: 'LinkedGov', layout: 'main' }, function (err, html) {
+  res.render('intro', { title: 'Register', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);
@@ -42,6 +42,42 @@ exports.intro = function(req, res, next) {
 exports.dashboard = function(req, res, next) {
 
   res.render('dashboard', { title: 'Dashboard', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display create_department page
+exports.create_department = function(req, res, next) {
+
+  res.render('create_department', { title: 'Configure Department', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display create_department page
+exports.create_office = function(req, res, next) {
+
+  res.render('create_office', { title: 'Configure Office', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display create_agent page
+exports.create_agent = function(req, res, next) {
+
+  res.render('create_agent', { title: 'Configure Agent', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);

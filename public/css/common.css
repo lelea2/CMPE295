@@ -81,7 +81,7 @@ h1 {
 
 .left-rail .nav {
   height: calc(100% - 100px);
-  max-height: 550px;
+  max-height: 560px;
   overflow-y: auto;
 }
 
