@@ -1,4 +1,4 @@
-### CMPE295
+### CMPE295 - LinkedGov
 
 ##### Government social network and workflow defined
 
@@ -7,9 +7,11 @@
 ```
 //Install node from https://nodejs.org/en/download/
 
+### set up application
 bower i
 npm i
 
+### Run application
 PORT=8000 nodemon index.js
 
 ```
@@ -33,3 +35,4 @@ DATABASE_PW=
 * Swagger
 * Angular
 * HandleBar
+* Twitter Bootstrap

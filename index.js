@@ -114,6 +114,13 @@ app.post('/api/login', users.login);
 /*****************************************************/
 app.get('/', routes.intro);
 app.get('/dashboard', routes.dashboard);
+app.get('/create_department', routes.create_department);
+app.get('/create_office', routes.create_office);
+app.get('/create_agent', routes.create_agent);
+app.get('/departments', routes.departments);
+app.get('/offices', routes.offices);
+app.get('/agents', routes.agents);
+
 
 /***************************************************************/
 /******************* Run the app               *****************/

@@ -16,7 +16,6 @@ function minifyHTML(html) {
 
 //Display signin page
 exports.signin = function(req, res, next) {
-
   res.render('signin', { title: 'Register', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
@@ -28,7 +27,6 @@ exports.signin = function(req, res, next) {
 
 //Display intro page
 exports.intro = function(req, res, next) {
-
   res.render('intro', { title: 'Register', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
@@ -40,7 +38,6 @@ exports.intro = function(req, res, next) {
 
 //Display dashboard page
 exports.dashboard = function(req, res, next) {
-
   res.render('dashboard', { title: 'Dashboard', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
@@ -52,7 +49,6 @@ exports.dashboard = function(req, res, next) {
 
 //Display create_department page
 exports.create_department = function(req, res, next) {
-
   res.render('create_department', { title: 'Configure Department', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
@@ -64,7 +60,6 @@ exports.create_department = function(req, res, next) {
 
 //Display create_department page
 exports.create_office = function(req, res, next) {
-
   res.render('create_office', { title: 'Configure Office', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
@@ -76,7 +71,6 @@ exports.create_office = function(req, res, next) {
 
 //Display create_agent page
 exports.create_agent = function(req, res, next) {
-
   res.render('create_agent', { title: 'Configure Agent', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
@@ -85,3 +79,37 @@ exports.create_agent = function(req, res, next) {
     res.send(minifyHTML(html));
   });
 };
+
+//Display departments page
+exports.departments = function(req, res, next) {
+  res.render('departments', { title: 'Departments', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display offices page
+exports.offices = function(req, res, next) {
+  res.render('offices', { title: 'Offices', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display agents page
+exports.agents = function(req, res, next) {
+  res.render('agents', { title: 'Agents', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
