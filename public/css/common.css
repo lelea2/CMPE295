@@ -106,6 +106,17 @@ h1 {
   height: 100%;
 }
 
+.middle-rail {
+  margin-left: 250px;
+  width: calc(100% - 480px);
+}
+
+.middle-rail h3 {
+  margin: 15px;
+  color: #4c4a48;
+  font-weight: 300;
+}
+
 .footer {
   padding: 1.5em;
   color: #fff;
