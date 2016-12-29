@@ -117,10 +117,11 @@ app.get('/dashboard', routes.dashboard);
 app.get('/create_department', routes.create_department);
 app.get('/create_office', routes.create_office);
 app.get('/create_agent', routes.create_agent);
+app.get('/create_workflow', routes.create_workflow);
+app.get('/create_task', routes.create_task);
 app.get('/departments', routes.departments);
 app.get('/offices', routes.offices);
 app.get('/agents', routes.agents);
-
 
 /***************************************************************/
 /******************* Run the app               *****************/

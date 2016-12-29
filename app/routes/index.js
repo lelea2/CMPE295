@@ -80,6 +80,28 @@ exports.create_agent = function(req, res, next) {
   });
 };
 
+//Display create_workflow page
+exports.create_workflow = function(req, res, next) {
+  res.render('create_workflow', { title: 'Configure Workflow', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display create_task page
+exports.create_task = function(req, res, next) {
+  res.render('create_task', { title: 'Configure Task', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
 //Display departments page
 exports.departments = function(req, res, next) {
   res.render('departments', { title: 'Departments', layout: 'main' }, function (err, html) {
