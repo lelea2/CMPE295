@@ -1,3 +1,70 @@
-<div class="left-rail">
-
+<div class="visible-md visible-lg left-rail" role="navigation" ng-controller="leftRailController" data-ng-init="init()">
+  <div class="sidebar sidebar-nav navbar-collapse">
+    <div class="heading">
+      <h2><span>Linked<span><span class="circle"></span><span><b>Gov</b></span></h2>
+    </div>
+    <ul class="nav" id="side-menu">
+      <li>
+        <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+      </li>
+      <li>
+        <a><i class="fa fa-bar-chart-o fa-fw"></i> Manage Tasks <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <a href="/tasks">View Tasks</a>
+          </li>
+          <li>
+            <a href="/create_tasks">Configure Task</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      <li>
+        <a><i class="fa fa-bar-chart-o fa-fw"></i> Manage Workflows <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <a href="/workflows">View Worfklows</a>
+          </li>
+          <li>
+            <a href="/create_worflow">Configure Workflow</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      <li>
+        <a><i class="fa fa-bar-chart-o fa-fw"></i> Manage Group <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <a href="/departments">View Departments</a>
+          </li>
+          <li>
+            <a href="/offices">View Offices</a>
+          </li>
+          <li>
+            <a href="/create_department">Configure Department</a>
+          </li>
+          <li>
+            <a href="/create_office">Configure Office</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      <li>
+        <a><i class="fa fa-bar-chart-o fa-fw"></i> Manage Agents <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <a href="/agents">View Agents</a>
+          </li>
+          <li>
+            <a href="/create_agent">Configure Agent</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      <li>
+        <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Manage Account</a>
+      </li>
+    </ul>
+  </div>
 </div>
+<script src="../js/controllers/left_rail.js"></script>

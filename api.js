@@ -1,3 +1,10 @@
+'use strict';
+
+var departments = require('./server/controllers/department'),
+    offices = require('./server/controllers/office'),
+    tags = require('./server/controllers/tag'),
+    users = require('./server/controllers/user');
+
 /**
  * @swagger
  * resourcePath: /api
@@ -16,8 +23,8 @@
  *      consumes:
  *        - text/html
  *      parameters:
- *        - name: username
- *          description: Your username
+ *        - name: email
+ *          description: Your email
  *          paramType: query
  *          required: true
  *          dataType: string
@@ -28,8 +35,4 @@
  *          dataType: string
  */
 exports.login = function (req, res) {
-  var user = {};
-  user.username = req.param('username');
-  user.password = req.param('password');
-  res.json(user);
 }

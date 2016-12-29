@@ -2,6 +2,15 @@ body {
   background: #eee;
 }
 
+.container {
+  width: 100% !important;
+  padding: 0;
+}
+
+h1 {
+  margin: 15px 20px;
+}
+
 .navbar-brand {
   padding: 5px 15px;
 }
@@ -28,8 +37,46 @@ body {
   color: #fff;
 }
 
-.container {
-  padding-top: 100px;
+.left-rail {
+  background: #4A5459;
+  position: fixed;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  color: #fff;
+}
+
+.left-rail .heading {
+  background: #69797e;
+  width: 100%;
+  padding: 10px;
+}
+
+.left-rail .heading h2 {
+  margin: 0;
+}
+
+.left-rail .heading h2 .circle {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.left-rail .navbar-collapse {
+  padding: 0;
+}
+
+.left-rail a {
+  color: #fff;
+}
+
+.left-rail a:hover,
+.left-rail a:focus {
+  color: #4A5459;
 }
 
 .footer {
@@ -37,4 +84,5 @@ body {
   color: #fff;
   text-align: right;
   border-top: 1px solid #60707e;
+  background: #4A5459;
 }
