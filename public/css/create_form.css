@@ -1,0 +1,11 @@
+form {
+  padding: 15px;
+}
+
+form > div {
+  margin: 10px 0;
+}
+
+form .submit-form {
+  margin: 15px 0;
+}

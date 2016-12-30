@@ -135,3 +135,36 @@ exports.agents = function(req, res, next) {
   });
 };
 
+//Display report page
+exports.report = function(req, res, next) {
+  res.render('report', { title: 'Report', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display workflows page
+exports.workflows = function(req, res, next) {
+  res.render('workflows', { title: 'Workflows', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display tasks page
+exports.tasks = function(req, res, next) {
+  res.render('tasks', { title: 'Tasks', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+

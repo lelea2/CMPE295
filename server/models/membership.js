@@ -10,13 +10,27 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     group_type: DataTypes.ENUM('department', 'office'),
-    role_id: DataTypes.INTEGER,
-    permission_id: DataTypes.STRING,
+    role_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Roles', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    },
+    permission_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Permissions', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    },
     isAdmin: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        Memberships.belongsTo(models.Roles, { foreignKey: 'role_id' });
+        Memberships.belongsTo(models.Permissions, { foreignKey: 'permission_id' });
       }
     }
   });

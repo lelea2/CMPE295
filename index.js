@@ -122,6 +122,9 @@ app.get('/create_task', routes.create_task);
 app.get('/departments', routes.departments);
 app.get('/offices', routes.offices);
 app.get('/agents', routes.agents);
+app.get('/report', routes.report);
+app.get('/workflows', routes.workflows);
+app.get('/tasks', routes.tasks);
 
 /***************************************************************/
 /******************* Run the app               *****************/

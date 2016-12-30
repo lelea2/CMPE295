@@ -20,8 +20,15 @@ span.period {
 
 .register-form {
   max-width: 550px;
-  margin: 440px auto 20px auto;
+  margin: 450px auto 20px auto;
   color: #fff;
+}
+
+@media (max-width: 767px) {
+  .register-form {
+    max-width: 90%;
+    margin: 100px auto 20px auto;
+  }
 }
 
 .register-form a {
@@ -55,3 +62,6 @@ span.period {
   border-radius: 0 0 3px 3px;
 }
 
+.register-form .msg-helper {
+  margin: 10px 0;
+}
