@@ -7,7 +7,14 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     name: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    department_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Departments', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    }
   }, {
     classMethods: {
       associate: function(models) {
