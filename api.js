@@ -32,7 +32,7 @@ exports.getDepartments = departments.showall;
 
 /**
  * @swagger
- * path: /api/offices
+ * path: /api/departments/{id}/offices
  * operations:
  *   -  httpMethod: GET
  *      summary: Get all existing offices in system
@@ -41,6 +41,12 @@ exports.getDepartments = departments.showall;
  *      nickname: showall
  *      consumes:
  *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Department Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
  */
 exports.getOffices = offices.showall;
 
