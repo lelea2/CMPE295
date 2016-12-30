@@ -3,7 +3,15 @@ App.controller('createDepartmentController', ['$scope', '$http', function ($scop
   $scope.formDepartment = {};
 
   $scope.createDepartment = function() {
-
+    $http({
+      method: 'POST',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/departments',
+      data: $scope.formDepartment
+    }).then(function(resp) {
+      // console.log(resp.data);
+      window.location = '/departments?created=true'; //create true for departments
+    });
   };
 
 }]);

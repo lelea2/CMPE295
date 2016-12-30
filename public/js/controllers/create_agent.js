@@ -2,6 +2,10 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
 
   $scope.formAgent = {};
 
+  $scope.init = function() {
+
+  };
+
   $scope.createAgent = function() {
 
   };

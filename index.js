@@ -125,6 +125,7 @@ app.get('/agents', routes.agents);
 app.get('/report', routes.report);
 app.get('/workflows', routes.workflows);
 app.get('/tasks', routes.tasks);
+app.get('/account', routes.account);
 
 /***************************************************************/
 /******************* Run the app               *****************/

@@ -20,3 +20,19 @@ App.config(['$compileProvider', function ($compileProvider) {
   // $compileProvider.commentDirectivesEnabled(false);
   // $compileProvider.cssClassDirectivesEnabled(false);
 }]);
+
+//Set up helper function
+window.LINKEDGOV = window.LINKEDGOV || {};
+
+LINKEDGOV.getHeaders = function(setCookies) {
+  return {
+    'Content-Type': 'application/json',
+    'setCookie': setCookies || false,
+    'u': $('input[name="_userId"]').val()
+  }
+};
+
+LINKEDGOV.formatDate = function(date) {
+  var tmp = new Date(date);
+  return (tmp.getMonth() + 1) + '/' + (tmp.getDate()) + '/' + tmp.getFullYear();
+}
