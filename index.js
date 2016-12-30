@@ -25,7 +25,8 @@ var express = require('express'),
     departments = require('./server/controllers/department'),
     offices = require('./server/controllers/office'),
     tags = require('./server/controllers/tag'),
-    users = require('./server/controllers/user');
+    users = require('./server/controllers/user'),
+    roles = require('./server/controllers/role');
 
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
@@ -62,6 +63,10 @@ app.use(swagger.init(app, {
   swaggerURL: '/swagger',
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',
+  info: {
+    title: 'swagger-express sample app',
+    description: 'Swagger + Express = {swagger-express}'
+  },
   apis: ['./api.js']
 }));
 
@@ -107,6 +112,11 @@ app.delete('/api/tags/:id', tags.delete);
 //Account
 app.post('/api/accounts', users.create);
 app.post('/api/login', users.login);
+
+//Roles
+app.get('/api/roles', roles.showall);
+app.post('/api/roles', roles.create);
+app.put('/api/roles/:id', roles.update);
 
 
 /*****************************************************/

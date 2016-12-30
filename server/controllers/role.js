@@ -21,8 +21,26 @@ module.exports = {
 
   showall(req, res) {
     Roles.findAll()
-    .then(function (tags) {
-      res.status(200).json(tags);
+    .then(function (roles) {
+      res.status(200).json(roles);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
+  update(req, res) {
+    var data = req.body;
+    var reqBody = {
+      role: data.role
+    };
+    Roles.update(reqBody, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (updateRecords) {
+      res.status(200).json({});
     })
     .catch(function (error) {
       res.status(500).json(error);
