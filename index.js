@@ -26,7 +26,8 @@ var express = require('express'),
     offices = require('./server/controllers/office'),
     tags = require('./server/controllers/tag'),
     users = require('./server/controllers/user'),
-    roles = require('./server/controllers/role');
+    roles = require('./server/controllers/role'),
+    membership = require('./server/controllers/membership');
 
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
@@ -102,6 +103,9 @@ app.delete('/api/departments/:id', departments.delete);
 //Offices
 app.post('/api/departments/:department_id/offices', offices.create);
 app.get('/api/departments/:department_id/offices', offices.showall);
+
+//Membership
+app.get('/api/memberships', membership.show);
 
 //Tags
 app.get('/api/tags', tags.showall);

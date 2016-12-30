@@ -47,7 +47,7 @@ module.exports = {
       }
     }).catch(function(err) {
       res.status(500).json(error);
-    })
+    });
   },
 
   update(req, res) {
