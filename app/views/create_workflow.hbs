@@ -1,7 +1,10 @@
 <link rel="stylesheet" type="text/css" href="../css/create_form.css">
 {{> leftrail}}
-<div class="middle-rail">
+<div class="middle-rail" ng-controller="createWorkflowController" data-ng-init="init()">
   <h3>Configure New Worlfow Type</h3>
+  <form ng-submit="createWorkflow()">
 
+  </form>
 </div>
 {{> rightrail}}
+<script src="../js/controllers/create_workflow.js"></script>
