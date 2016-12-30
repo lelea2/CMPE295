@@ -3,13 +3,46 @@
 var departments = require('./server/controllers/department'),
     offices = require('./server/controllers/office'),
     tags = require('./server/controllers/tag'),
-    users = require('./server/controllers/user');
+    roles = require('./server/controllers/role'),
+    users = require('./server/controllers/user'),
+    customers = require('./server/controllers/customer'),
+    workflows = require('./server/controllers/workflow'),
+    processes = require('./server/controllers/process'),
+    permission = require('./server/controllers/permission');
 
 /**
  * @swagger
- * resourcePath: /api
+ * resourcePath: /
  * description: All about API
  */
+
+/**
+ * @swagger
+ * path: /api/departments
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all existing departments in system
+ *      notes: Return array of departments
+ *      responseClass: Departments
+ *      nickname: showall
+ *      consumes:
+ *        - text/html
+ */
+exports.getDepartments = departments.showall;
+
+/**
+ * @swagger
+ * path: /api/offices
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all existing offices in system
+ *      notes: Return array of offices
+ *      responseClass: Offices
+ *      nickname: showall
+ *      consumes:
+ *        - text/html
+ */
+exports.getOffices = offices.showall;
 
 /**
  * @swagger
@@ -34,5 +67,4 @@ var departments = require('./server/controllers/department'),
  *          required: true
  *          dataType: string
  */
-exports.login = function (req, res) {
-}
+exports.login = users.login;
