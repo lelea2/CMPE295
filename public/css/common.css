@@ -125,6 +125,13 @@ h1 {
   font-weight: 300;
 }
 
+.notification {
+  position: fixed;
+  bottom: 0;
+  padding: 0;
+  width: calc(100% - 515px);
+}
+
 .footer {
   padding: 1.5em;
   color: #fff;

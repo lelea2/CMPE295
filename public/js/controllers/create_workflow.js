@@ -15,7 +15,15 @@ App.controller('createWorkflowController', ['$scope', '$http', function ($scope,
   };
 
   $scope.createWorkflow = function() {
-
+    $http({
+      method: 'POST',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/workflow_configure',
+      data: $scope.formWorkflow
+    }).then(function(resp) {
+      //success, load to view process
+      window.location = '/workflows?created=true';
+    });
   };
 
 }]);
