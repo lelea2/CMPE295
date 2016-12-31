@@ -3,7 +3,24 @@
 <div class="middle-rail" ng-controller="createProcessController" data-ng-init="init()">
   <h3>Configure New Task Type</h3>
   <form ng-submit="createProcess()">
-
+    <div>
+      <label for="inputName">Task Name</label>
+      <input type="text" id="inputName" ng-model="formProcess.name" class="form-control" placeholder="Task name" required autofocus>
+    </div>
+    <div>
+      <label for="inputDesc">Task Description</label>
+      <textarea class="form-control" rows="3" ng-model="formProcess.description" id="inputDesc" placeholder="Task description" required></textarea>
+    </div>
+    {{{{raw-helper}}}}
+    <div>
+      <label>Department</label>
+      <select class="form-control" ng-model="formProcess.department_id">
+        <option value="">Choose department for task</option>
+        <option ng-repeat="department in departments" value={{department.id}}>{{department.unique_code}}</option>
+      </select>
+    </div>
+    {{{{/raw-helper}}}}
+    <button type="submit" class="btn btn-primary submit-form">Create New Task Type</button>
   </form>
 </div>
 {{> rightrail}}

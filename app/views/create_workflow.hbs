@@ -1,9 +1,26 @@
 <link rel="stylesheet" type="text/css" href="../css/create_form.css">
 {{> leftrail}}
 <div class="middle-rail" ng-controller="createWorkflowController" data-ng-init="init()">
-  <h3>Configure New Worlfow Type</h3>
+  <h3>Configure New Workflow Type</h3>
   <form ng-submit="createWorkflow()">
-
+    <div>
+      <label for="inputName">Workflow Name</label>
+      <input type="text" id="inputName" ng-model="formWorkflow.name" class="form-control" placeholder="Workflow name" required autofocus>
+    </div>
+    <div>
+      <label for="inputDesc">Workflow Description</label>
+      <textarea class="form-control" rows="3" ng-model="formWorkflow.description" id="inputDesc" placeholder="Workflow description" required></textarea>
+    </div>
+    {{{{raw-helper}}}}
+    <div>
+      <label>Workflow Tag</label>
+      <select class="form-control" ng-model="formWorkflow.tag_id">
+        <option value="">Select Tag for Workflow</option>
+        <option ng-repeat="tag in tags" value={{tag.id}}>{{tag.name}}</option>
+      </select>
+    </div>
+    {{{{/raw-helper}}}}
+    <button type="submit" class="btn btn-primary submit-form">Create New Workflow</button>
   </form>
 </div>
 {{> rightrail}}

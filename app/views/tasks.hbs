@@ -1,6 +1,8 @@
 {{> leftrail}}
-<div class="middle-rail">
+<div class="middle-rail" ng-controller="tasksController" data-ng-init="init()">
   <h3>All Tasks</h3>
 
+  {{> notification}}
 </div>
 {{> rightrail}}
+<script src="../js/controllers/task.js"></script>

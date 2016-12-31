@@ -170,7 +170,7 @@ exports.tasks = function(req, res, next) {
 
 //Display account page
 exports.account = function(req, res, next) {
-  res.render('tasks', { title: 'Account', layout: 'main' }, function (err, html) {
+  res.render('account', { title: 'Account', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);

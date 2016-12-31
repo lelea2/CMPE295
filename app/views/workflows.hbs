@@ -1,6 +1,8 @@
 {{> leftrail}}
-<div class="middle-rail">
+<div class="middle-rail" ng-controller="workflowsController" data-ng-int="init()">
   <h3>All Workflows</h3>
 
+  {{> notification}}
 </div>
 {{> rightrail}}
+<script src="../js/controllers/workflow.js"></script>

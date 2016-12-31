@@ -24,7 +24,7 @@ span.period {
   color: #fff;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .register-form {
     max-width: 90%;
     margin: 100px auto 20px auto;
