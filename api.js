@@ -264,6 +264,50 @@ exports.login = users.login;
  *       unique_code:
  *         type: String
  *         required: true
+ *   Role:
+ *     id: Role
+ *     properties:
+ *       id:
+ *         type: String
+ *       role:
+ *         type: String
+ *         required: true
+ *   User:
+ *     id: User
+ *     properties:
+ *       id:
+ *         type: String
+ *       email:
+ *         type: String
+ *         required: true
+ *       phone:
+ *         type: String
+ *         required: true
+ *       firstName:
+ *         type: String
+ *       lastName:
+ *         type: String
+ *       password:
+ *         type: String
+ *         required: true
+ *       isAdmin:
+ *         type: Boolean
+ *   Membership:
+ *     id: Membership
+ *     properties:
+ *       id:
+ *         type: String
+ *       user_id:
+ *         type: String
+ *         required: true
+ *       group_id:
+ *         type: String
+ *         required: true
+ *       grou_type:
+ *         type: String
+ *         required: true
+ *       permission_id:
+ *         type: String
+ *       isAdmin:
+ *         type: Boolean
  */
-
-
