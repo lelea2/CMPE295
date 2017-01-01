@@ -94,15 +94,17 @@ app.get('*', express.static(path.join(__dirname, 'public'), { maxAge: oneWeek })
 /*****************************************************/
 
 //Department
-app.get('/api/departments', departments.showall);
-app.get('/api/departments/:id', departments.show);
-app.post('/api/departments', departments.create);
-app.put('/api/departments/:id', departments.update);
-app.delete('/api/departments/:id', departments.delete);
+app.get('/api/departments', api.getDepartments);
+app.get('/api/departments/:id', api.getDepartmentById);
+app.post('/api/departments', api.createDepartment);
+app.put('/api/departments/:id', api.updateDepartment);
+app.delete('/api/departments/:id', api.deleteDepartment);
 
 //Offices
 app.post('/api/departments/:department_id/offices', offices.create);
 app.get('/api/departments/:department_id/offices', offices.showall);
+app.put('/api/offices/:id', offices.update);
+app.delete('/api/offices/:id', offices.delete);
 
 //Membership
 app.get('/api/memberships', membership.show);

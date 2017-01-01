@@ -23,8 +23,8 @@ var departments = require('./server/controllers/department'),
  *   -  httpMethod: GET
  *      summary: Get all existing departments in system
  *      notes: Return array of departments
- *      responseClass: Departments
- *      nickname: showall
+ *      responseClass: Department
+ *      nickname: showall_department
  *      consumes:
  *        - text/html
  */
@@ -32,13 +32,13 @@ exports.getDepartments = departments.showall;
 
 /**
  * @swagger
- * path: /api/departments/{id}/offices
+ * path: /api/departments/{id}
  * operations:
  *   -  httpMethod: GET
- *      summary: Get all existing offices in system
- *      notes: Return array of offices
- *      responseClass: Offices
- *      nickname: showall
+ *      summary: Get department by Id
+ *      notes: return appartment by Id
+ *      responseClass: Department
+ *      nickname: show_department_by_id
  *      consumes:
  *        - text/html
  *      parameters:
@@ -48,7 +48,149 @@ exports.getDepartments = departments.showall;
  *          required: true
  *          dataType: string
  */
+exports.getDepartmentById = departments.show;
+
+/**
+ * @swagger
+ * path: /api/departments
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create department
+ *      notes: Return new department created
+ *      responseClass: Department
+ *      nickname: create_department
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: Department
+ *          paramType: body
+ *          description: department object
+ *          required: true
+ */
+exports.createDepartment = departments.create;
+
+/**
+ * @swagger
+ * path: /api/departments/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update department
+ *      notes: Return updated department
+ *      responseClass: void
+ *      nickname: update_department
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Department Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: Department
+ *          paramType: body
+ *          description: department object
+ *          required: true
+ */
+exports.updateDepartment = departments.update;
+
+/**
+ * @swagger
+ * path: /api/departments/{id}
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete department
+ *      notes: return 200 status code if succeed
+ *      responseClass: void
+ *      nickname: delete_department
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Department Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.deleteDepartment = departments.delete;
+
+/**
+ * @swagger
+ * path: /api/departments/{department_id}/offices
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all existing offices in system
+ *      notes: Return array of offices
+ *      responseClass: Office
+ *      nickname: showall_office_per_department
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: department_id
+ *          description: Department Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
 exports.getOffices = offices.showall;
+
+/**
+ * @swagger
+ * path: /api/departments/{department_id}/offices
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create office
+ *      notes: return office created
+ *      responseClass: Office
+ *      nickname: create_office
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: department_id
+ *          description: Department Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: Office
+ *          paramType: body
+ *          description: office object
+ *          required: true
+ */
+exports.createOffice = offices.create;
+
+/**
+ * @swagger
+ * path: /api/offices/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update office
+ *      notes: return office updated
+ *      responseClass: Office
+ *      nickname: update_office
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - dataType: Office
+ *          paramType: body
+ *          description: office object
+ *          required: true
+ */
+exports.updateOffice = offices.update;
+
+/**
+ * @swagger
+ * path: /api/offices/{id}
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete office
+ *      notes: delete office
+ *      responseClass: void
+ *      nickname: delete_office
+ *      consumes:
+ *        - text/html
+ *          application/json
+ */
+exports.deleteOffice = offices.delete;
 
 /**
  * @swagger
@@ -74,3 +216,54 @@ exports.getOffices = offices.showall;
  *          dataType: string
  */
 exports.login = users.login;
+
+
+/**
+ * @swagger
+ * models:
+ *   Department:
+ *     id: Department
+ *     properties:
+ *       id:
+ *         type: String
+ *       name:
+ *         type: String
+ *         required: true
+ *       description:
+ *         type: String
+ *         required: true
+ *       address:
+ *         type: String
+ *         required: true
+ *       phone:
+ *         type: String
+ *         required: true
+ *       unique_code:
+ *         type: String
+ *         required: true
+ *   Office:
+ *     id: Office
+ *     properties:
+ *       id:
+ *         type: String
+ *       department_id:
+ *         type: String
+ *         required: true
+ *       name:
+ *         type: String
+ *         required: true
+ *       description:
+ *         type: String
+ *         required: true
+ *       address:
+ *         type: String
+ *         required: true
+ *       phone:
+ *         type: String
+ *         required: true
+ *       unique_code:
+ *         type: String
+ *         required: true
+ */
+
+
