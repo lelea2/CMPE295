@@ -8,7 +8,8 @@ var departments = require('./server/controllers/department'),
     customers = require('./server/controllers/customer'),
     workflows = require('./server/controllers/workflow'),
     processes = require('./server/controllers/process'),
-    permission = require('./server/controllers/permission');
+    permission = require('./server/controllers/permission'),
+    memberships = require('./server/controllers/membership');
 
 /**
  * @swagger
@@ -135,6 +136,26 @@ exports.getOffices = offices.showall;
 
 /**
  * @swagger
+ * path: /api/offices/{id}
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get office by id
+ *      notes: Return office object
+ *      responseClass: Office
+ *      nickname: show_office_by_id
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Office Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.getOfficeById = offices.show;
+
+/**
+ * @swagger
  * path: /api/departments/{department_id}/offices
  * operations:
  *   -  httpMethod: POST
@@ -170,6 +191,11 @@ exports.createOffice = offices.create;
  *        - text/html
  *          application/json
  *      parameters:
+ *        - name: id
+ *          description: Office Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
  *        - dataType: Office
  *          paramType: body
  *          description: office object
@@ -191,6 +217,192 @@ exports.updateOffice = offices.update;
  *          application/json
  */
 exports.deleteOffice = offices.delete;
+
+/**
+ * @swagger
+ * path: /api/memberships
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all memberships
+ *      notes: return array of memberships
+ *      responseClass: Membership
+ *      nickname: get_memberships
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - name: group_id
+ *          description: group id
+ *          paramType: query
+ *          required: true
+ *          dataType: string
+ *        - dataType: group_type
+ *          paramType: query
+ *          description: group type
+ *          required: true
+ */
+exports.getMemberships = memberships.show;
+
+/**
+ * @swagger
+ * path: /api/memberships/{id}
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete membership
+ *      notes: return status code for success/failure
+ *      responseClass: void
+ *      nickname: delete_membership
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - name: id
+ *          description: membership id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.deleteMembership = memberships.delete;
+
+/**
+ * @swagger
+ * path: /api/roles
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all roles
+ *      notes: return array of roles
+ *      responseClass: Role
+ *      nickname: get_roles
+ *      consumes:
+ *        - text/html
+ *          application/json
+ */
+exports.getRoles = roles.showall;
+
+/**
+ * @swagger
+ * path: /api/roles
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create role
+ *      notes: return role object created
+ *      responseClass: Role
+ *      nickname: create_role
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: Role
+ *          paramType: body
+ *          description: role object
+ *          required: true
+ */
+exports.createRole = roles.create;
+
+/**
+ * @swagger
+ * path: /api/roles/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update role
+ *      notes: return role updated
+ *      responseClass: Role
+ *      nickname: update_role
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - name: id
+ *          description: Role Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: Role
+ *          paramType: body
+ *          description: role object
+ *          required: true
+ */
+exports.updateRole = roles.update;
+
+/**
+ * @swagger
+ * path: /api/tags
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all tags available
+ *      notes: return array of tags
+ *      responseClass: Tag
+ *      nickname: get_all_tags
+ *      consumes:
+ *        - text/html
+ *          application/json
+ */
+exports.getTags = tags.showall;
+
+/**
+ * @swagger
+ * path: /api/tags
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create new tag
+ *      notes: return new tag object
+ *      responseClass: Tag
+ *      nickname: create_tag
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - dataType: Tag
+ *          paramType: body
+ *          description: tag object
+ *          required: true
+ */
+exports.createTag = tags.create;
+
+/**
+ * @swagger
+ * path: /api/tags/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update tag
+ *      notes: return updated tag object
+ *      responseClass: void
+ *      nickname: update_tag
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - name: id
+ *          description: Tag Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: Tag
+ *          paramType: body
+ *          description: tag object
+ *          required: true
+ */
+exports.updateTag = tags.update;
+
+/**
+ * @swagger
+ * path: /api/tags/{id}
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete tag
+ *      notes: return status code for success/failure
+ *      responseClass: void
+ *      nickname: update_tag
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - name: id
+ *          description: Tag Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.deleteTag = tags.delete;
 
 /**
  * @swagger
@@ -216,7 +428,6 @@ exports.deleteOffice = offices.delete;
  *          dataType: string
  */
 exports.login = users.login;
-
 
 /**
  * @swagger
@@ -272,6 +483,20 @@ exports.login = users.login;
  *       role:
  *         type: String
  *         required: true
+ *   Tag:
+ *     id: Tag
+ *     properties:
+ *       id:
+ *         type: String
+ *       name:
+ *         type: String
+ *         required: true
+ *       description:
+ *         type: String
+ *         required: true
+ *       keywords:
+ *         type: String
+ *         required: true
  *   User:
  *     id: User
  *     properties:
@@ -303,7 +528,7 @@ exports.login = users.login;
  *       group_id:
  *         type: String
  *         required: true
- *       grou_type:
+ *       group_type:
  *         type: String
  *         required: true
  *       permission_id:

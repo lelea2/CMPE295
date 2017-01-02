@@ -7,6 +7,7 @@ module.exports = {
 
   create(req, res) {
     var data = req.body;
+    // console.log(data);
     var reqBody = {
       id: uuid.v4(),
       name: data.name,

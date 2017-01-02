@@ -22,11 +22,12 @@ var express = require('express'),
     expressHbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     routes = require('./app/routes'),
-    departments = require('./server/controllers/department'),
-    offices = require('./server/controllers/office'),
-    tags = require('./server/controllers/tag'),
+    security = require('./server/helpers/security'),
+    // departments = require('./server/controllers/department'),
+    // offices = require('./server/controllers/office'),
+    // tags = require('./server/controllers/tag'),
     users = require('./server/controllers/user'),
-    roles = require('./server/controllers/role'),
+    // roles = require('./server/controllers/role'),
     membership = require('./server/controllers/membership');
 
 app.use(bodyParser.urlencoded({"extended": false}));
@@ -45,7 +46,7 @@ app.use(cookieParser('keycatboard'));
 
 //Set up userId
 app.use(function(req, res, next) {
-  // res.locals._userId = security.getUserId(req) || '';
+  res.locals._userId = security.getUserId(req) || '';
   res.locals._currentYear = new Date().getFullYear();
   next();
 });
@@ -101,34 +102,39 @@ app.put('/api/departments/:id', api.updateDepartment);
 app.delete('/api/departments/:id', api.deleteDepartment);
 
 //Offices
-app.post('/api/departments/:department_id/offices', offices.create);
-app.get('/api/departments/:department_id/offices', offices.showall);
-app.put('/api/offices/:id', offices.update);
-app.delete('/api/offices/:id', offices.delete);
+app.post('/api/departments/:department_id/offices', api.createOffice);
+app.get('/api/departments/:department_id/offices', api.getOffices);
+app.get('/api/offices/:id', api.getOfficeById);
+app.put('/api/offices/:id', api.updateOffice);
+app.delete('/api/offices/:id', api.deleteOffice);
 
-//Membership
-app.get('/api/memberships', membership.show);
+//Memberships
+app.get('/api/memberships', api.getMemberships);
+app.delete('/api/memberships/:id', api.deleteMembership);
 
 //Tags
-app.get('/api/tags', tags.showall);
-app.post('/api/tags', tags.create);
-app.post('/api/tags/:id', tags.update);
-app.delete('/api/tags/:id', tags.delete);
+app.get('/api/tags', api.getTags);
+app.post('/api/tags', api.createTag);
+app.post('/api/tags/:id', api.updateTag);
+app.delete('/api/tags/:id', api.deleteTag);
+
+//Roles
+app.get('/api/roles', api.getRoles);
+app.post('/api/roles', api.createRole);
+app.put('/api/roles/:id', api.updateRole);
 
 //Account
 app.post('/api/accounts', users.create);
+app.put('/api/accounts/:id', users.update);
+app.get('/api/accounts/:id', users.show);
 app.post('/api/login', users.login);
-
-//Roles
-app.get('/api/roles', roles.showall);
-app.post('/api/roles', roles.create);
-app.put('/api/roles/:id', roles.update);
 
 
 /*****************************************************/
 /***************** Views Routing *********************/
 /*****************************************************/
 app.get('/', routes.intro);
+app.get('/signin', routes.intro);
 app.get('/dashboard', routes.dashboard);
 app.get('/create_department', routes.create_department);
 app.get('/create_office', routes.create_office);

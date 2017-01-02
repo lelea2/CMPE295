@@ -30,6 +30,26 @@ module.exports = {
       });
   },
 
+  show(req, res) {
+    var data = req.body;
+    User.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(user) {
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(500).json({
+          errorCode: 4003,
+          errorMessage: 'Invalid password'
+        });
+      }
+    }).catch(function(err) {
+      res.status(500).json(error);
+    });
+  },
+
   login(req, res) {
     var data = req.body;
     User.findOne({

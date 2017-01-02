@@ -2,6 +2,7 @@
 
 var Office = require('../models/').Offices;
 var uuid = require('node-uuid');
+var Department = require('../models/').Departments;
 
 module.exports = {
 
@@ -55,6 +56,21 @@ module.exports = {
     })
     .then(function (offices) {
       res.status(200).json(offices);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
+  show(req, res) {
+    Office.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [Department]
+    })
+    .then(function (office) {
+      res.status(200).json(office);
     })
     .catch(function (error) {
       res.status(500).json(error);
