@@ -1,4 +1,4 @@
-### CMPE295 - LinkedGov
+### CMPE295 - Linked.Gov
 
 ##### Government social network and workflow defined
 
@@ -26,13 +26,17 @@ DATABASE_USER=
 DATABASE_PW=
 ```
 
-##### Technology
+###### Technology
 
 * MariaDB
 * Neo4j
 * Sequelize
 * ExpressJS
-* Swagger
+* Swagger (https://github.com/fliptoo/swagger-express)
 * Angular
 * HandleBar
 * Twitter Bootstrap
+
+
+###### Deployment
+
