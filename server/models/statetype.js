@@ -4,7 +4,9 @@ module.exports = function(sequelize, DataTypes) {
   var StateTypes = sequelize.define('StateTypes', {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
     },
     name: DataTypes.STRING
   }, {

@@ -2,12 +2,26 @@
 
 module.exports = function(sequelize, DataTypes) {
   var ProcessAdmin = sequelize.define('ProcessAdmin', {
-    process_id: DataTypes.STRING,
-    user_id: DataTypes.STRING
+    process_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Processes', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Users', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    }
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        ProcessAdmin.belongsTo(models.Processes, { foreignKey: 'process_id' });
+        ProcessAdmin.belongsTo(models.Users, { foreignKey: 'user_id' });
       }
     },
     timestamps: false,
@@ -21,4 +35,3 @@ module.exports = function(sequelize, DataTypes) {
   });
   return ProcessAdmin;
 };
-
