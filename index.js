@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
 
 app.use(cookieParser('keycatboard'));
-// app.use(csrfCrypto({ key: 'cmpe281project' }));
+// app.use(csrfCrypto({ key: 'cmpe295project' }));
 // app.use(csrfCrypto.enforcer());
 
 // app.use(function(req, res, next) {
@@ -62,12 +62,12 @@ app.use(swagger.init(app, {
   apiVersion: '1.0',
   swaggerVersion: '1.0',
   basePath: 'http://localhost:' + (process.env.PORT || '8000'),
-  swaggerURL: '/swagger',
+  swaggerURL: '/docs',
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',
   info: {
-    title: 'swagger-express sample app',
-    description: 'Swagger + Express = {swagger-express}'
+    title: 'LinkedGov APIs',
+    description: 'LinkedGov Swagger'
   },
   apis: ['./api.js']
 }));
@@ -123,7 +123,7 @@ app.get('/api/roles', api.getRoles);
 app.post('/api/roles', api.createRole);
 app.put('/api/roles/:id', api.updateRole);
 
-//Account
+//Agent Account
 app.post('/api/accounts', users.create);
 app.put('/api/accounts/:id', users.update);
 app.get('/api/accounts/:id', users.show);
