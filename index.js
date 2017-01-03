@@ -129,6 +129,12 @@ app.put('/api/accounts/:id', users.update);
 app.get('/api/accounts/:id', users.show);
 app.post('/api/login', users.login);
 
+//Process note
+app.get('/api/processes/:process_id/notes', api.getProcessNotes);
+app.post('/api/process_notes', api.createProcessNote);
+app.put('/api/process_notes/:id', api.updateProcessNote);
+app.delete('/api/process_notes/:id', api.deleteProcessNote);
+
 
 /*****************************************************/
 /***************** Views Routing *********************/

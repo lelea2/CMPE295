@@ -1,7 +1,7 @@
 'use strict';
 
 var Workflow = require('../models/').Workflows;
-var WorkflowType = require('../models/').WorkflowType;
+var WorkflowType = require('../models/').WorkflowTypes;
 var uuid = require('node-uuid');
 
 module.exports = {

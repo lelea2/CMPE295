@@ -1,7 +1,7 @@
 'use strict';
 
 var Process = require('../models/').Processes;
-var ProcessType = require('../models/').WorkflowType;
+var ProcessType = require('../models/').ProcessTypes;
 var uuid = require('node-uuid');
 
 module.exports = {
@@ -48,4 +48,5 @@ module.exports = {
   create(req, res) {
 
   }
+
 };

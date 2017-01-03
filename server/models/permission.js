@@ -7,7 +7,8 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     manage_member: DataTypes.BOOLEAN,
-    manage_read: DataTypes.BOOLEAN,
+    manage_write: DataTypes.BOOLEAN, //create and update
+    manage_read: DataTypes.BOOLEAN, //viewable
     manage_delete: DataTypes.BOOLEAN
   }, {
     classMethods: {

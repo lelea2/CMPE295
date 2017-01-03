@@ -8,6 +8,7 @@ var departments = require('./server/controllers/department'),
     customers = require('./server/controllers/customer'),
     workflows = require('./server/controllers/workflow'),
     processes = require('./server/controllers/process'),
+    process_notes = require('./server/controllers/process_note'),
     permission = require('./server/controllers/permission'),
     memberships = require('./server/controllers/membership');
 
@@ -406,6 +407,88 @@ exports.deleteTag = tags.delete;
 
 /**
  * @swagger
+ * path: /api/processes/{process_id}/notes
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all notes for a process
+ *      notes: Return array of notes
+ *      responseClass: ProcessNote
+ *      nickname: showall_notes_per_process
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: process_id
+ *          description: ProcessId Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.getProcessNotes = process_notes.showall;
+
+/**
+ * @swagger
+ * path: /api/process_notes
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create note per process
+ *      notes: Return note object
+ *      responseClass: ProcessNote
+ *      nickname: create_process_note
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: ProcessNote
+ *          paramType: body
+ *          description: note object
+ *          required: true
+ */
+exports.createProcessNote = process_notes.create;
+
+/**
+ * @swagger
+ * path: /api/process_notes/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update process note
+ *      responseClass: void
+ *      nickname: update_process_note
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: ProcessNote Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: ProcessNote
+ *          paramType: body
+ *          description: note object
+ *          required: true
+ */
+exports.updateProcessNote = process_notes.update;
+
+/**
+ * @swagger
+ * path: /api/process_notes/{id}
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete process note
+ *      responseClass: void
+ *      nickname: delete_process_note
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: ProcessNote Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.deleteProcessNote = process_notes.delete;
+
+
+/**
+ * @swagger
  * path: /login
  * operations:
  *   -  httpMethod: POST
@@ -535,4 +618,15 @@ exports.login = users.login;
  *         type: String
  *       isAdmin:
  *         type: Boolean
+ *   ProcessNote:
+ *     id: ProcessNote
+ *     properties:
+ *       id:
+ *         type: String
+ *       process_id:
+ *         type: String
+ *       creator_id:
+ *         type: String
+ *       note:
+ *         type: String
  */
