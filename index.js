@@ -62,7 +62,7 @@ app.use(swagger.init(app, {
   apiVersion: '1.0',
   swaggerVersion: '1.0',
   basePath: 'http://localhost:' + (process.env.PORT || '8000'),
-  swaggerURL: '/docs',
+  swaggerURL: '/swagger',
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',
   info: {
@@ -124,10 +124,15 @@ app.post('/api/roles', api.createRole);
 app.put('/api/roles/:id', api.updateRole);
 
 //Agent Account
-app.post('/api/accounts', users.create);
-app.put('/api/accounts/:id', users.update);
-app.get('/api/accounts/:id', users.show);
+app.post('/api/agents', users.create);
+app.put('/api/agents/:id', users.update);
+app.get('/api/agents/:id', users.show);
 app.post('/api/login', users.login);
+
+//Customer account
+app.post('/api/customer', users.create);
+app.put('/api/customer/:id', users.update);
+app.get('/api/customer/:id', users.show);
 
 //Process note
 app.get('/api/processes/:process_id/notes', api.getProcessNotes);

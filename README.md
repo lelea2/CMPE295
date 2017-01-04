@@ -8,6 +8,7 @@
 //Install node from https://nodejs.org/en/download/
 
 ### set up application
+npm install -g bower
 bower i
 npm i
 
@@ -29,8 +30,8 @@ DATABASE_PW=
 ###### Technology
 
 * MariaDB
-* Neo4j
-* Sequelize
+* Neo4j (https://neo4j.com/developer/javascript/)
+* Sequelize (http://docs.sequelizejs.com/en/v3/)
 * ExpressJS
 * Swagger (https://github.com/fliptoo/swagger-express)
 * Angular
