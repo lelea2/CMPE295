@@ -28,6 +28,26 @@ module.exports = {
       });
   },
 
+  show(req, res) {
+    var data = req.body;
+    Customer.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(customer) {
+      if (customer) {
+        res.status(200).json(customer);
+      } else {
+        res.status(500).json({
+          errorCode: 4003,
+          errorMessage: 'Invalid id'
+        });
+      }
+    }).catch(function(err) {
+      res.status(500).json(error);
+    });
+  },
+
   login(req, res) {
     var data = req.body;
     Customer.findOne({

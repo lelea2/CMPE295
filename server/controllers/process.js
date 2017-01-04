@@ -2,6 +2,8 @@
 
 var Process = require('../models/').Processes;
 var ProcessType = require('../models/').ProcessTypes;
+var ProcessAdmin = require('../models/').ProcessAdmins;
+var User = require('../models/').Users;
 var uuid = require('node-uuid');
 
 module.exports = {
@@ -46,7 +48,40 @@ module.exports = {
   },
 
   create(req, res) {
+    var data = req.body;
+    var id =  uuid.v4();
+    var reqBody = {
+      id: id,
+      workflow_id: data.workflow_id,
+      enabled_flag: data.enabled_flag,
+      currentStateId: data.currentStateId,
+      next_states: data.next_states,
+      process_type: data.process_type,
+      critial: data.critical,
+      due_date: data.due_date
+    };
+    Process.create(reqBody)
+      .then(function (newProcess) {
+        res.status(201).json(newProcess);
+      })
+      .catch(function (error) {
+        res.status(500).json(error);
+      });
+  },
 
+  show_per_agent(req, res) {
+    ProcessAdmin.findAll({
+      where: {
+        user_id: req.query.agent_id
+      },
+      include: [User, Process]
+    })
+    .then(function (processes) {
+      res.status(200).json(processes);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
   }
 
 };

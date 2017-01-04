@@ -15,7 +15,7 @@ var departments = require('./server/controllers/department'),
 /**
  * @swagger
  * resourcePath: /
- * description: All about API
+ * description: APIs
  */
 
 /**
@@ -221,6 +221,69 @@ exports.deleteOffice = offices.delete;
 
 /**
  * @swagger
+ * path: /api/agents
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create agent
+ *      notes: return agent object created
+ *      responseClass: User
+ *      nickname: create_agent
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: User
+ *          paramType: body
+ *          description: customer object
+ *          required: true
+ */
+exports.createAgent = users.create;
+
+/**
+ * @swagger
+ * path: /api/agents/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update agent
+ *      notes: return agent object created
+ *      responseClass: User
+ *      nickname: update_agent
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: User Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: User
+ *          paramType: body
+ *          description: user object
+ *          required: true
+ */
+exports.updateAgent = users.update;
+
+/**
+ * @swagger
+ * path: /api/agents/{id}
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Show agent
+ *      notes: return agent object created
+ *      responseClass: User
+ *      nickname: show_agent
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: User Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.showAgent = users.show;
+
+/**
+ * @swagger
  * path: /api/memberships
  * operations:
  *   -  httpMethod: GET
@@ -323,6 +386,69 @@ exports.createRole = roles.create;
  *          required: true
  */
 exports.updateRole = roles.update;
+
+/**
+ * @swagger
+ * path: /api/customers
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create customer
+ *      notes: return customer object created
+ *      responseClass: Customer
+ *      nickname: create_customer
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: Customer
+ *          paramType: body
+ *          description: customer object
+ *          required: true
+ */
+exports.createCustomer = customers.create;
+
+/**
+ * @swagger
+ * path: /api/customers/{id}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update customer
+ *      notes: return customer object created
+ *      responseClass: Customer
+ *      nickname: update_customer
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Customer Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: Customer
+ *          paramType: body
+ *          description: customer object
+ *          required: true
+ */
+exports.updateCustomer = customers.update;
+
+/**
+ * @swagger
+ * path: /api/customers/{id}
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Show customer
+ *      notes: return customer object created
+ *      responseClass: Customer
+ *      nickname: show_customer
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Customer Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.showCustomer = customers.show;
 
 /**
  * @swagger
@@ -489,31 +615,6 @@ exports.deleteProcessNote = process_notes.delete;
 
 /**
  * @swagger
- * path: /login
- * operations:
- *   -  httpMethod: POST
- *      summary: Login with username and password
- *      notes: Returns a user based on username
- *      responseClass: User
- *      nickname: login
- *      consumes:
- *        - text/html
- *      parameters:
- *        - name: email
- *          description: Your email
- *          paramType: query
- *          required: true
- *          dataType: string
- *        - name: password
- *          description: Your password
- *          paramType: query
- *          required: true
- *          dataType: string
- */
-exports.login = users.login;
-
-/**
- * @swagger
  * models:
  *   Department:
  *     id: Department
@@ -590,7 +691,6 @@ exports.login = users.login;
  *         required: true
  *       phone:
  *         type: String
- *         required: true
  *       firstName:
  *         type: String
  *       lastName:
@@ -629,4 +729,25 @@ exports.login = users.login;
  *         type: String
  *       note:
  *         type: String
+ *   Customer:
+ *     id: Customer
+ *     properties:
+ *       id:
+ *         type: String
+ *       email:
+ *         type: String
+ *         required: true
+ *       phone:
+ *         type: String
+ *         required: true
+ *       firstName:
+ *         type: String
+ *         required: true
+ *       lastName:
+ *         type: String
+ *         required: true
+ *       password:
+ *         type: String
+ *         required: true
  */
+

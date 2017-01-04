@@ -19,7 +19,8 @@ module.exports = {
       phone: data.phone,
       firstName: data.firstName,
       lastName: data.lastName,
-      password: hashPassword
+      password: hashPassword,
+      isAdmin: data.isAdmin || false
     };
     User.create(reqBody)
       .then(function (newUser) {
@@ -42,7 +43,7 @@ module.exports = {
       } else {
         res.status(500).json({
           errorCode: 4003,
-          errorMessage: 'Invalid password'
+          errorMessage: 'Invalid user id'
         });
       }
     }).catch(function(err) {

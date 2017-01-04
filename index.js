@@ -124,15 +124,17 @@ app.post('/api/roles', api.createRole);
 app.put('/api/roles/:id', api.updateRole);
 
 //Agent Account
-app.post('/api/agents', users.create);
-app.put('/api/agents/:id', users.update);
-app.get('/api/agents/:id', users.show);
-app.post('/api/login', users.login);
+app.post('/api/agents', api.createAgent);
+app.put('/api/agents/:id', api.updateAgent);
+app.get('/api/agents/:id', api.showAgent);
 
 //Customer account
-app.post('/api/customer', users.create);
-app.put('/api/customer/:id', users.update);
-app.get('/api/customer/:id', users.show);
+app.post('/api/customers', api.createCustomer);
+app.put('/api/customer/:id', api.updateCustomer);
+app.get('/api/customer/:id', api.showCustomer);
+
+//Handle user login (for both customer and agent)
+app.post('/api/login', users.login);
 
 //Process note
 app.get('/api/processes/:process_id/notes', api.getProcessNotes);
