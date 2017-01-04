@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    type: DataTypes.ENUM('auto-approve', 'agent-approve', 'admin-approve')
+    type: DataTypes.ENUM('auto-approve', 'agent-approve', 'admin-approve'),
+    is_deleted: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

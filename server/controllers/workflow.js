@@ -47,7 +47,25 @@ module.exports = {
     });
   },
 
+  delete_configure(req, res) {
+    var reqBody = {
+      is_deleted: true
+    };
+    WorkflowType.update(reqBody, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (updateRecords) {
+      res.status(200).json({});
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   create(req, res) {
 
   }
+
 };

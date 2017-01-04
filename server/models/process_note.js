@@ -20,7 +20,8 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    note: DataTypes.STRING
+    note: DataTypes.STRING,
+    is_deleted: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

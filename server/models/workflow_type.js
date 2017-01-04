@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    flows: DataTypes.BLOB
+    flows: DataTypes.BLOB,
+    is_deleted: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
