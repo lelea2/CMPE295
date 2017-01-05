@@ -26,5 +26,5 @@ module.exports = function(sequelize, DataTypes) {
     },
     timestamps: false
   });
-  return WorklowCustomers;
+  return WorklowCustomer;
 };

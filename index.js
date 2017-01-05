@@ -11,6 +11,8 @@
 //     console.log("Error creating connection:", error);
 //   });
 
+require('dotenv').load(); //loading .env variables to file
+
 var express = require('express'),
     app = express(),
     path = require('path'),
