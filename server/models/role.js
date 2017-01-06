@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
       }
     },
-    timestamp: false
+    timestamps: false
   });
   return Roles;
 };

@@ -29,6 +29,7 @@ var express = require('express'),
     // offices = require('./server/controllers/office'),
     // tags = require('./server/controllers/tag'),
     users = require('./server/controllers/user'),
+    customers = require('./server/controllers/customer'),
     // roles = require('./server/controllers/role'),
     membership = require('./server/controllers/membership');
 
@@ -49,6 +50,8 @@ app.use(cookieParser('keycatboard'));
 //Set up userId
 app.use(function(req, res, next) {
   res.locals._userId = security.getUserId(req) || '';
+  res.locals._role = security.getRole(req) || '';
+  res.locals._isAdmin = security._isAdmin(req) || '';
   res.locals._currentYear = new Date().getFullYear();
   next();
 });
@@ -136,7 +139,16 @@ app.put('/api/customer/:id', api.updateCustomer);
 app.get('/api/customer/:id', api.showCustomer);
 
 //Handle user login (for both customer and agent)
-app.post('/api/login', users.login);
+app.post('/api/login', function(req, res) {
+  var data = req.body;
+  if (data.account_type === 'agent') { //Handle agent
+    users.login(req, res);
+  } else if (data.account_type === 'resident') {
+    customers.login(req, res);
+  } else {
+    res.status(500).json({err: 'Invalid account type'});
+  }
+});
 
 //Process note
 app.get('/api/processes/:process_id/notes', api.getProcessNotes);
@@ -148,21 +160,21 @@ app.delete('/api/process_notes/:id', api.deleteProcessNote);
 /*****************************************************/
 /***************** Views Routing *********************/
 /*****************************************************/
-app.get('/', routes.intro);
-app.get('/signin', routes.intro);
-app.get('/dashboard', routes.dashboard);
-app.get('/create_department', routes.create_department);
-app.get('/create_office', routes.create_office);
-app.get('/create_agent', routes.create_agent);
-app.get('/create_workflow', routes.create_workflow);
-app.get('/create_task', routes.create_task);
-app.get('/departments', routes.departments);
-app.get('/offices', routes.offices);
-app.get('/agents', routes.agents);
-app.get('/report', routes.report);
-app.get('/workflows', routes.workflows);
-app.get('/tasks', routes.tasks);
-app.get('/account', routes.account);
+app.get('/', security.userAuthenticated(), routes.intro);
+app.get('/signin', security.userAuthenticated(), routes.intro);
+app.get('/dashboard', security.userRequiredLoggedIn(), routes.dashboard);
+app.get('/create_department', security.userRequiredLoggedIn(), routes.create_department);
+app.get('/create_office', security.userRequiredLoggedIn(), routes.create_office);
+app.get('/create_agent', security.userRequiredLoggedIn(), routes.create_agent);
+app.get('/create_workflow', security.userRequiredLoggedIn(), routes.create_workflow);
+app.get('/create_task', security.userRequiredLoggedIn(), routes.create_task);
+app.get('/departments', security.userRequiredLoggedIn(), routes.departments);
+app.get('/offices', security.userRequiredLoggedIn(), routes.offices);
+app.get('/agents', security.userRequiredLoggedIn(), routes.agents);
+app.get('/report', security.userRequiredLoggedIn(), routes.report);
+app.get('/workflows', security.userRequiredLoggedIn(), routes.workflows);
+app.get('/tasks', security.userRequiredLoggedIn(), routes.tasks);
+app.get('/account', security.userRequiredLoggedIn(), routes.account);
 
 /***************************************************************/
 /******************* Run the app               *****************/

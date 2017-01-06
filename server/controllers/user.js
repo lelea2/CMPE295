@@ -2,7 +2,6 @@
 
 var User = require('../models/').Users;
 var Role = require('../models/').Roles;
-var Membership = require('../models/').Memberships;
 var uuid = require('node-uuid');
 var passwordHelpers = require('../helpers/passwordHelper');
 var security = require('../helpers/security');
@@ -58,7 +57,14 @@ module.exports = {
         email: data.email
       }
     }).then(function(user) {
-      if (user) {
+      if (passwordHelpers.verifyPassword(data.password, user.password)) {
+        if (req.headers.setcookie === 'true') {
+          security.setUserCookie(req, {
+            id: user.id,
+            isAdmin: user.isAdmin,
+            role: 'agent'
+          });
+        }
         res.status(200).json(user);
       } else {
         res.status(500).json({
@@ -67,7 +73,8 @@ module.exports = {
         });
       }
     }).catch(function(err) {
-      res.status(500).json(error);
+      console.log(err);
+      res.status(500).json(err);
     });
   },
 

@@ -35,4 +35,13 @@ LINKEDGOV.getHeaders = function(setCookies) {
 LINKEDGOV.formatDate = function(date) {
   var tmp = new Date(date);
   return (tmp.getMonth() + 1) + '/' + (tmp.getDate()) + '/' + tmp.getFullYear();
-}
+};
+
+LINKEDGOV.isEmptyStr = function(str) {
+  try {
+    str = $.trim(str);
+    return (str === '' || str === null);
+  } catch(ex) {
+    return true;
+  }
+};

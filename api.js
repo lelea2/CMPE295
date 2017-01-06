@@ -612,7 +612,6 @@ exports.updateProcessNote = process_notes.update;
  */
 exports.deleteProcessNote = process_notes.delete;
 
-
 /**
  * @swagger
  * models:

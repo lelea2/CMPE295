@@ -19,6 +19,9 @@
       </label>
     </div>
     <p class="msg-helper">Don't have an account? <a ng-click="showSignup()">Sign up</a></p>
+    <div class="alert alert-danger" ng-show="errMessageShow">
+      <span ng-bind="errMessage"></span>
+    </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </form>
   <form class="form-signup" ng-submit="processSignup()" ng-show="!signinState">
@@ -42,6 +45,9 @@
     <input type="password" id="inputConfirmPassword" ng-model="formSignupData.confirm_password" class="form-control last" placeholder="Confirmed Password" required>
     <p class="error" ng-show="errorState">{{errorMessage}}</p>
     <p class="msg-helper">Already has an account? <a ng-click="showSignin()">Sign in</a></p>
+    <div class="alert alert-danger" ng-show="errMessageShow">
+      <span ng-bind="errMessage"></span>
+    </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
   </form>
 </div>

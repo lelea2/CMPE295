@@ -55,7 +55,13 @@ module.exports = {
         email: data.email
       }
     }).then(function(customer) {
-      if (customer) {
+      if (passwordHelpers.verifyPassword(data.password, customer.password)) {
+        if (req.headers.setcookie === 'true') {
+          security.setUserCookie(req, {
+            id: customer.id,
+            role: 'customer'
+          });
+        }
         res.status(200).json(customer);
       } else {
         res.status(500).json({
@@ -64,7 +70,7 @@ module.exports = {
         });
       }
     }).catch(function(err) {
-      res.status(500).json(error);
+      res.status(500).json(err);
     })
   },
 

@@ -29,11 +29,11 @@ module.exports = (function() {
    * Function setting user cookie
    * @method  setUserCookie
    */
-  function setUserCookie(req, userId) {
-    console.log('set user cookie, userId=' + userId);
+  function setUserCookie(req, data) {
+    console.log('set user cookie, userId=' + data.id);
     try {
       var cookies = new Cookies(req, req.res);
-      cookies.set(USER_COOKIE, encrypt(userId), {
+      cookies.set(USER_COOKIE, encrypt(JSON.stringify(data)), {
         httpOnly: true,
         path: '/',
         expires: new Date(Date.now() + TTL),
@@ -44,21 +44,39 @@ module.exports = (function() {
     }
   }
 
+  function _rawData(req) {
+    var data = {};
+    try {
+      var cookies = new Cookies(req, req.res);
+      var userCookie = cookies.get(USER_COOKIE);
+      var strdata = decrypt(userCookie);
+      data = JSON.parse(strdata);
+    } catch(ex) {
+    }
+    return data;
+  }
+
   /**
    * Function get user cookie
    * @param Express request object
    * @return userId
    */
   function getUserId(req) {
-    try {
-      var cookies = new Cookies(req, req.res);
-      var userCookie = cookies.get(USER_COOKIE);
-      var userId = decrypt(userCookie);
-      return userId;
-    } catch(ex) {
-      //console.log(ex);
-      return '';
-    }
+    var data = _rawData(req);
+    return data.id || '';
+  }
+
+  function getRole(req) {
+    var data = _rawData(req);
+    return data.role || '';
+  }
+
+  /**
+   * Check if current user is system admin
+   */
+  function isAdmin(req) {
+    var data = _rawData(req);
+    return data.isAdmin || false;
   }
 
   /**
@@ -103,6 +121,8 @@ module.exports = (function() {
   return {
     setUserCookie: setUserCookie,
     getUserId: getUserId,
+    getRole: getRole,
+    isAdmin: isAdmin,
     logout: logout,
     userAuthenticated: userAuthenticated,
     userRequiredLoggedIn: userRequiredLoggedIn
