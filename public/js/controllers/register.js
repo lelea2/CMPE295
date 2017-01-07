@@ -4,6 +4,7 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
   $scope.formMembershipData = {};
 
   $scope.signinState = true;
+  $scope.signupState = false;
   $scope.membershipState = false;
   $scope.errMessage = '';
   $scope.errMessageShow = false;
@@ -105,11 +106,13 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
 
   $scope.showSignin = function() {
     $scope.signinState = true;
+    $scope.signupState = false;
     $scope.errMessageShow = false;
   };
 
   $scope.showSignup = function() {
     $scope.signinState = false;
+    $scope.signupState = false;
     $scope.errMessageShow = false;
   };
 

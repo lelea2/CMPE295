@@ -24,7 +24,7 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </form>
-  <form class="form-signup" ng-submit="processSignup()" ng-show="!signinState">
+  <form class="form-signup" ng-submit="processSignup()" ng-show="signupState">
     <h2 class="form-signup-heading">Sign up</h2>
     <div class="form-group account-type">
       <select class="form-control" ng-model="formSignupData.account_type">
@@ -35,6 +35,10 @@
     </div>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" ng-model="formSignupData.email" class="form-control first" placeholder="Email address" required autofocus>
+    <div>
+      <label for="inputPhone">Phone Number</label>
+      <input type="text" id="inputPhone" ng-model="formSignupData.phone" ui-mask="1-999-999-9999" class="form-control" ui-mask-placeholder ui-mask-placeholder-char="_">
+    </div>
     <label for="inputFirstName" class="sr-only">First name</label>
     <input type="text" id="inputFirstName" ng-model="formSignupData.firstName" class="form-control" placeholder="First name" required>
     <label for="inputLastName" class="sr-only">Last name</label>
@@ -55,16 +59,19 @@
     <div class="form-group departments">
       <select class="form-control" ng-model="formMembershipData.department">
         <option value="">Select department</option>
+        <option ng-repeat="department in departments" value={{department.id}}>{{department.unique_code}}</option>
       </select>
     </div>
     <div class="form-group offices">
       <select class="form-control" ng-model="formMembershipData.office">
         <option value="">Select office</option>
+        <option ng-repeat="office in offices" value={{office.id}}>{{office.unique_code}}</option>
       </select>
     </div>
     <div class="form-group roles">
       <select class="form-control" ng-model="formMembershipData.role">
         <option value="">Select role</option>
+        <option ng-repeat="roles in roles" value={{role.id}}>{{role.role}}</option>
       </select>
     </div>
     <div class="alert alert-danger" ng-show="errMembershipMessageShow">
