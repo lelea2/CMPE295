@@ -50,6 +50,28 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
   </form>
+  <form class="form-membership" ng-submit="processMembership()" ng-show="membershipState">
+    <h2 class="form-membership-heading">Register membership</h2>
+    <div class="form-group departments">
+      <select class="form-control" ng-model="formMembershipData.department">
+        <option value="">Select department</option>
+      </select>
+    </div>
+    <div class="form-group offices">
+      <select class="form-control" ng-model="formMembershipData.office">
+        <option value="">Select office</option>
+      </select>
+    </div>
+    <div class="form-group roles">
+      <select class="form-control" ng-model="formMembershipData.role">
+        <option value="">Select role</option>
+      </select>
+    </div>
+    <div class="alert alert-danger" ng-show="errMembershipMessageShow">
+      <span ng-bind="errMembershipMessage"></span>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register Membership</button>
+  </form>
 </div>
 {{{{/raw-helper}}}}
 <script src="../js/controllers/register.js"></script>

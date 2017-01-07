@@ -51,7 +51,7 @@ app.use(cookieParser('keycatboard'));
 app.use(function(req, res, next) {
   res.locals._userId = security.getUserId(req) || '';
   res.locals._role = security.getRole(req) || '';
-  res.locals._isAdmin = security._isAdmin(req) || '';
+  res.locals._isAdmin = security.isAdmin(req) || '';
   res.locals._currentYear = new Date().getFullYear();
   next();
 });
@@ -148,6 +148,24 @@ app.post('/api/login', function(req, res) {
   } else {
     res.status(500).json({err: 'Invalid account type'});
   }
+});
+
+//Handle user signup (for both customer and agent)
+app.post('/api/signup', function(req, res) {
+  var data = req.body;
+  if (data.account_type === 'agent') { //Handle agent
+    api.createAgent(req, res);
+  } else if (data.account_type === 'resident') {
+    api.createCustomer(req, res);
+  } else {
+    res.status(500).json({err: 'Invalid account type'});
+  }
+});
+
+//Log user out
+app.get('/logout', function(req, res) {
+  security.logout(req);
+  res.redirect(302, '/');
 });
 
 //Process note

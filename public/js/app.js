@@ -45,3 +45,8 @@ LINKEDGOV.isEmptyStr = function(str) {
     return true;
   }
 };
+
+LINKEDGOV.phoneToNumber = function(str) {
+  var num = str.replace(/[^0-9]+/g,'');
+  return num;
+};
