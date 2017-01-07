@@ -13,12 +13,15 @@
           <li>
             <a href="/tasks">View Tasks</a>
           </li>
+          {{#if _isAdmin}}
           <li>
             <a href="/create_task">Configure Task</a>
           </li>
+          {{/if}}
         </ul>
       <!-- /.nav-second-level -->
       </li>
+      {{#if _isAdmin}}
       <li>
         <a data-toggle="collapse" href="#manageWorkflows" aria-expanded="false" aria-controls="manageWorkflows"><i class="fa fa-connectdevelop fa-fw"></i> Manage Workflows <span class="fa fa-angle-down pull-right"></span></a>
         <ul class="nav nav-second-level collapse" id="manageWorkflows">
@@ -31,6 +34,7 @@
         </ul>
       <!-- /.nav-second-level -->
       </li>
+      {{/if}}
       <li>
         <a data-toggle="collapse" href="#manageGroups" aria-expanded="false" aria-controls="manageGroups"><i class="fa fa fa-group fa-fw"></i> Manage Groups <span class="fa fa-angle-down pull-right"></span></a>
         <ul class="nav nav-second-level collapse" id="manageGroups">
@@ -40,12 +44,14 @@
           <li>
             <a href="/offices">View Offices</a>
           </li>
+          {{#if _isAdmin}}
           <li>
             <a href="/create_department">Configure Department</a>
           </li>
           <li>
             <a href="/create_office">Configure Office</a>
           </li>
+          {{/if}}
         </ul>
       <!-- /.nav-second-level -->
       </li>
