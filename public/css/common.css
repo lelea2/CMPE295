@@ -139,3 +139,43 @@ h1 {
   border-top: 1px solid #60707e;
   background: #4A5459;
 }
+
+.navbar {
+  border-radius: 0;
+  background: #4A5459;
+}
+
+.navbar-brand span {
+  text-transform: none !important;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.navbar-brand span.circle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 5px 7px;
+}
+
+.navbar .navbar-toggler {
+  background: transparent;
+  border: 0;
+  font-size: 24px;
+}
+
+.navbar .main-collapse {
+  margin-top: 59px;
+  width: 100%;
+  background: #4A5459;
+}
+
+.navbar .collapse .links a {
+  color: #fff;
+}
+
+.navbar .collapse .links ul li:hover a {
+  color: #4A5459;
+}

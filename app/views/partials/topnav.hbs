@@ -1,14 +1,88 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded visible-sm visible-xs">
-  <button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="topnav navbar navbar-toggleable-md visible-sm visible-xs">
+  <button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#navbarLinked" aria-controls="navbarLinked" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fa fa-bars" aria-hidden="true"></i>
   </button>
   <a class="navbar-brand" href="#"><span>Linked</span><span class="circle"></span><span>Gov</span></a>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
-    </div>
+  <div class="collapse navbar-collapse main-collapse" id="navbarLinked">
+    <ul class="nav links">
+      <li>
+        <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+      </li>
+      <li>
+        <a data-toggle="collapse" href="#manageTasks" aria-expanded="false" aria-controls="manageTasks"><i class="fa fa-tasks fa-fw"></i> Manage Tasks <span class="fa fa-angle-down pull-right"></span></a>
+        <ul class="nav nav-second-level collapse" id="manageTasks">
+          <li>
+            <a href="/tasks">View Tasks</a>
+          </li>
+          {{#if _isAdmin}}
+          <li>
+            <a href="/create_task">Configure Task</a>
+          </li>
+          {{/if}}
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      {{#if _isAdmin}}
+      <li>
+        <a data-toggle="collapse" href="#manageWorkflows" aria-expanded="false" aria-controls="manageWorkflows"><i class="fa fa-connectdevelop fa-fw"></i> Manage Workflows <span class="fa fa-angle-down pull-right"></span></a>
+        <ul class="nav nav-second-level collapse" id="manageWorkflows">
+          <li>
+            <a href="/workflows">View Worfklows</a>
+          </li>
+          <li>
+            <a href="/create_workflow">Configure Workflow</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      {{/if}}
+      <li>
+        <a data-toggle="collapse" href="#manageGroups" aria-expanded="false" aria-controls="manageGroups"><i class="fa fa fa-group fa-fw"></i> Manage Groups <span class="fa fa-angle-down pull-right"></span></a>
+        <ul class="nav nav-second-level collapse" id="manageGroups">
+          <li>
+            <a href="/departments">View Departments</a>
+          </li>
+          <li>
+            <a href="/offices">View Offices</a>
+          </li>
+          {{#if _isAdmin}}
+          <li>
+            <a href="/create_department">Configure Department</a>
+          </li>
+          <li>
+            <a href="/create_office">Configure Office</a>
+          </li>
+          {{/if}}
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      <li>
+        <a data-toggle="collapse" href="#manageAgents" aria-expanded="false" aria-controls="manageAgents"><i class="fa fa-user-plus fa-fw"></i> Manage Agents <span class="fa fa-angle-down pull-right"></span></a>
+        <ul class="nav nav-second-level collapse" id="manageAgents">
+          <li>
+            <a href="/agents">View Agents</a>
+          </li>
+          <li>
+            <a href="/create_agent">Configure Agent</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+      <li>
+        <a href="/report"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a>
+      </li>
+      <li>
+        <a data-toggle="collapse" href="#manageAccount" aria-expanded="false" aria-controls="manageAccount"><i class="fa fa-user fa-fw"></i> My Account <span class="fa fa-angle-down pull-right"></span></a>
+        <ul class="nav nav-second-level collapse" id="manageAccount">
+          <li>
+            <a href="/account">Manage Account</a>
+          </li>
+          <li>
+            <a href="/logout">Log Out</a>
+          </li>
+        </ul>
+      <!-- /.nav-second-level -->
+      </li>
+    </ul>
   </div>
 </nav>
