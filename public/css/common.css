@@ -185,6 +185,10 @@ h1 {
   color: #4A5459 !important;
 }
 
+.table-responsive {
+  margin: 15px;
+}
+
 .table-responsive >.fixed-column {
   position: absolute;
   z-index: 1;

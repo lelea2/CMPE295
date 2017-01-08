@@ -24,4 +24,8 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
     });
   };
 
+  $scope.viewProcess = function() {
+
+  };
+
 }]);
