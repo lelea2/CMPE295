@@ -50,3 +50,26 @@ LINKEDGOV.phoneToNumber = function(str) {
   var num = str.replace(/[^0-9]+/g,'');
   return num;
 };
+
+LINKEDGOV.getParamVal = function(name, url) {
+  if (!url) {
+    url = location.href;
+  }
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( url );
+  return (results == null) ? '' : results[1];
+}
+
+LINKEDGOV.fixedTable = function() {
+  //Adding table fixed
+  var $table = $('.table');
+  if ($table.length > 0) {
+    var $fixedColumn = $table.clone().insertBefore($table).addClass('fixed-column');
+    $fixedColumn.find('th:not(:first-child),td:not(:first-child)').remove();
+    $fixedColumn.find('tr').each(function (i, elem) {
+      $(this).height($table.find('tr:eq(' + i + ')').height());
+    });
+  }
+};

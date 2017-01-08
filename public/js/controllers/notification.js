@@ -4,7 +4,7 @@ App.controller('notificationController', ['$scope', '$http', function ($scope, $
   $scope.showMessage = false;
 
   $scope.init = function() {
-    $timeout(function() {
+    window.setTimeout(function() {
       $scope.showMessage = false;
     }, 3000);
   };

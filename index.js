@@ -185,12 +185,14 @@ app.get('/create_department', security.userRequiredLoggedIn(), routes.create_dep
 app.get('/create_office', security.userRequiredLoggedIn(), routes.create_office);
 app.get('/create_agent', security.userRequiredLoggedIn(), routes.create_agent);
 app.get('/create_workflow', security.userRequiredLoggedIn(), routes.create_workflow);
+app.get('/create_tag', security.userRequiredLoggedIn(), routes.create_tag);
 app.get('/create_task', security.userRequiredLoggedIn(), routes.create_task);
 app.get('/departments', security.userRequiredLoggedIn(), routes.departments);
 app.get('/offices', security.userRequiredLoggedIn(), routes.offices);
 app.get('/agents', security.userRequiredLoggedIn(), routes.agents);
 app.get('/report', security.userRequiredLoggedIn(), routes.report);
 app.get('/workflows', security.userRequiredLoggedIn(), routes.workflows);
+app.get('/tags', security.userRequiredLoggedIn(), routes.tags);
 app.get('/tasks', security.userRequiredLoggedIn(), routes.tasks);
 app.get('/account', security.userRequiredLoggedIn(), routes.account);
 

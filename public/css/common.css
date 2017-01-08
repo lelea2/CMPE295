@@ -184,3 +184,16 @@ h1 {
 .navbar .collapse .links li a:focus {
   color: #4A5459 !important;
 }
+
+.table-responsive >.fixed-column {
+  position: absolute;
+  z-index: 1;
+  display: inline-block;
+  width: auto;
+  border-right: 1px solid #ddd;
+}
+@media(min-width:768px) {
+  .table-responsive >.fixed-column {
+    display: none;
+  }
+}

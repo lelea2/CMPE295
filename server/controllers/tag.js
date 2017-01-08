@@ -10,7 +10,8 @@ module.exports = {
     var reqBody = {
       id: uuid.v4(),
       name: data.name,
-      description: data.description
+      description: data.description,
+      keywords: data.keywords
     };
     Tag.create(reqBody)
       .then(function (newTag) {
@@ -35,7 +36,8 @@ module.exports = {
     var data = req.body;
     var reqBody = {
       name: data.name,
-      description: data.description
+      description: data.description,
+      keywords: data.keywords
     };
     Tag.update(reqBody, {
       where: {

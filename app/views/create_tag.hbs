@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" href="../css/create_form.css">
+{{> leftrail}}
+<div class="middle-rail" ng-controller="createTagController">
+  <h3>Configure New Tag</h3>
+  <form ng-submit="createTag()">
+    <div>
+      <label for="inputName">Tag Name</label>
+      <input type="text" id="inputName" ng-model="formTag.name" class="form-control" placeholder="Tag name" required autofocus>
+    </div>
+    <div>
+      <label for="inputDesc">Tag Description</label>
+      <textarea class="form-control" rows="3" ng-model="formTag.description" id="inputDesc" placeholder="Tag description" required></textarea>
+    </div>
+    <div>
+      <label for="inputKeyword">Tag Keywords (separated by |)</label>
+      <input class="form-control" ng-model="formTag.keywords" id="inputKeyword" placeholder="Tag keywords" ></input>
+    </div>
+    <button type="submit" class="btn btn-primary submit-form">Create New Tag</button>
+  </form>
+</div>
+{{> rightrail}}
+<script src="../js/controllers/create_tag.js"></script>

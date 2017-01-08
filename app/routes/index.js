@@ -80,6 +80,17 @@ exports.create_agent = function(req, res, next) {
   });
 };
 
+//Display create_tag page
+exports.create_tag = function(req, res, next) {
+  res.render('create_tag', { title: 'Configure Tag', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
 //Display create_workflow page
 exports.create_workflow = function(req, res, next) {
   res.render('create_workflow', { title: 'Configure Workflow', layout: 'main' }, function (err, html) {
@@ -149,6 +160,17 @@ exports.report = function(req, res, next) {
 //Display workflows page
 exports.workflows = function(req, res, next) {
   res.render('workflows', { title: 'Workflows', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+//Display tags page
+exports.tags = function(req, res, next) {
+  res.render('tags', { title: 'Tags', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);
