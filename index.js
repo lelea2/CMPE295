@@ -180,7 +180,7 @@ app.delete('/api/process_notes/:id', api.deleteProcessNote);
 /*****************************************************/
 app.get('/', security.userAuthenticated(), routes.intro);
 app.get('/signin', security.userAuthenticated(), routes.intro);
-app.get('/dashboard', /*security.userRequiredLoggedIn(),*/ routes.dashboard);
+app.get('/dashboard', security.userRequiredLoggedIn(), routes.dashboard);
 app.get('/create_department', security.userRequiredLoggedIn(), routes.create_department);
 app.get('/create_office', security.userRequiredLoggedIn(), routes.create_office);
 app.get('/create_agent', security.userRequiredLoggedIn(), routes.create_agent);
