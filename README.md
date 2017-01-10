@@ -4,6 +4,9 @@
 
 ###### Demo
 
+![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/swagger.png)
+
+
 ###### How to run application
 
 ```

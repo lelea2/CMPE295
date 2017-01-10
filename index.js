@@ -128,6 +128,11 @@ app.get('/api/process_configure', api.getProcessTypes);
 app.post('/api/process_configure', api.createProcessType);
 app.put('/api/process_configure/:id', api.updateProcessType);
 
+//Workflows
+app.get('/api/workflow_configure', api.getWorkflowTypes);
+app.post('/api/workflow_configure', api.createWorkflowType);
+app.put('/api/workflow_configure/:id', api.updateWorkflowType);
+
 //Roles
 app.get('/api/roles', api.getRoles);
 app.post('/api/roles', api.createRole);
