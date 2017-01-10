@@ -143,6 +143,7 @@ h1 {
 .navbar {
   border-radius: 0;
   background: #4A5459;
+  z-index: 1;
 }
 
 .navbar-brand span {
@@ -187,6 +188,7 @@ h1 {
 
 .table-responsive {
   margin: 15px;
+  width: 90%;
 }
 
 .table-responsive >.fixed-column {
@@ -217,4 +219,8 @@ h1 {
   top: 40%;
   margin-left: 38%;
   position: absolute;
+}
+
+.modal button.submit-form {
+  margin: 15px 0;
 }
