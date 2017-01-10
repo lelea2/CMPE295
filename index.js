@@ -123,6 +123,11 @@ app.post('/api/tags', api.createTag);
 app.post('/api/tags/:id', api.updateTag);
 app.delete('/api/tags/:id', api.deleteTag);
 
+//Processes
+app.get('/api/process_configure', api.getProcessTypes);
+app.post('/api/process_configure', api.createProcessType);
+app.put('/api/process_configure/:id', api.updateProcessType);
+
 //Roles
 app.get('/api/roles', api.getRoles);
 app.post('/api/roles', api.createRole);

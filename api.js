@@ -533,6 +533,68 @@ exports.deleteTag = tags.delete;
 
 /**
  * @swagger
+ * path: /api/process_configure
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get array of process configure
+ *      notes: Return array of process configure per department
+ *      responseClass: ProcessType
+ *      nickname: get_process_type
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: department_id
+ *          paramType: query
+ *          description: department id
+ *          required: true
+ */
+exports.getProcessTypes = processes.show_configure;
+
+/**
+ * @swagger
+ * path: /api/process_configure
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create new process type
+ *      notes: Return process type object
+ *      responseClass: ProcessType
+ *      nickname: create_process_type
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: ProcessType
+ *          paramType: body
+ *          description: process type object
+ *          required: true
+ */
+exports.createProcessType = processes.configure;
+
+/**
+ * @swagger
+ * path: /api/process_configure/:id
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update process type
+ *      notes: Return process type object
+ *      responseClass: ProcessType
+ *      nickname: create_process_type
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: ProcessType Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: ProcessType
+ *          paramType: body
+ *          description: process type object
+ *          required: true
+ */
+exports.updateProcessType = processes.update_configure;
+
+/**
+ * @swagger
  * path: /api/processes/{process_id}/notes
  * operations:
  *   -  httpMethod: GET
@@ -717,6 +779,23 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *       isAdmin:
  *         type: Boolean
+ *   ProcessType:
+ *     id: ProcessType
+ *     properties:
+ *       id:
+ *         type: String
+ *       name:
+ *         type: String
+ *         required: true
+ *       description:
+ *         type: String
+ *         required: true
+ *       department_id:
+ *         type: String
+ *         required: true
+ *       type:
+ *         type: String
+ *         required: true
  *   ProcessNote:
  *     id: ProcessNote
  *     properties:

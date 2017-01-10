@@ -16,7 +16,7 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
   $scope.offices = [];
 
   $scope.processSignin = function() {
-    console.log('processSignin');
+    // console.log('processSignin');
     if (LINKEDGOV.isEmptyStr($scope.formSigninData.account_type)) {
       $scope.errMessage = 'Please choose a valid account type';
       $scope.errMessageShow = true;

@@ -16,7 +16,8 @@ module.exports = {
       id: id,
       name: data.name,
       description: data.description,
-      department_id: data.department_id
+      department_id: data.department_id,
+      type: data.type
     };
     ProcessType.create(reqBody)
       .then(function (newProcessType) {
@@ -27,12 +28,28 @@ module.exports = {
       });
   },
 
+  show_configure(req, res) {
+    ProcessType.findAll({
+      where: {
+        department_id: req.query.department_id,
+        $or: [{is_deleted: null}, {is_deleted: false}]
+      }
+    })
+    .then(function (data) {
+      res.status(200).json(data);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   update_configure(req, res) {
     var data = req.body;
     var reqBody = {
       name: data.name,
       description: data.description,
-      department_id: data.department_id
+      department_id: data.department_id,
+      type: data.type
     };
     ProcessType.update(reqBody, {
       where: {

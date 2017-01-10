@@ -11,6 +11,15 @@
       <label for="inputDesc">Task Description</label>
       <textarea class="form-control" rows="3" ng-model="formProcess.description" id="inputDesc" placeholder="Task description" required></textarea>
     </div>
+    <div>
+      <label>Task Type</label>
+      <select class="form-control" ng-model="formProcess.type">
+        <option value="">Choose process type</option>
+        <option value="auto-approve">Auto Approve</option>
+        <option value="agent-approve">Agent Approve</option>
+        <option value="admin-approve">Admin Approve</option>
+      </select>
+    </div>
     {{{{raw-helper}}}}
     <div>
       <label>Department</label>
