@@ -24,13 +24,42 @@
         <td>{{department.group_email}}</td>
         <td>{{department.phone}}</td>
         <td><a href="/offices?department_id={{department.id}}">View office</a></td>
-        <td><a ng-click="updateDetail(office.id)">Edit</a></td>
+        <td><a ng-click="editDepartment(department.id)">Edit</a></td>
       </tr>
     </tbody>
     {{{{/raw-helper}}}}
   </table>
   {{> loading}}
   {{> notification}}
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit department</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-edit-office" ng-submit="updateDepartment()">
+            <label for="inputName">Department Name</label>
+            <input type="text" id="inputName" ng-model="formDepartment.name" class="form-control" placeholder="Department name" required autofocus>
+            <label for="inputDescription">Department description</label>
+            <input type="text" id="inputDescription" ng-model="formDepartment.description" class="form-control" placeholder="Department description" required>
+            <label for="inputCode">Department code</label>
+            <input type="text" id="inputCode" ng-model="formDepartment.unique_code" class="form-control" placeholder="Department code" required>
+            <label for="inputEmail">Department email</label>
+            <input type="text" id="inputEmail" ng-model="formDepartment.group_email" class="form-control" placeholder="input email" required>
+            <label for="inputPhone">Department phone</label>
+            <input type="text" id="inputPhone" ng-model="formDepartment.phone" ui-mask="1-999-999-9999" class="form-control" ui-mask-placeholder ui-mask-placeholder-char="_" required>
+            <button type="submit" class="btn btn-primary submit-form">Update Department</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{> rightrail}}
 <script src="../js/controllers/departments.js"></script>

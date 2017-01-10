@@ -49,9 +49,10 @@
           <form class="form-edit-office" ng-submit="updateOffice()">
             <label for="inputName">Office Name</label>
             <input type="text" id="inputName" ng-model="formOffice.name" class="form-control" placeholder="Office name" required autofocus>
-            <br />
             <label for="inputDescription">Office description</label>
             <input type="text" id="inputDescription" ng-model="formOffice.description" class="form-control" placeholder="Office description" required>
+            <label for="inputCode">Office code</label>
+            <input type="text" id="inputCode" ng-model="formOffice.unique_code" class="form-control" placeholder="code code" required>
             <label for="inputEmail">Office email</label>
             <input type="text" id="inputEmail" ng-model="formOffice.group_email" class="form-control" placeholder="Office email" required>
             <label for="inputPhone">Office phone</label>
