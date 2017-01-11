@@ -20,6 +20,33 @@
       </select>
     </div>
     {{{{/raw-helper}}}}
+    <div>
+      <label>Flows Configure</label>
+      {{{{raw-helper}}}}
+      <fieldset data-ng-repeat="choice in choices">
+        <div class="row" style="margin: 10px 0">
+          <div class="col-md-1">
+            <button type="button" class="btn btn-default" ng-click="removeItem($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </div>
+          <div class="col-md-5">
+            <strong>Main Process</strong>
+            <select class="form-control">
+              <option value="">Select main process</option>
+              <option ng-repeat="process in processes" value={{process.id}}>{{process.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <strong>Blocking processes</strong>
+            <select class="form-control" multiple>
+              <option ng-repeat="process in processes" value={{process.id}}>{{process.name}}</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+      {{{{/raw-helper}}}}
+      <button type="button" class="btn btn-primary pull-right" ng-click="addChoices()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="clearfix"></div>
     <button type="submit" class="btn btn-primary submit-form">Create New Workflow</button>
   </form>
 </div>

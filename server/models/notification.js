@@ -1,13 +1,20 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Process_Notifications = sequelize.define('Process_Notifications', {
+  var Notifications = sequelize.define('Notifications', {
     id: {
       type: DataTypes.STRING,
       primaryKey: true
     },
-    user_id: DataTypes.STRING,
-    process_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Users', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    },
+    task_id: DataTypes.STRING,
+    task_type: DataTypes.ENUM('workflow', 'process'),
     notification_type: DataTypes.ENUM('assigned','unassigned','commented','contacted'),
     notification_message: DataTypes.STRING
   }, {
@@ -17,5 +24,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return Process_Notifications;
+  return Notifications;
 };

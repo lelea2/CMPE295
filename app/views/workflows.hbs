@@ -3,13 +3,13 @@
   <h3>All Workflow Types</h3>
   {{{{raw-helper}}}}
   <div class="col-md-6" style="margin: 15px 0">
-    <select class="form-control">
+    <select class="form-control" ng-model="currentTag" ng-change="selectTag()">
       <option value="">All Tags</option>
       <option ng-repeat="tag in tags" value={{tag.id}}>{{tag.name}}</option>
     </select>
   </div>
   {{{{/raw-helper}}}}
-  <table class="table table-striped table-bordered table-hover">
+  <table class="table table-striped table-bordered table-hover table-responsive">
     <thead>
       <tr>
         <th>#</th>

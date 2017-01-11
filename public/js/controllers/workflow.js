@@ -2,6 +2,7 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
 
   $scope.workflow_types = [];
   $scope.tags = [];
+  $scope.currentTag = '';
 
   $scope.init = function() {
     //Get all tags
@@ -25,6 +26,10 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
   };
 
   $scope.viewProcess = function() {
+
+  };
+
+  $scope.selectTag = function() {
 
   };
 

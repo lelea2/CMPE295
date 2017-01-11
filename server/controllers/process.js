@@ -29,12 +29,22 @@ module.exports = {
   },
 
   show_configure(req, res) {
-    ProcessType.findAll({
-      where: {
-        department_id: req.query.department_id,
-        $or: [{is_deleted: null}, {is_deleted: false}]
-      }
-    })
+    var dataBody = {};
+    if (!!req.query.department_id) {
+      dataBody = {
+        where: {
+          department_id: req.query.department_id,
+          $or: [{is_deleted: null}, {is_deleted: false}]
+        }
+      };
+    } else {
+      dataBody = {
+        where: {
+          $or: [{is_deleted: null}, {is_deleted: false}]
+        }
+      };
+    }
+    ProcessType.findAll(dataBody)
     .then(function (data) {
       res.status(200).json(data);
     })

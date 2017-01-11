@@ -608,7 +608,6 @@ exports.updateWorkflowType = workflows.update_configure;
  *        - dataType: department_id
  *          paramType: query
  *          description: department id
- *          required: true
  */
 exports.getProcessTypes = processes.show_configure;
 
