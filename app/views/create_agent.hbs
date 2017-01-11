@@ -2,7 +2,25 @@
 {{> leftrail}}
 <div class="middle-rail" ng-controller="createAgentController" data-ng-init="init()">
   <h3>Configure New Agent</h3>
-
+  <form ng-submit="createAgent()">
+    <div>
+      <label for="inputEmail">Agent Email</label>
+      <input type="text" id="inputEmail" ng-model="formAgent.name" class="form-control" placeholder="Agent email" required autofocus>
+    </div>
+    <div>
+      <label for="inputphone">Agent Phone</label>
+       <input type="text" id="inputPhone" ng-model="formAgent.phone" ui-mask="1-999-999-9999" class="form-control" ui-mask-placeholder ui-mask-placeholder-char="_" required>
+    </div>
+    <div>
+      <label for="inputFirstName">Agent FirstName</label>
+      <input type="text" id="inputFirstName" ng-model="formAgent.firstName" class="form-control" placeholder="Firstname" required autofocus>
+    </div>
+    <div>
+      <label for="inputFirstName">Agent LastName</label>
+      <input type="text" id="inputLastName" ng-model="formAgent.lastName" class="form-control" placeholder="Lastname" required autofocus>
+    </div>
+    <button type="submit" class="btn btn-primary submit-form">Create New Agent</button>
+  </form>
 </div>
 {{> rightrail}}
 <script src="../js/controllers/create_agent.js"></script>
