@@ -3,6 +3,7 @@
 var Process = require('../models/').Processes;
 var ProcessType = require('../models/').ProcessTypes;
 var ProcessAdmin = require('../models/').ProcessAdmins;
+var Department = require('../models/').Departments;
 var User = require('../models/').Users;
 var uuid = require('node-uuid');
 
@@ -30,18 +31,30 @@ module.exports = {
 
   show_configure(req, res) {
     var dataBody = {};
-    if (!!req.query.department_id) {
+    if (!!req.headers.filters) {
+      dataBody = {
+        where: {
+          id: {
+            $in: req.headers.filters
+          },
+          $or: [{is_deleted: null}, {is_deleted: false}]
+        },
+        include: [Department]
+      };
+    } else if (!!req.query.department_id) {
       dataBody = {
         where: {
           department_id: req.query.department_id,
           $or: [{is_deleted: null}, {is_deleted: false}]
-        }
+        },
+        include: [Department]
       };
     } else {
       dataBody = {
         where: {
           $or: [{is_deleted: null}, {is_deleted: false}]
-        }
+        },
+        include: [Department]
       };
     }
     ProcessType.findAll(dataBody)

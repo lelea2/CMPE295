@@ -7,12 +7,22 @@ var uuid = require('node-uuid');
 module.exports = {
 
   show_configure(req, res) {
-    WorkflowType.findAll({
-      where: {
-        tag_id: req.query.tag_id,
-        $or: [{is_deleted: null}, {is_deleted: false}]
-      }
-    })
+    var dataBody = {};
+    if (!!req.query.tag_id) {
+      dataBody = {
+        where: {
+          tag_id: req.query.tag_id,
+          $or: [{is_deleted: null}, {is_deleted: false}]
+        }
+      };
+    } else {
+      dataBody = {
+        where: {
+          $or: [{is_deleted: null}, {is_deleted: false}]
+        }
+      };
+    }
+    WorkflowType.findAll(dataBody)
     .then(function (data) {
       res.status(200).json(data);
     })

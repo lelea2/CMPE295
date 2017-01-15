@@ -3,10 +3,9 @@ App.controller('createWorkflowController', ['$scope', '$http', function ($scope,
   $scope.formWorkflow = {};
   $scope.tags = [];
   $scope.processes = [];
-  $scope.blocktasks = [[]]; //block tasks
   $scope.choices = [{
-    task_id: '',
-    block_tasks: $scope.blocktasks[0]
+    process_id: '',
+    block_process_id: []
   }]; //empty 1 choice
 
   $scope.init = function() {
@@ -34,23 +33,36 @@ App.controller('createWorkflowController', ['$scope', '$http', function ($scope,
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/workflow_configure',
-      data: $scope.formWorkflow
+      data: $scope.generateWorkFlow()
     }).then(function(resp) {
       //success, load to view process
       window.location = '/workflows?created=true';
     });
   };
 
+  $scope.generateWorkFlow = function() {
+    return {
+      name: $scope.formWorkflow.name,
+      description: $scope.formWorkflow.description,
+      tag_id: $scope.formWorkflow.tag_id,
+      flows: {
+        tasks: $scope.choices
+      }
+    };
+  };
+
   $scope.addChoices = function() {
-    $scope.blocktasks.push([]);
     $scope.choices.push({
-      task_id: '',
-      block_tasks: []
+      process_id: '',
+      block_process_id: []
     });
   };
 
   $scope.removeItem = function(index) {
-    console.log(index);
+    // console.log(index);
+    if ($scope.choices.length > 0) {
+      $scope.choices.splice(index, 1);
+    }
   };
 
 }]);

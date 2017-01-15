@@ -13,26 +13,43 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Tag Name</th>
+        <th>Name</th>
         <th>Description</th>
-        <th>Keywords</th>
         <th>View workflow</th>
       </tr>
     </thead>
     {{{{raw-helper}}}}
     <tbody>
-      <tr ng-repeat="item in workflowtypes">
+      <tr ng-repeat="item in workflow_types">
         <td>{{$index + 1}}</td>
         <td>{{item.name}}</td>
         <td>{{item.description}}</td>
-        <td><a ng-click="viewProcess(item.id)">View Process</a></td>
+        <td><a ng-click="viewProcess(item)">View Process</a></td>
       </tr>
     </tbody>
     {{{{/raw-helper}}}}
   </table>
-  <a href="/create_workflow" class="btn btn-info">Configure new workflow</a>
+  <a href="/create_workflow" class="btn btn-info" style="margin-left: 15px">Configure new workflow</a>
   {{> loading}}
   {{> notification}}
+  <div id="myGraphModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">View Process Configure Details</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{> rightrail}}
 <script src="../js/controllers/workflow.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+

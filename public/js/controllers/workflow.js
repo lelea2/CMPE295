@@ -25,12 +25,30 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
     });
   };
 
-  $scope.viewProcess = function() {
+  $scope.viewProcess = function(item) {
+    var flows = item.flows;
+    $('#myGraphModal').modal({
+      show: true
+    });
+  };
+
+  $scope.generateWorkflow = function(flows) {
 
   };
 
   $scope.selectTag = function() {
-
+    $(document).trigger('linkedgov:loading_start');
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/workflow_configure?tag_id=' + $scope.currentTag,
+    }).then(function(resp) {
+      //success, load to view process
+      $scope.workflow_types = resp.data;
+      $(document).trigger('linkedgov:loading_stop');
+    }, function(err) {
+      $(document).trigger('linkedgov:loading_stop');
+    });
   };
 
 }]);
