@@ -90,7 +90,44 @@ module.exports = {
   },
 
   create(req, res) {
+    var data = req.body;
+    var id =  uuid.v4();
+    var reqBody = {
+      id: id,
+      type_id: data.type_id,
+      currentStateId: data.state,
+      note: data.note,
+      critial: data.critial,
+      due_date: data.due_date
+    };
+    Workflow.create(reqBody)
+    .then(function (newRecords) {
+      res.status(201).json(newRecords);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
 
+  update(req, res) {
+    var data = req.body;
+    var reqBody = {
+      currentStateId: data.state,
+      critial: data.critial,
+      due_date: data.due_date
+    };
+    Workflow.update(reqBody, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (updateRecords) {
+      res.status(200).json({});
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
   }
 
 };
+
