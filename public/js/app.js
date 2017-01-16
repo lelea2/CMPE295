@@ -28,8 +28,13 @@ LINKEDGOV.getHeaders = function(setCookies) {
   return {
     'Content-Type': 'application/json',
     'setCookie': setCookies || false,
-    'u': $('input[name="_userId"]').val()
+    'u': $('input[name="_userId"]').val(),
+    'account_type': $('input[name="_role"]').val()
   }
+};
+
+LINKEDGOV.getUserId = function() {
+  return $('input[name="_userId"]').val();
 };
 
 LINKEDGOV.formatDate = function(date) {

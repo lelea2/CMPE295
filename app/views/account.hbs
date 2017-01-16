@@ -1,5 +1,5 @@
 {{> leftrail}}
-<div class="middle-rail" ng-controller="accountController">
+<div class="middle-rail" ng-controller="accountController" data-ng-init="init()">
   <h3>Manage Account</h3>
   <form ng-submit="updateAccount">
     <div>
@@ -18,6 +18,7 @@
       <label for="inputFirstName">LastName</label>
       <input type="text" id="inputLastName" ng-model="formAccount.lastName" class="form-control" placeholder="Lastname" required autofocus>
     </div>
+    <button type="submit" class="btn btn-primary submit-form">Update Account</button>
   </form>
   {{> loading}}
 </div>
