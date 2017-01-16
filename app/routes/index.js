@@ -168,6 +168,17 @@ exports.workflows = function(req, res, next) {
   });
 };
 
+//Display workflows case page
+exports.workflow_case = function(req, res, next) {
+  res.render('workflow_case', { title: 'Cases', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
 //Display tags page
 exports.tags = function(req, res, next) {
   res.render('tags', { title: 'Tags', layout: 'main' }, function (err, html) {
@@ -182,6 +193,16 @@ exports.tags = function(req, res, next) {
 //Display tasks page
 exports.tasks = function(req, res, next) {
   res.render('tasks', { title: 'Tasks', layout: 'main' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};
+
+exports.task_case = function(req, res, next) {
+  res.render('task_case', { title: 'Task Cases', layout: 'main' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);

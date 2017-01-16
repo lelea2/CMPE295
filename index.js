@@ -226,8 +226,10 @@ app.get('/offices', security.userRequiredLoggedIn(), routes.offices);
 app.get('/agents', security.userRequiredLoggedIn(), routes.agents);
 app.get('/report', security.userRequiredLoggedIn(), routes.report);
 app.get('/workflows', security.userRequiredLoggedIn(), routes.workflows);
+app.get('/workflow_case', security.userRequiredLoggedIn(), routes.workflow_case);
 app.get('/tags', security.userRequiredLoggedIn(), routes.tags);
 app.get('/tasks', security.userRequiredLoggedIn(), routes.tasks);
+app.get('/task_case', security.userRequiredLoggedIn(), routes.task_case);
 app.get('/account', security.userRequiredLoggedIn(), routes.account);
 
 /***************************************************************/
