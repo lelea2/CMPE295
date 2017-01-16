@@ -30,7 +30,8 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     critical: DataTypes.ENUM('1','2','3','4','5'),
-    due_date: DataTypes.DATE
+    due_date: DataTypes.DATE,
+    details: DataTypes.BLOB //Include all schema detail for certain task
   }, {
     classMethods: {
       associate: function(models) {

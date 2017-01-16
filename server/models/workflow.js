@@ -22,7 +22,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     note: DataTypes.STRING,
     critical: DataTypes.ENUM('1','2','3','4','5'),
-    due_date: DataTypes.DATE
+    due_date: DataTypes.DATE,
+    longitude: DataTypes.DECIMAL(10, 2),
+    latitude: DataTypes.DECIMAL(10, 2)
   }, {
     classMethods: {
       associate: function(models) {
