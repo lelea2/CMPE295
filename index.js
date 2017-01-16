@@ -172,6 +172,30 @@ app.post('/api/signup', function(req, res) {
   }
 });
 
+//Handle get user information (for both customer and agent)
+app.get('/api/account/:id', function(req, res) {
+  var data = req.headers;
+  if (data.account_type === 'agent') { //Handle agent
+    api.showAgent(req, res);
+  } else if (data.account_type === 'resident') {
+    api.showCustomer(req, res);
+  } else {
+    res.status(500).json({err: 'Invalid account type'});
+  }
+});
+
+//Handle update user information (for both customer and agent)
+app.put('/api/account/:id', function(req, res) {
+  var data = req.headers;
+  if (data.account_type === 'agent') { //Handle agent
+    api.updateAgent(req, res);
+  } else if (data.account_type === 'resident') {
+    api.updateCustomer(req, res);
+  } else {
+    res.status(500).json({err: 'Invalid account type'});
+  }
+});
+
 //Log user out
 app.get('/logout', function(req, res) {
   security.logout(req);

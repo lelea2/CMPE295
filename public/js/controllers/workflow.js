@@ -33,7 +33,9 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
   };
 
   $scope.generateWorkflow = function(flows) {
+    for(var i = 0; i < flows.length; i++) {
 
+    }
   };
 
   $scope.selectTag = function() {
