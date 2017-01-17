@@ -97,8 +97,11 @@ module.exports = {
       type_id: data.type_id,
       currentStateId: data.state,
       note: data.note,
+      img_gallery: data.img_gallery,
       critial: data.critial,
-      due_date: data.due_date
+      due_date: data.due_date,
+      longitude: data.longitude,
+      latitude: data.latitude
     };
     Workflow.create(reqBody)
     .then(function (newRecords) {
@@ -126,6 +129,40 @@ module.exports = {
     })
     .catch(function (error) {
       res.status(500).json(error);
+    });
+  },
+
+  show(req,res) {
+    Workflow.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function(data) {
+      res.status(200).json(data)
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
+  },
+
+  //Query to show collection of certain type of workflow
+  show_collection(req, res) {
+    var reqBody = {},
+        filter = req.query.filter;
+    if (filter === 'workflow_type') {
+      reqBody = {
+        where: {
+          workflow_id: req.query.workflow_id
+        }
+      };
+    }
+    Workflow.findaAll(reqBody)
+    .then(function(data) {
+      res.status(200).json(data)
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
     });
   }
 
