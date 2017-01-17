@@ -164,6 +164,11 @@ module.exports = {
     .catch(function(err) {
       res.status(500).json(err);
     });
+  },
+
+  //Showing number statistic of workflow (for displaying)
+  show_statistic(req, res) {
+
   }
 
 };
