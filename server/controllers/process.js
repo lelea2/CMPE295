@@ -126,6 +126,28 @@ module.exports = {
       });
   },
 
+  update(req, res) {
+    var data = req.body;
+    var reqBody = {
+      enabled_flag: data.enabled_flag,
+      currentStateId: data.currentStateId,
+      next_states: data.next_states,
+      critial: data.critical,
+      due_date: data.due_date
+    };
+    Process.update(reqBody, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (updateRecords) {
+      res.status(200).json({});
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   show_per_agent(req, res) {
     ProcessAdmin.findAll({
       where: {

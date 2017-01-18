@@ -3,6 +3,7 @@
 var Workflow = require('../models/').Workflows;
 var WorkflowType = require('../models/').WorkflowTypes;
 var uuid = require('node-uuid');
+var sequelize = require('sequelize');
 
 module.exports = {
 
@@ -153,7 +154,7 @@ module.exports = {
     if (filter === 'workflow_type') {
       reqBody = {
         where: {
-          workflow_id: req.query.workflow_id
+          type_id: req.query.id
         }
       };
     }
@@ -167,8 +168,25 @@ module.exports = {
   },
 
   //Showing number statistic of workflow (for displaying)
-  show_statistic(req, res) {
-
+  show_stats(req, res) {
+    Workflow.findAll({
+      attributes: {
+        include: [[sequelize.fn('COUNT', sequelize.col('type_id')), 'no_workflows']]
+      },
+      where: {
+        createdAt: {
+          $lt: new Date(),
+          $gt: new Date(new Date() - 30 * 24 * 60 * 60 * 1000)
+        }
+      },
+      include: [WorkflowType]
+    })
+    .then(function(data) {
+      res.status(200).json(data)
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
   }
 
 };
