@@ -21,7 +21,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     note: DataTypes.STRING,
-    img_gallery: DataTypes.BLOBS,
     critical: DataTypes.ENUM('1','2','3','4','5'),
     due_date: DataTypes.DATE,
     longitude: DataTypes.DECIMAL(10, 2),

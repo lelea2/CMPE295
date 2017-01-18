@@ -2,6 +2,7 @@
 
 var Workflow = require('../models/').Workflows;
 var WorkflowType = require('../models/').WorkflowTypes;
+var WorkflowFile = require('../models').WorkflowFiles;
 var uuid = require('node-uuid');
 var sequelize = require('sequelize');
 
@@ -98,7 +99,6 @@ module.exports = {
       type_id: data.type_id,
       currentStateId: data.state,
       note: data.note,
-      img_gallery: data.img_gallery,
       critial: data.critial,
       due_date: data.due_date,
       longitude: data.longitude,
@@ -147,6 +147,20 @@ module.exports = {
     });
   },
 
+  show_files(req, res) {
+    WorkflowFile.findAll({
+      where: {
+        workflow_id: req.params.workflow_id
+      }
+    })
+    .then(function(data) {
+      res.status(200).json(data)
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
+  },
+
   //Query to show collection of certain type of workflow
   show_collection(req, res) {
     var reqBody = {},
@@ -169,14 +183,16 @@ module.exports = {
 
   //Showing number statistic of workflow (for displaying)
   show_stats(req, res) {
+    var fromDate = req.query.fromDate || new Date(new Date() - 30 * 24 * 60 * 60 * 1000),
+        toDate = req.query.toDate || new Date()
     Workflow.findAll({
       attributes: {
         include: [[sequelize.fn('COUNT', sequelize.col('type_id')), 'no_workflows']]
       },
       where: {
         createdAt: {
-          $lt: new Date(),
-          $gt: new Date(new Date() - 30 * 24 * 60 * 60 * 1000)
+          $lt: fromDate,
+          $gt: toDate
         }
       },
       include: [WorkflowType]

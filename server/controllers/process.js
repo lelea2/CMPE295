@@ -2,6 +2,7 @@
 
 var Process = require('../models/').Processes;
 var ProcessType = require('../models/').ProcessTypes;
+var ProcessFile = require('../models/').ProcessFiles;
 var ProcessAdmin = require('../models/').ProcessAdmins;
 var Department = require('../models/').Departments;
 var User = require('../models/').Users;
@@ -31,11 +32,11 @@ module.exports = {
 
   show_configure(req, res) {
     var dataBody = {};
-    if (!!req.headers.filters) {
+    if (!!req.query.filters) {
       dataBody = {
         where: {
           id: {
-            $in: req.headers.filters
+            $in: req.query.filters.split('~')
           },
           $or: [{is_deleted: null}, {is_deleted: false}]
         },

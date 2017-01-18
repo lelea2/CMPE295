@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        ProcessFiles.belongsTo(models.Processes, { foreignKey: 'process_id' });
       }
     }
   });

@@ -543,7 +543,8 @@ exports.deleteTag = tags.delete;
  *      consumes:
  *        - text/html
  *      parameters:
- *        - dataType: tag_id
+ *        - name: tag_id
+ *          dataType: string
  *          paramType: query
  *          description: tag id
  *          required: true
@@ -595,6 +596,49 @@ exports.updateWorkflowType = workflows.update_configure;
 
 /**
  * @swagger
+ * path: /api/workflows
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create new workflow
+ *      notes: Return workflows object
+ *      responseClass: Workflow
+ *      nickname: create_workflow
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: Workflow
+ *          paramType: body
+ *          description: workflow object
+ *          required: true
+ */
+exports.createWorkflow = workflows.create;
+
+/**
+ * @swagger
+ * path: /api/workflows/:id
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update workflow
+ *      notes: Update workflow object
+ *      responseClass: void
+ *      nickname: update_workflow
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Workflow Id
+ *          paramType: path
+ *          dataType: string
+ *          required: true
+ *        - dataType: Workflow
+ *          paramType: body
+ *          description: workflow object
+ *          required: true
+ */
+exports.updateWorkflow = workflows.update;
+
+/**
+ * @swagger
  * path: /api/process_configure
  * operations:
  *   -  httpMethod: GET
@@ -605,9 +649,17 @@ exports.updateWorkflowType = workflows.update_configure;
  *      consumes:
  *        - text/html
  *      parameters:
- *        - dataType: department_id
+ *        - name: department_id
+ *          description: Department Id
  *          paramType: query
- *          description: department id
+ *          required: false
+ *          dataType: string
+ *        - name: filters
+ *          paramType: header
+ *          in: header
+ *          description: array of process type id
+ *          dataType: array
+ *          required: false
  */
 exports.getProcessTypes = processes.show_configure;
 
@@ -653,6 +705,26 @@ exports.createProcessType = processes.configure;
  *          required: true
  */
 exports.updateProcessType = processes.update_configure;
+
+/**
+ * @swagger
+ * path: /api/process_configure/:id
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete process type
+ *      notes: Delete process type object
+ *      responseClass: void
+ *      nickname: delete_process_type
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: ProcessType Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.deleteProcessType = processes.delete_configure;
 
 /**
  * @swagger
@@ -859,6 +931,44 @@ exports.deleteProcessNote = process_notes.delete;
  *         required: true
  *       is_deleted:
  *         type: boolean
+ *   Workflow:
+ *     id: Workflow
+ *     properties:
+ *       id:
+ *         type: String
+ *       type_id:
+ *         type: String
+ *         required: true
+ *       currentStateId:
+ *         type: Integer
+ *         required: true
+ *       critical:
+ *         type: Integer
+ *       due_date:
+ *         type: String
+ *       longitude:
+ *         type: Double
+ *         required: true
+ *       latitude:
+ *         type: Double
+ *         required: true
+ *   WorkflowFile:
+ *     id: WorkflowFile
+ *     properties:
+ *       id:
+ *         type: String
+ *       workflow_id:
+ *         type: String
+ *         required: true
+ *       filename:
+ *         type: String
+ *         required: true
+ *       mimeType:
+ *         type: String
+ *         required: true
+ *       file:
+ *         type: String
+ *         required: true
  *   ProcessType:
  *     id: ProcessType
  *     properties:
@@ -878,6 +988,28 @@ exports.deleteProcessNote = process_notes.delete;
  *         required: true
  *       is_deleted:
  *         type: boolean
+ *   Process:
+ *     id: Process
+ *     properties:
+ *       id:
+ *         type: String
+ *       workflow_id:
+ *         type: String
+ *         required: true
+ *       process_type:
+ *         type: String
+ *         required: true
+ *       enabled_flag:
+ *         type: Boolean
+ *       currentStateId:
+ *         type: Integer
+ *         required: true
+ *       next_states:
+ *         type: Object
+ *       critical:
+ *         type: Integer
+ *       due_date:
+ *         type: String
  *   ProcessNote:
  *     id: ProcessNote
  *     properties:
@@ -885,8 +1017,10 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *       process_id:
  *         type: String
+ *         required: true
  *       creator_id:
  *         type: String
+ *         required: true
  *       note:
  *         type: String
  *   Customer:
