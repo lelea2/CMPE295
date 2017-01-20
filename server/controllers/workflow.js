@@ -164,11 +164,17 @@ module.exports = {
   //Query to show collection of certain type of workflow
   show_collection(req, res) {
     var reqBody = {},
-        filter = req.query.filter;
+        filter = req.query.filter,
+        fromDate = req.query.fromDate || new Date(new Date() - 30 * 24 * 60 * 60 * 1000),
+        toDate = req.query.toDate || new Date();
     if (filter === 'workflow_type') {
       reqBody = {
         where: {
-          type_id: req.query.id
+          type_id: req.query.id,
+          createdAt: {
+            $lt: fromDate,
+            $gt: toDate
+          }
         }
       };
     }
@@ -184,7 +190,7 @@ module.exports = {
   //Showing number statistic of workflow (for displaying)
   show_stats(req, res) {
     var fromDate = req.query.fromDate || new Date(new Date() - 30 * 24 * 60 * 60 * 1000),
-        toDate = req.query.toDate || new Date()
+        toDate = req.query.toDate || new Date();
     Workflow.findAll({
       attributes: {
         include: [[sequelize.fn('COUNT', sequelize.col('type_id')), 'no_workflows']]
