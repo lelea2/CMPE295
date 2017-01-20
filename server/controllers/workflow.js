@@ -3,8 +3,16 @@
 var Workflow = require('../models/').Workflows;
 var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
+var WorklowCustomer = require('../models').WorklowCustomers;
 var uuid = require('node-uuid');
 var sequelize = require('sequelize');
+
+/**
+ * Helper function to generate manage process for running query, create dependencies
+ */
+function manageProcesses(flows) {
+
+}
 
 module.exports = {
 
@@ -209,6 +217,23 @@ module.exports = {
     .catch(function(err) {
       res.status(500).json(err);
     });
+  },
+
+  //Show workflows by customers id
+  //Customer might want to track their own case at this time
+  show_by_customer(req, res) {
+    WorklowCustomer.findAll({
+      where: {
+        customer_id: req.headers.u //userId in case of customer logged in
+      },
+      include: [Workflow]
+    })
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    })
   }
 
 };
