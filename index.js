@@ -128,11 +128,14 @@ app.delete('/api/tags/:id', api.deleteTag);
 app.get('/api/process_configure', api.getProcessTypes);
 app.post('/api/process_configure', api.createProcessType);
 app.put('/api/process_configure/:id', api.updateProcessType);
+app.delete('/api/process_configure/:id', api.deleteProcessType);
 
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);
+app.get('/api/workflow_configure/:id', api.getWorkflowTypes);
 app.post('/api/workflow_configure', api.createWorkflowType);
 app.put('/api/workflow_configure/:id', api.updateWorkflowType);
+app.delete('/api/workflow_configure/:id', api.deleteWorkflowType);
 
 //Roles
 app.get('/api/roles', api.getRoles);

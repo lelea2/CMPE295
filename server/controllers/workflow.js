@@ -11,7 +11,7 @@ var sequelize = require('sequelize');
  * Helper function to generate manage process for running query, create dependencies
  */
 function manageProcesses(flows) {
-  var processes = [];
+  var processes = {};
   for(var i = 0; i < flows.length; i++) {
 
   }
@@ -21,7 +21,13 @@ module.exports = {
 
   show_configure(req, res) {
     var dataBody = {};
-    if (!!req.query.tag_id) {
+    if (!!req.params.id) {
+      dataBody = {
+        where: {
+          id: req.params.id
+        }
+      };
+    } else if (!!req.query.tag_id) {
       dataBody = {
         where: {
           tag_id: req.query.tag_id,
@@ -53,7 +59,7 @@ module.exports = {
       name: data.name,
       description: data.description,
       tag_id: data.tag_id,
-      flows: data.flows
+      flows: JSON.stringify(data.flows)
     };
     WorkflowType.create(reqBody)
       .then(function (newWorkflowType) {
@@ -70,7 +76,7 @@ module.exports = {
       name: data.name,
       description: data.description,
       tag_id: data.tag_id,
-      flows: data.flows
+      flows: JSON.stringify(data.flows)
     };
     WorkflowType.update(reqBody, {
       where: {

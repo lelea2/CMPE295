@@ -553,6 +553,26 @@ exports.deleteTag = tags.delete;
 
 /**
  * @swagger
+ * path: /api/workflow_configure/{id}
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get array of workflow configure
+ *      notes: Return array of workflow configure
+ *      responseClass: WorkflowType
+ *      nickname: get_workflow_type_by_id
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: WorkflowType Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.getWorkflowTypes = workflows.show_configure;
+
+/**
+ * @swagger
  * path: /api/workflow_configure
  * operations:
  *   -  httpMethod: GET
@@ -613,6 +633,25 @@ exports.createWorkflowType = workflows.configure;
  *          required: true
  */
 exports.updateWorkflowType = workflows.update_configure;
+
+/**
+ * @swagger
+ * path: /api/workflow_configure/{id}
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Delete workflow configure
+ *      responseClass: void
+ *      nickname: delete_workflow_type_by_id
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: WorkflowType Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ */
+exports.deleteWorkflowType = workflows.delete_configure;
 
 /**
  * @swagger
@@ -1061,6 +1100,25 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *         required: true
  *       password:
+ *         type: String
+ *         required: true
+ *   Notification:
+ *     id: Notification
+ *     properties:
+ *       id:
+ *         type: String
+ *       user_id:
+ *         type: String
+ *       task:
+ *         type: String
+ *         require: true
+ *       task_id:
+ *         type: String
+ *         required: true
+ *       notification_type:
+ *         type: String
+ *         required: true
+ *       notification_message:
  *         type: String
  *         required: true
  */

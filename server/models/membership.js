@@ -30,8 +30,7 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Permissions', // Can be both a string representing the table name, or a reference to the model
         key: 'id'
       }
-    },
-    isAdmin: DataTypes.BOOLEAN
+    }
   }, {
     classMethods: {
       associate: function(models) {

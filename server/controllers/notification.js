@@ -7,6 +7,10 @@ module.exports = {
 
   show(req, res) {
 
+  },
+
+  create(req, res) {
+
   }
 
 };
