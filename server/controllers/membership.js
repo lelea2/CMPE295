@@ -34,6 +34,23 @@ module.exports = {
     .catch(function (error) {
       res.status(500).json(error);
     });
+  },
+
+  update(req, res) {
+    var reqBody = {
+      role_id: req.body.role_id
+    };
+    Membership.update(reqBody, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (updateRecords) {
+      res.status(200).json({});
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
   }
 
 };

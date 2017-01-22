@@ -311,6 +311,26 @@ exports.getMemberships = memberships.show;
  * @swagger
  * path: /api/memberships/{id}
  * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update membership
+ *      notes: return status code for success/failure
+ *      responseClass: void
+ *      nickname: update_membership
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - dataType: Membership
+ *          paramType: body
+ *          description: membership object
+ *          required: true
+ */
+exports.updateMembership = memberships.update;
+
+/**
+ * @swagger
+ * path: /api/memberships/{id}
+ * operations:
  *   -  httpMethod: DELETE
  *      summary: Delete membership
  *      notes: return status code for success/failure
@@ -902,15 +922,14 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *       user_id:
  *         type: String
- *         required: true
  *       group_id:
  *         type: String
- *         required: true
  *       group_type:
  *         type: String
- *         required: true
  *       permission_id:
  *         type: String
+ *       role_id:
+ *         type: Integer
  *       isAdmin:
  *         type: Boolean
  *   WorkflowType:

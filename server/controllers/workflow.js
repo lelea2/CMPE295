@@ -11,7 +11,10 @@ var sequelize = require('sequelize');
  * Helper function to generate manage process for running query, create dependencies
  */
 function manageProcesses(flows) {
+  var processes = [];
+  for(var i = 0; i < flows.length; i++) {
 
+  }
 }
 
 module.exports = {

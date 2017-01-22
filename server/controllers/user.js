@@ -23,6 +23,12 @@ module.exports = {
     };
     User.create(reqBody)
       .then(function (newUser) {
+        if (req.headers.setcookie === 'true') {
+          security.setUserCookie(req, {
+            id: userId,
+            role: 'customer'
+          });
+        }
         res.status(201).json(newUser);
       })
       .catch(function (error) {

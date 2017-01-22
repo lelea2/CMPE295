@@ -5,5 +5,8 @@ var Notification = require('../models/').Notifications,
 
 module.exports = {
 
+  show(req, res) {
+
+  }
 
 };

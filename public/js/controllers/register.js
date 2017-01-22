@@ -58,7 +58,7 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
       if ($scope.formSignupData.account_type === 'agent') {
         $scope.showProcessMembership();
       } else {
-        window.location.reload();
+        window.location = '/dashboard';
       }
     }, function(err) {
       $scope.errMessage = 'Signup failed. Please try again!';
@@ -112,7 +112,7 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
 
   $scope.showSignup = function() {
     $scope.signinState = false;
-    $scope.signupState = false;
+    $scope.signupState = true;
     $scope.errMessageShow = false;
   };
 

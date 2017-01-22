@@ -21,6 +21,12 @@ module.exports = {
     };
     Customer.create(reqBody)
       .then(function (newCustomer) {
+        if (req.headers.setcookie === 'true') {
+          security.setUserCookie(req, {
+            id: userId,
+            role: 'customer'
+          });
+        }
         res.status(201).json(newCustomer);
       })
       .catch(function (error) {

@@ -115,6 +115,7 @@ app.delete('/api/offices/:id', api.deleteOffice);
 
 //Memberships
 app.get('/api/memberships', api.getMemberships);
+app.put('/api/memberships/:id', api.updateMembership);
 app.delete('/api/memberships/:id', api.deleteMembership);
 
 //Tags
