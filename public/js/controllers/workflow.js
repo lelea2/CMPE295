@@ -5,11 +5,12 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
   $scope.currentTag = '';
 
   $scope.init = function() {
+    $scope.currentTag = LINKEDGOV.getParamVal('tag_id') || '';
     //Get all tags
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
-      url: '/api/tags',
+      url: '/api/tags'
     }).then(function(resp) {
       //success, load to view process
       $scope.tags = resp.data;
@@ -18,7 +19,7 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
-      url: '/api/workflow_configure',
+      url: (!!$scope.currentTag) ? ('/api/workflow_configure/?tag_id=' + $scope.currentTag) : '/api/workflow_configure'
     }).then(function(resp) {
       //success, load to view process
       $scope.workflow_types = resp.data;

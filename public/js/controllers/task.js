@@ -3,8 +3,10 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   $scope.departments = [];
   $scope.tasks = [];
   $scope.currentDepartment = '';
+  $scope.formTask = {};
 
   $scope.init = function() {
+    $scope.currentDepartment = LINKEDGOV.getParamVal('department_id') || '';
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
@@ -13,9 +15,11 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
       //success, load to view process
       $scope.departments = resp.data;
     });
+
+    $scope.loadTasksPerDepartment();
   };
 
-  $scope.selectDepartment = function() {
+  $scope.loadTasksPerDepartment = function() {
     if (!!$scope.currentDepartment) {
       $(document).trigger('linkedgov:loading_start');
       $http({
@@ -32,8 +36,29 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     }
   };
 
-  $scope.editTask = function() {
+  $scope.selectDepartment = function() {
+    $scope.loadTasksPerDepartment();
+  };
 
+  $scope.editTask = function(item) {
+    // console.log(item);
+    // console.log('edit task');
+    $scope.formTask = item;
+    $('#myTaskModal').modal({
+      show: true
+    });
+  };
+
+  $scope.updateTask = function() {
+    $http({
+      method: 'PUT',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/process_configure/' + $scope.formTask.id,
+      data: $scope.formTask
+    }).then(function(resp) {
+      //success, load to view process
+      window.location.reload('/?department_id=' + $scope.formTask.department_id);
+    });
   };
 
 }]);

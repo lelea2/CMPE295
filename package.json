@@ -37,6 +37,7 @@
     "save": "^2.3.0",
     "sequelize": "^3.24.6",
     "sequelize-cli": "^2.4.0",
+    "sequelize-json": "^2.1.2",
     "swagger-express": "^1.0.5",
     "winston": "^2.2.0"
   },

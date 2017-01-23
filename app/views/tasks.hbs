@@ -26,7 +26,7 @@
         <td>{{item.name}}</td>
         <td>{{item.description}}</td>
         <td>{{item.type}}</td>
-        <td><a ng-click="editTask(item.id)">Edit</a></td>
+        <td><a ng-click="editTask(item)">Edit</a></td>
       </tr>
     </tbody>
     {{{{/raw-helper}}}}
@@ -34,6 +34,42 @@
   <a href="/create_task" class="btn btn-info" style="margin-left: 15px">Configure new task</a>
   {{> loading}}
   {{> notification}}
+  <div id="myTaskModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Process</h4>
+        </div>
+        <div class="modal-body">
+          <form ng-submit="updateTask()">
+            <div>
+              <label for="inputName">Task Name</label>
+              <input type="text" id="inputName" ng-model="formTask.name" class="form-control" placeholder="Task name" required autofocus>
+            </div>
+            <div>
+              <label for="inputDesc">Task Description</label>
+              <textarea class="form-control" rows="3" ng-model="formTask.description" id="inputDesc" placeholder="Task description" required></textarea>
+            </div>
+            <div>
+              <label>Task Type</label>
+              <select class="form-control" ng-model="formTask.type">
+                <option value="">Choose process type</option>
+                <option value="auto-approve">Auto Approve</option>
+                <option value="agent-approve">Agent Approve</option>
+                <option value="admin-approve">Admin Approve</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary submit-form">Update Task</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{> rightrail}}
 <script src="../js/controllers/task.js"></script>

@@ -72,7 +72,6 @@ module.exports = {
     var reqBody = {
       name: data.name,
       description: data.description,
-      department_id: data.department_id,
       type: data.type
     };
     ProcessType.update(reqBody, {

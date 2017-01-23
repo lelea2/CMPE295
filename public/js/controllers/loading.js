@@ -9,10 +9,12 @@ App.controller('loadingController', ['$scope', '$http', function ($scope, $http)
 
   $scope.loadingStart = function() {
     $scope.showLoading = true;
+    $('.middle-rail').addClass('loading-shown');
   };
 
   $scope.loadingStop = function() {
     $scope.showLoading = false;
+    $('.middle-rail').removeClass('loading-shown');
   };
 
 }]);

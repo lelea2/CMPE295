@@ -2,6 +2,13 @@
 
 var Permission = require('../models/').Permissions;
 
+var DEFAULT_PERMISSION = {
+  manage_member: false,
+  manage_write: true,
+  manage_read: true,
+  manage_delete: false
+};
+
 module.exports = {
 
   create(req, res) {
