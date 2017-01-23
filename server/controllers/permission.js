@@ -29,6 +29,18 @@ module.exports = {
       });
   },
 
+  create_default(callback) {
+    var reqBody = DEFAULT_PERMISSION;
+    reqBody.id = uuid.v4();
+    Permission.create(reqBody)
+      .then(function (newPermission) {
+        callback(newPermission);
+      })
+      .catch(function (error) {
+        callback(error);
+      });
+  },
+
   update(req, res) {
     var data = req.body;
     var reqBody = {

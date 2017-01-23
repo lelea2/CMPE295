@@ -2,7 +2,7 @@
 {{> leftrail}}
 <div class="middle-rail" ng-controller="accountController" data-ng-init="init()">
   <h3>Manage Account</h3>
-  <form ng-submit="updateAccount">
+  <form ng-submit="updateAccount()">
     <div>
       <label for="inputEmail">Email</label>
       <input type="text" id="inputEmail" ng-model="formAccount.email" class="form-control" placeholder="Agent email" required autofocus>

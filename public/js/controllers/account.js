@@ -26,7 +26,12 @@ App.controller('accountController', ['$scope', '$http', function ($scope, $http)
       data: $scope.formAccount
     }).then(function(resp) {
       //success, load to view process
-      window.location.reload();
+      // window.location.reload();
+      $(document).trigger('linkedgov:notification_shown', {
+        message: 'Account updated successfully',
+        type: 'success'
+      });
+      $(document).trigger('linkedgov:loading_stop');
     }, function(err) {
       $(document).trigger('linkedgov:loading_stop');
     });
