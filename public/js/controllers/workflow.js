@@ -35,9 +35,15 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
 
   $scope.generateWorkflow = function(flows) {
     console.log(flows);
-    for(var i = 0; i < flows.length; i++) {
-
+    var tasks_arr = []; //array to store unique tasks
+    for(var key in flows) {
+      if (tasks_arr.indexOf(key) < 0) {
+        tasks_arr.push(key);
+      } else {
+        //don't push to new tasks_arr
+      }
     }
+
   };
 
   $scope.selectTag = function() {

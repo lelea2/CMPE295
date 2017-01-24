@@ -13,8 +13,13 @@ var Serializer = require('sequelize-to-json');
  */
 function manageProcesses(flows) {
   var processes = {};
-  for(var i = 0; i < flows.length; i++) {
-
+  var tasks_arr = [];
+  for(var key in flows) {
+    if (tasks_arr.indexOf(key) < 0) {
+      tasks_arr.push(key);
+    } else {
+      //don't push to new tasks_arr
+    }
   }
 }
 
@@ -43,11 +48,12 @@ module.exports = {
       };
     }
     dataBody.attributes = {
-      include: [[sequelize.fn('COLUMN_GET', sequelize.col('flows')), 'flows_json']]
+      include: [[sequelize.fn('COLUMN_CHECK', sequelize.col('flows')), 'flows_json']]
     };
     WorkflowType.findAll(dataBody)
     .then(function (data) {
       // console.log(Serializer.serializeMany);
+      console.log(data);
       res.status(200).json(data);
     })
     .catch(function (error) {
