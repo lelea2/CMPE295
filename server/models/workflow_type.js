@@ -1,5 +1,7 @@
 'use strict';
 
+var JsonField = require('sequelize-json');
+
 module.exports = function(sequelize, DataTypes) {
   var WorkflowTypes = sequelize.define('WorkflowTypes', {
     id: {
@@ -15,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    flows: DataTypes.BLOB,
+    flows: JsonField(sequelize, 'WorkflowTypes', 'flows'),
     is_deleted: DataTypes.BOOLEAN
   }, {
     classMethods: {

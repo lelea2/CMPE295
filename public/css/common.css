@@ -112,6 +112,7 @@ h1 {
   padding: 15px;
   height: 100%;
   position: fixed;
+  overflow-y: auto;
 }
 
 .middle-rail.loading-shown {

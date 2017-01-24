@@ -6,6 +6,7 @@ var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
 var uuid = require('node-uuid');
 var sequelize = require('sequelize');
+var Serializer = require('sequelize-to-json');
 
 /**
  * Helper function to generate manage process for running query, create dependencies
@@ -41,11 +42,16 @@ module.exports = {
         }
       };
     }
+    dataBody.attributes = {
+      include: [[sequelize.fn('COLUMN_GET', sequelize.col('flows')), 'flows_json']]
+    };
     WorkflowType.findAll(dataBody)
     .then(function (data) {
+      // console.log(Serializer.serializeMany);
       res.status(200).json(data);
     })
     .catch(function (error) {
+      console.log(error);
       res.status(500).json(error);
     });
   },
@@ -59,13 +65,14 @@ module.exports = {
       name: data.name,
       description: data.description,
       tag_id: data.tag_id,
-      flows: JSON.stringify(data.flows)
+      flows: data.flows
     };
     WorkflowType.create(reqBody)
       .then(function (newWorkflowType) {
         res.status(201).json(newWorkflowType);
       })
       .catch(function (error) {
+        console.log(error);
         res.status(500).json(error);
       });
   },
@@ -76,7 +83,7 @@ module.exports = {
       name: data.name,
       description: data.description,
       tag_id: data.tag_id,
-      flows: JSON.stringify(data.flows)
+      flows: data.flows
     };
     WorkflowType.update(reqBody, {
       where: {

@@ -27,13 +27,14 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
   };
 
   $scope.viewProcess = function(item) {
-    var flows = item.flows;
+    var flows = $scope.generateWorkflow(item.flows);
     $('#myGraphModal').modal({
       show: true
     });
   };
 
   $scope.generateWorkflow = function(flows) {
+    console.log(flows);
     for(var i = 0; i < flows.length; i++) {
 
     }
