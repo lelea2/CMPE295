@@ -5,6 +5,7 @@ var ProcessType = require('../models/').ProcessTypes;
 var ProcessFile = require('../models/').ProcessFiles;
 var ProcessAdmin = require('../models/').ProcessAdmins;
 var Department = require('../models/').Departments;
+var StateType = require('../models').StateTypes;
 var User = require('../models/').Users;
 var uuid = require('node-uuid');
 

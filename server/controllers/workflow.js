@@ -4,6 +4,7 @@ var Workflow = require('../models/').Workflows;
 var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
+var StateType = require('../models').StateTypes;
 var uuid = require('node-uuid');
 var sequelize = require('sequelize');
 var Serializer = require('sequelize-to-json');

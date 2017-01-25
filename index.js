@@ -124,6 +124,9 @@ app.post('/api/tags', api.createTag);
 app.post('/api/tags/:id', api.updateTag);
 app.delete('/api/tags/:id', api.deleteTag);
 
+//StateTypes
+app.get('/api/statetypes', api.getStateTypes);
+
 //Processes
 app.get('/api/process_configure', api.getProcessTypes);
 app.post('/api/process_configure', api.createProcessType);

@@ -10,7 +10,8 @@ var departments = require('./server/controllers/department'),
     processes = require('./server/controllers/process'),
     process_notes = require('./server/controllers/process_note'),
     permission = require('./server/controllers/permission'),
-    memberships = require('./server/controllers/membership');
+    memberships = require('./server/controllers/membership'),
+    statetype = require('./server/controllers/statetype');
 
 /**
  * @swagger
@@ -472,6 +473,21 @@ exports.showCustomer = customers.show;
 
 /**
  * @swagger
+ * path: /api/statetypes
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all state types available
+ *      notes: return array of statetypes
+ *      responseClass: StateType
+ *      nickname: get_all_statetypes
+ *      consumes:
+ *        - text/html
+ *          application/json
+ */
+exports.getStateTypes = statetype.showall;
+
+/**
+ * @swagger
  * path: /api/tags
  * operations:
  *   -  httpMethod: GET
@@ -919,6 +935,15 @@ exports.deleteProcessNote = process_notes.delete;
  *       id:
  *         type: String
  *       role:
+ *         type: String
+ *         required: true
+ *   StateType:
+ *     id: StateType
+ *     properties:
+ *       id:
+ *         type: Integer
+ *         required: true
+ *       name:
  *         type: String
  *         required: true
  *   Tag:
