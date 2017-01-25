@@ -22,7 +22,7 @@ App.controller('createProcessController', ['$scope', '$http', function ($scope, 
       data: $scope.formProcess
     }).then(function(resp) {
       //success, load to view process
-      window.location = '/tasks?created=true';
+      window.location = '/tasks?created=true&department_id=' + $scope.formProcess.department_id;
     });
   };
 

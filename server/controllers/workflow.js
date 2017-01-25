@@ -14,11 +14,18 @@ var Serializer = require('sequelize-to-json');
 function manageProcesses(flows) {
   var processes = {};
   var tasks_arr = [];
-  for(var key in flows) {
-    if (tasks_arr.indexOf(key) < 0) {
-      tasks_arr.push(key);
+  for(var i = 0; i < flows.length; i++) {
+    var item = flows[i];
+    if (tasks_arr.indexOf(item.process_id) < 0) {
+      tasks_arr.push(item.process_id);
     } else {
       //don't push to new tasks_arr
+    }
+    for (var j = 0; j < item.block_process_id.length; j++) {
+      var block_item = item.block_process_id[j];
+      if (tasks_arr.indexOf(block_item) < 0) {
+        tasks_arr.push(block_item);
+      }
     }
   }
 }
@@ -47,14 +54,17 @@ module.exports = {
         }
       };
     }
-    dataBody.attributes = {
-      include: [[sequelize.fn('COLUMN_CHECK', sequelize.col('flows')), 'flows_json']]
-    };
     WorkflowType.findAll(dataBody)
     .then(function (data) {
       // console.log(Serializer.serializeMany);
-      console.log(data);
-      res.status(200).json(data);
+      // console.log(data[0].flows.toString('utf-8'));
+      var arr = [];
+      for (var i = 0; i < data.length; i++) {
+        var item = data[i];
+        item.flows = JSON.parse(item.flows.toString('utf-8'));
+        arr.push(item);
+      }
+      res.status(200).json(arr);
     })
     .catch(function (error) {
       console.log(error);

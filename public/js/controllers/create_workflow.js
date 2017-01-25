@@ -29,14 +29,17 @@ App.controller('createWorkflowController', ['$scope', '$http', function ($scope,
   };
 
   $scope.createWorkflow = function() {
+    var new_workflow_type = $scope.generateWorkFlow();
     $http({
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/workflow_configure',
-      data: $scope.generateWorkFlow()
+      data: new_workflow_type
     }).then(function(resp) {
       //success, load to view process
-      window.location = '/workflows?created=true';
+      window.location = '/workflows?created=true&tag_id=' + new_workflow_type.tag_id;
+    }, function(err) {
+      alert('Failed to create workflow. Please try again');
     });
   };
 
