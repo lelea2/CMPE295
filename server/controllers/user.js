@@ -105,5 +105,9 @@ module.exports = {
     .catch(function (error) {
       res.status(500).json(error);
     });
+  },
+
+  show_stat(req, res) {
+
   }
 };
