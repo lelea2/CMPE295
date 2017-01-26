@@ -1,5 +1,7 @@
 ### CMPE295 - Linked.Gov
 
+[![CircleCI](https://circleci.com/gh/lelea2/CMPE295.svg?style=svg)](https://circleci.com/gh/lelea2/CMPE295)
+
 ##### Government social network and workflow defined
 
 ###### Demo
