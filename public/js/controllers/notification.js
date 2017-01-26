@@ -3,10 +3,12 @@ App.controller('notificationController', ['$scope', '$http', function ($scope, $
   $scope.message = '';
   $scope.type = '';
   $scope.showMessage = false;
+  $scope.controller = window.LINKEDGOV_CONTROLLER;
 
   $scope.init = function() {
+    var created =  LINKEDGOV.getParamVal('created') || '';
     window.setTimeout(function() {
-      $scope.showMessage = false;
+      $scope.showMessage = (created === 'true') ? true : false;
     }, 3000);
     $(document).bind('linkedgov:notification_shown', $scope.showNotication);
   };
