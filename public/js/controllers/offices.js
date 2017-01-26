@@ -6,6 +6,7 @@ App.controller('officesController', ['$scope', '$http', function ($scope, $http)
   $scope.formOffice = {};
 
   $scope.init = function() {
+    $scope.currentDepartment = LINKEDGOV.getParamVal('department_id') || null;
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
@@ -14,6 +15,7 @@ App.controller('officesController', ['$scope', '$http', function ($scope, $http)
       //success, load to view process
       $scope.departments = resp.data;
     });
+    $scope.selectDepartment(); //view offices
   };
 
   $scope.selectDepartment = function() {
@@ -28,6 +30,7 @@ App.controller('officesController', ['$scope', '$http', function ($scope, $http)
         $(document).trigger('linkedgov:loading_stop');
         $scope.offices = resp.data;
       }, function(err) {
+        $scope.offices = [];
         $(document).trigger('linkedgov:loading_stop');
       });
     }

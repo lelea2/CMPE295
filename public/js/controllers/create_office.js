@@ -15,14 +15,15 @@ App.controller('createOfficeController', ['$scope', '$http', function ($scope, $
   };
 
   $scope.createOffice = function() {
+    var currDepartment = $scope.formOffice.department_id;
     $http({
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
-      url: '/api/offices',
+      url: '/api/departments/' + currDepartment + '/offices',
       data: $scope.formOffice
     }).then(function(resp) {
       // console.log(resp.data);
-      window.location = '/offices?created=true'; //create true for offices
+      window.location = '/offices?created=true&department_id=' + currDepartment; //create true for offices
     });
   };
 
