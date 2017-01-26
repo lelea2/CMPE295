@@ -1,9 +1,9 @@
 <div class="notification" ng-show="showMessage" ng-controller="notificationController" data-ng-init="init()">
-  <div class="alert alert-info">
+  {{{{raw-helper}}}}
+  <div class="alert alert-{{type}}">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    {{{{raw-helper}}}}
     <p>{{message}}</p>
-    {{{{/raw-helper}}}}
   </div>
+  {{{{/raw-helper}}}}
 </div>
 <script src="../js/controllers/notification.js"></script>

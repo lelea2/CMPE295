@@ -1,15 +1,34 @@
 App.controller('notificationController', ['$scope', '$http', function ($scope, $http) {
 
+  //Message configure for successfully created message
+  var SUCCESS_ARR = {
+    departments: 'Department created successfully.',
+    offices: 'Office created successfully.',
+    tags: 'Tag created successfully.',
+    workflows: 'Workflow Type configured successfully.',
+    tasks: 'Tasks configured successfully.',
+    agents: 'New agent added successfully.'
+  };
+
   $scope.message = '';
   $scope.type = '';
   $scope.showMessage = false;
-  $scope.controller = window.LINKEDGOV_CONTROLLER;
 
   $scope.init = function() {
     var created =  LINKEDGOV.getParamVal('created') || '';
-    window.setTimeout(function() {
-      $scope.showMessage = (created === 'true') ? true : false;
-    }, 3000);
+    var controller = window.LINKEDGOV_CONTROLLER;
+    // console.log('Notification...');
+    // console.log(created);
+    $scope.showMessage = (created === 'true') ? true : false;
+    if (created === 'true') {
+      $scope.message = SUCCESS_ARR[controller];
+      $scope.type = "success";
+    }
+    if ($scope.showMessage === true) {
+      window.setTimeout(function() {
+        $scope.showMessage = false;
+      }, 5000);
+    }
     $(document).bind('linkedgov:notification_shown', $scope.showNotication);
   };
 
