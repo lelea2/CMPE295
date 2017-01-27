@@ -3,8 +3,10 @@
 var User = require('../models/').Users;
 var Role = require('../models/').Roles;
 var uuid = require('node-uuid');
+var BPromise = require('bluebird');
 var passwordHelpers = require('../helpers/passwordHelper');
 var security = require('../helpers/security');
+var sequelize = require('sequelize');
 
 module.exports = {
 
@@ -108,14 +110,18 @@ module.exports = {
   },
 
   show_stat(req, res) {
+    var deferred = BPromise.pending(); //Or Q.defer() in Q
     User.findAll({
-      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']]
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'agents_count']]
     })
     .then(function(result) {
-      res.status(200).json(result);
+      deferred.resolve(result[0].dataValues);
     })
-    .catch(function(err) {
-      res.status(500).json(err);
+    .catch(function(error) {
+      deferred.reject({err: error});
     });
+    return deferred.promise;
+
   }
+
 };

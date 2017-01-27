@@ -18,6 +18,7 @@ var express = require('express'),
     path = require('path'),
     compression = require('compression'),
     cookieParser = require('cookie-parser'),
+    BPromise = require("bluebird"),
     swagger = require('swagger-express'), //swagger for API view
     api = require('./api'), //API endpoint
     csrfCrypto = require('csrf-crypto'),
@@ -25,7 +26,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     routes = require('./app/routes'),
     security = require('./server/helpers/security'),
-    // departments = require('./server/controllers/department'),
+    departments = require('./server/controllers/department'),
+    workflows = require('./server/controllers/workflow'),
+    tasks = require('./server/controllers/process'),
     // offices = require('./server/controllers/office'),
     // tags = require('./server/controllers/tag'),
     users = require('./server/controllers/user'),
@@ -163,7 +166,7 @@ app.post('/api/login', function(req, res) {
   } else if (data.account_type === 'resident') {
     customers.login(req, res);
   } else {
-    res.status(500).json({err: 'Invalid account type'});
+    res.status(403).json({err: 'Invalid account type'});
   }
 });
 
@@ -175,7 +178,7 @@ app.post('/api/signup', function(req, res) {
   } else if (data.account_type === 'resident') {
     api.createCustomer(req, res);
   } else {
-    res.status(500).json({err: 'Invalid account type'});
+    res.status(403).json({err: 'Invalid account type'});
   }
 });
 
@@ -187,7 +190,7 @@ app.get('/api/account/:id', function(req, res) {
   } else if (data.account_type === 'resident') {
     api.showCustomer(req, res);
   } else {
-    res.status(500).json({err: 'Invalid account type'});
+    res.status(403).json({err: 'Invalid account type'});
   }
 });
 
@@ -199,7 +202,30 @@ app.put('/api/account/:id', function(req, res) {
   } else if (data.account_type === 'resident') {
     api.updateCustomer(req, res);
   } else {
-    res.status(500).json({err: 'Invalid account type'});
+    res.status(403).json({err: 'Invalid account type'});
+  }
+});
+
+//Handle statistic per user
+app.get('/api/stats', function(req, res) {
+  var data = req.headers;
+  if (data.account_type === 'agent') {
+    BPromise.all([
+      users.show_stat(req, res),
+      departments.show_stat(req, res),
+      workflows.show_configure_stat(req, res),
+      tasks.show_configure_stat(req, res)
+    ]).then(function(data) {
+      res.status(200).json({
+        data: data
+      });
+    }, function() {
+      res.status(500).json({err: 'Server Error'});
+    });
+  } else if (data.account_type === 'resident') {
+    res.status(500).json({err: 'Server Error'});
+  } else {
+    res.status(403).json({err: 'Invalid account type'});
   }
 });
 

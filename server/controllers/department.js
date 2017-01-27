@@ -2,6 +2,8 @@
 
 var Department = require('../models/').Departments;
 var uuid = require('node-uuid');
+var BPromise = require('bluebird');
+var sequelize = require('sequelize');
 
 module.exports = {
 
@@ -36,15 +38,18 @@ module.exports = {
   },
 
   show_stat(req, res) {
+    var deferred = BPromise.pending(); //Or Q.defer() in Q
+
     Department.findAll({
-      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']]
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'department_count']]
     })
-    .then(function (department) {
-      res.status(200).json(department);
+    .then(function(result) {
+      deferred.resolve(result[0].dataValues);
     })
-    .catch(function (error) {
-      res.status(500).json(error);
+    .catch(function(error) {
+      deferred.reject({err: error});
     });
+    return deferred.promise;
   },
 
   showall(req, res) {

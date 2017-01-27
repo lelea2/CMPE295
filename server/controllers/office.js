@@ -3,6 +3,7 @@
 var Office = require('../models/').Offices;
 var uuid = require('node-uuid');
 var Department = require('../models/').Departments;
+var sequelize = require('sequelize');
 
 module.exports = {
 

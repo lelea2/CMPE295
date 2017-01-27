@@ -7,7 +7,7 @@ var WorklowCustomer = require('../models').WorklowCustomers;
 var StateType = require('../models').StateTypes;
 var uuid = require('node-uuid');
 var sequelize = require('sequelize');
-var Serializer = require('sequelize-to-json');
+var BPromise = require('bluebird');
 
 /**
  * Helper function to generate manage process for running query, create dependencies
@@ -74,17 +74,20 @@ module.exports = {
   },
 
   show_configure_stat(req, res) {
+    var deferred = BPromise.pending(); //Or Q.defer() in Q
     WorkflowType.findAll({
-      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'workflow_configure_count']],
       where: {
         $or: [{is_deleted: null}, {is_deleted: false}]
       }
-    }).then(function(result) {
-        res.status(200).json(result);
-      })
-      .catch(function(err) {
-        res.status(500).json(err);
-      });
+    })
+    .then(function(result) {
+      deferred.resolve(result[0].dataValues);
+    })
+    .catch(function(error) {
+      deferred.reject({err: error});
+    });
+    return deferred.promise;
   },
 
   //Configure new workflow type

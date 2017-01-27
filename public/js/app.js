@@ -29,7 +29,8 @@ LINKEDGOV.getHeaders = function(setCookies) {
     'Content-Type': 'application/json',
     'setCookie': setCookies || false,
     'u': $('input[name="_userId"]').val(),
-    'account_type': $('input[name="_role"]').val()
+    'account_type': $('input[name="_role"]').val(),
+    'admin': ($('input[name="_isAdmin"]').val() === 'true') ? true: false
   }
 };
 

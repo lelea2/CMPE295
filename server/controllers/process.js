@@ -8,6 +8,8 @@ var Department = require('../models/').Departments;
 var StateType = require('../models').StateTypes;
 var User = require('../models/').Users;
 var uuid = require('node-uuid');
+var BPromise = require('bluebird');
+var sequelize = require('sequelize');
 
 module.exports = {
 
@@ -69,17 +71,20 @@ module.exports = {
   },
 
   show_configure_stat(req, res) {
+    var deferred = BPromise.pending(); //Or Q.defer() in Q
     ProcessType.findAll({
-      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'tasks_configure_count']],
       where: {
         $or: [{is_deleted: null}, {is_deleted: false}]
       }
-    }).then(function(result) {
-        res.status(200).json(result);
-      })
-      .catch(function(err) {
-        res.status(500).json(err);
-      });
+    })
+    .then(function(result) {
+      deferred.resolve(result[0].dataValues);
+    })
+    .catch(function(error) {
+      deferred.reject({err: error});
+    });
+    return deferred.promise;
   },
 
   update_configure(req, res) {
