@@ -27,5 +27,12 @@ session
 
 
 module.exports = {
+  create(req, res) {
+
+  },
+
+  show(req, res) {
+
+  }
 
 };

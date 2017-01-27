@@ -22,7 +22,7 @@ App.controller('notificationController', ['$scope', '$http', function ($scope, $
     $scope.showMessage = (created === 'true') ? true : false;
     if (created === 'true') {
       $scope.message = SUCCESS_ARR[controller];
-      $scope.type = "success";
+      $scope.type = 'success';
     }
     if ($scope.showMessage === true) {
       window.setTimeout(function() {
