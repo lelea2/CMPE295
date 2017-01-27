@@ -209,7 +209,7 @@ app.put('/api/account/:id', function(req, res) {
 //Handle statistic per user
 app.get('/api/stats', function(req, res) {
   var data = req.headers;
-  if (data.account_type === 'agent') {
+  if (data.account_type === 'agent' && data.admin === true) {
     BPromise.all([
       users.show_stat(req, res),
       departments.show_stat(req, res),
@@ -217,11 +217,16 @@ app.get('/api/stats', function(req, res) {
       tasks.show_configure_stat(req, res)
     ]).then(function(data) {
       res.status(200).json({
-        data: data
+        agents_count: data[0].agents_count,
+        department_count: data[1].department_count,
+        workflow_configure_count: data[2].workflow_configure_count,
+        tasks_configure_count: data[3].tasks_configure_count
       });
     }, function() {
       res.status(500).json({err: 'Server Error'});
     });
+  } else if (data.account_type === 'agent') { //agent but not system admin
+
   } else if (data.account_type === 'resident') {
     res.status(500).json({err: 'Server Error'});
   } else {

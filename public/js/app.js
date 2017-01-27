@@ -57,6 +57,10 @@ LINKEDGOV.phoneToNumber = function(str) {
   return num;
 };
 
+LINKEDGOV.numberToPhone = function(text) {
+  return text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, '1-($1)-$2-$3');
+};
+
 LINKEDGOV.getParamVal = function(name, url) {
   if (!url) {
     url = location.href;

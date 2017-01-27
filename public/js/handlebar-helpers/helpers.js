@@ -37,6 +37,7 @@
       'raw-helper': function(options) {
         return options.fn();
       }
+
     };
 
     /************* END HELPERS *************/
