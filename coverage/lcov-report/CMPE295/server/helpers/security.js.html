@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for CMPE295/server/helpers/security.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">CMPE295/server/helpers/</a> security.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.85% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>15/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">23.08% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.85% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>15/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+var Cookies = require('cookies'),
+    crypto = require('crypto'),
+    scheme = 'aes-256-cbc',
+    key = 'linkgovsecret',
+    USER_COOKIE = 'userInfo',
+    TTL = 15 * 24 * 3600 * 1000; //15 days
+&nbsp;
+module.exports = (function() {
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function encrypt(text) {</span>
+<span class="cstat-no" title="statement not covered" >    var cipher = crypto.createCipher(scheme, key);</span>
+<span class="cstat-no" title="statement not covered" >    var crypted = cipher.update(text, 'utf-8', 'hex');</span>
+<span class="cstat-no" title="statement not covered" >    crypted += cipher.final('hex');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return crypted;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function decrypt(data){</span>
+<span class="cstat-no" title="statement not covered" >    var decipher = crypto.createDecipher(scheme, key);</span>
+<span class="cstat-no" title="statement not covered" >    var decrypted = decipher.update(data, 'hex', 'utf-8');</span>
+<span class="cstat-no" title="statement not covered" >    decrypted += decipher.final('utf-8');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return decrypted;</span>
+  }
+&nbsp;
+  /**
+   * Function setting user cookie
+   * @method  setUserCookie
+   */
+<span class="fstat-no" title="function not covered" >  function setUserCookie(req, data) {</span>
+<span class="cstat-no" title="statement not covered" >    console.log('set user cookie, userId=' + data.id);</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      var cookies = new Cookies(req, req.res);</span>
+<span class="cstat-no" title="statement not covered" >      cookies.set(USER_COOKIE, encrypt(JSON.stringify(data)), {</span>
+        httpOnly: true,
+        path: '/',
+        expires: new Date(Date.now() + TTL),
+        overwrite: true
+      });
+    } catch(ex) {
+<span class="cstat-no" title="statement not covered" >      console.log(ex);</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function _rawData(req) {</span>
+<span class="cstat-no" title="statement not covered" >    var data = {};</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      var cookies = new Cookies(req, req.res);</span>
+<span class="cstat-no" title="statement not covered" >      var userCookie = cookies.get(USER_COOKIE);</span>
+<span class="cstat-no" title="statement not covered" >      var strdata = decrypt(userCookie);</span>
+<span class="cstat-no" title="statement not covered" >      data = JSON.parse(strdata);</span>
+    } catch(ex) {
+    }
+<span class="cstat-no" title="statement not covered" >    return data;</span>
+  }
+&nbsp;
+  /**
+   * Function get user cookie
+   * @param Express request object
+   * @return userId
+   */
+<span class="fstat-no" title="function not covered" >  function getUserId(req) {</span>
+<span class="cstat-no" title="statement not covered" >    var data = _rawData(req);</span>
+<span class="cstat-no" title="statement not covered" >    return data.id || '';</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function getRole(req) {</span>
+<span class="cstat-no" title="statement not covered" >    var data = _rawData(req);</span>
+<span class="cstat-no" title="statement not covered" >    return data.role || '';</span>
+  }
+&nbsp;
+  /**
+   * Check if current user is system admin
+   */
+<span class="fstat-no" title="function not covered" >  function isAdmin(req) {</span>
+<span class="cstat-no" title="statement not covered" >    var data = _rawData(req);</span>
+<span class="cstat-no" title="statement not covered" >    return data.isAdmin || false;</span>
+  }
+&nbsp;
+  /**
+   * Function handle user logout
+   * @method logout
+   */
+<span class="fstat-no" title="function not covered" >  function logout(req) {</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      var cookies = new Cookies(req, req.res);</span>
+<span class="cstat-no" title="statement not covered" >      cookies.set(USER_COOKIE, null, {</span>
+        httpOnly: true,
+        path: '/',
+        expires: 0,
+        overwrite: true
+      });
+    } catch(ex) {}
+  }
+&nbsp;
+  function userAuthenticated() {
+    return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >      var userId = getUserId(req);</span>
+<span class="cstat-no" title="statement not covered" >      if (userId === '' || userId.length !== 36) {</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        res.redirect(302, '/dashboard');</span>
+      }
+    };
+  }
+&nbsp;
+  function userRequiredLoggedIn() {
+    return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >      var userId = getUserId(req);</span>
+<span class="cstat-no" title="statement not covered" >      if (userId !== '') {</span>
+<span class="cstat-no" title="statement not covered" >        next();</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        res.redirect(302, '/signin');</span>
+      }
+    };
+  }
+&nbsp;
+  /** Interface for user class **/
+  return {
+    setUserCookie: setUserCookie,
+    getUserId: getUserId,
+    getRole: getRole,
+    isAdmin: isAdmin,
+    logout: logout,
+    userAuthenticated: userAuthenticated,
+    userRequiredLoggedIn: userRequiredLoggedIn
+  };
+&nbsp;
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 26 2017 21:14:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

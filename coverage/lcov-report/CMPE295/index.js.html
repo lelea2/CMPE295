@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for CMPE295/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">CMPE295/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">71.05% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>81/114</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.69% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">12.5% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">71.05% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>81/114</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+//Testing DB connection
+// var models = require('./server/models/');
+// models.sequelize
+//   .authenticate()
+//   .then(function () {
+//     console.log('Connection successful');
+//   })
+//   .catch(function(error) {
+//     console.log("Error creating connection:", error);
+//   });
+&nbsp;
+require('dotenv').load(); //loading .env variables to file
+&nbsp;
+var express = require('express'),
+    app = express(),
+    path = require('path'),
+    compression = require('compression'),
+    cookieParser = require('cookie-parser'),
+    swagger = require('swagger-express'), //swagger for API view
+    api = require('./api'), //API endpoint
+    csrfCrypto = require('csrf-crypto'),
+    expressHbs = require('express-handlebars'),
+    bodyParser = require('body-parser'),
+    routes = require('./app/routes'),
+    security = require('./server/helpers/security'),
+    // departments = require('./server/controllers/department'),
+    // offices = require('./server/controllers/office'),
+    // tags = require('./server/controllers/tag'),
+    users = require('./server/controllers/user'),
+    customers = require('./server/controllers/customer'),
+    // roles = require('./server/controllers/role'),
+    membership = require('./server/controllers/membership');
+&nbsp;
+app.use(bodyParser.urlencoded({"extended": false}));
+app.use(bodyParser.json())
+&nbsp;
+app.use(cookieParser('keycatboard'));
+// app.use(csrfCrypto({ key: 'cmpe295project' }));
+// app.use(csrfCrypto.enforcer());
+&nbsp;
+// app.use(function(req, res, next) {
+//   if(res.getFormToken !== undefined) {
+//     res.locals._csrf = res.getFormToken();
+//   }
+//   next();
+// });
+&nbsp;
+//Set up userId
+app.use(<span class="fstat-no" title="function not covered" >function(req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >  res.locals._userId = security.getUserId(req) || '';</span>
+<span class="cstat-no" title="statement not covered" >  res.locals._role = security.getRole(req) || '';</span>
+<span class="cstat-no" title="statement not covered" >  res.locals._isAdmin = security.isAdmin(req) || '';</span>
+<span class="cstat-no" title="statement not covered" >  res.locals._currentYear = new Date().getFullYear();</span>
+<span class="cstat-no" title="statement not covered" >  next();</span>
+});
+&nbsp;
+//Allow origin
+app.all('/*', <span class="fstat-no" title="function not covered" >function(req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >  res.header('Access-Control-Allow-Origin', '*');</span>
+<span class="cstat-no" title="statement not covered" >  next();</span>
+});
+&nbsp;
+//Configure for swagger view
+app.use(swagger.init(app, {
+  apiVersion: '1.0',
+  swaggerVersion: '1.0',
+  basePath: 'http://localhost:' + (process.env.PORT || <span class="branch-1 cbranch-no" title="branch not covered" >'8000')</span>,
+  swaggerURL: '/swagger',
+  swaggerJSON: '/api-docs.json',
+  swaggerUI: './public/swagger/',
+  info: {
+    title: 'LinkedGov APIs',
+    description: 'LinkedGov Swagger'
+  },
+  apis: ['./api.js']
+}));
+&nbsp;
+//Using handlebar helper on both client and server side
+//http://codyrushing.com/using-handlebars-helpers-on-both-client-and-server/
+app.set('views', __dirname + '/app/views');
+app.engine('hbs', expressHbs({
+  extname:'.hbs',
+  defaultLayout:'main.hbs',
+  helpers: require("./public/js/handlebar-helpers/helpers.js").helpers, // same file that gets used on our client
+  partialsDir: "app/views/partials/", // same as default, I just like to be explicit
+  layoutsDir: "app/views/layouts/" // same as default, I just like to be explicit
+}));
+app.set('view engine', 'hbs');
+&nbsp;
+/**** Handle static files loaded, include caching, gzip ****/
+var oneWeek = 7 * 24 * 3600 * 1000; //caching time in miliseconds
+// New call to compress content
+app.use(compression());
+app.get('*', express.static(path.join(__dirname, 'public'), { maxAge: oneWeek }));
+&nbsp;
+/*****************************************************/
+/***************** API Routing ***********************/
+/*****************************************************/
+&nbsp;
+//Department
+app.get('/api/departments', api.getDepartments);
+app.get('/api/departments/:id', api.getDepartmentById);
+app.post('/api/departments', api.createDepartment);
+app.put('/api/departments/:id', api.updateDepartment);
+app.delete('/api/departments/:id', api.deleteDepartment);
+&nbsp;
+//Offices
+app.post('/api/departments/:department_id/offices', api.createOffice);
+app.get('/api/departments/:department_id/offices', api.getOffices);
+app.get('/api/offices/:id', api.getOfficeById);
+app.put('/api/offices/:id', api.updateOffice);
+app.delete('/api/offices/:id', api.deleteOffice);
+&nbsp;
+//Memberships
+app.get('/api/memberships', api.getMemberships);
+app.put('/api/memberships/:id', api.updateMembership);
+app.delete('/api/memberships/:id', api.deleteMembership);
+&nbsp;
+//Tags
+app.get('/api/tags', api.getTags);
+app.post('/api/tags', api.createTag);
+app.post('/api/tags/:id', api.updateTag);
+app.delete('/api/tags/:id', api.deleteTag);
+&nbsp;
+//StateTypes
+app.get('/api/statetypes', api.getStateTypes);
+&nbsp;
+//Processes
+app.get('/api/process_configure', api.getProcessTypes);
+app.post('/api/process_configure', api.createProcessType);
+app.put('/api/process_configure/:id', api.updateProcessType);
+app.delete('/api/process_configure/:id', api.deleteProcessType);
+&nbsp;
+//Workflows
+app.get('/api/workflow_configure', api.getWorkflowTypes);
+app.get('/api/workflow_configure/:id', api.getWorkflowTypes);
+app.post('/api/workflow_configure', api.createWorkflowType);
+app.put('/api/workflow_configure/:id', api.updateWorkflowType);
+app.delete('/api/workflow_configure/:id', api.deleteWorkflowType);
+&nbsp;
+//Roles
+app.get('/api/roles', api.getRoles);
+app.post('/api/roles', api.createRole);
+app.put('/api/roles/:id', api.updateRole);
+&nbsp;
+//Agent Account
+app.post('/api/agents', api.createAgent);
+app.put('/api/agents/:id', api.updateAgent);
+app.get('/api/agents/:id', api.showAgent);
+&nbsp;
+//Customer account
+app.post('/api/customers', api.createCustomer);
+app.put('/api/customer/:id', api.updateCustomer);
+app.get('/api/customer/:id', api.showCustomer);
+&nbsp;
+//Handle user login (for both customer and agent)
+app.post('/api/login', <span class="fstat-no" title="function not covered" >function(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  var data = req.body;</span>
+<span class="cstat-no" title="statement not covered" >  if (data.account_type === 'agent') { //Handle agent</span>
+<span class="cstat-no" title="statement not covered" >    users.login(req, res);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (data.account_type === 'resident') {</span>
+<span class="cstat-no" title="statement not covered" >    customers.login(req, res);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    res.status(500).json({err: 'Invalid account type'});</span>
+  }
+});
+&nbsp;
+//Handle user signup (for both customer and agent)
+app.post('/api/signup', <span class="fstat-no" title="function not covered" >function(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  var data = req.body;</span>
+<span class="cstat-no" title="statement not covered" >  if (data.account_type === 'agent') { //Handle agent</span>
+<span class="cstat-no" title="statement not covered" >    api.createAgent(req, res);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (data.account_type === 'resident') {</span>
+<span class="cstat-no" title="statement not covered" >    api.createCustomer(req, res);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    res.status(500).json({err: 'Invalid account type'});</span>
+  }
+});
+&nbsp;
+//Handle get user information (for both customer and agent)
+app.get('/api/account/:id', <span class="fstat-no" title="function not covered" >function(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  var data = req.headers;</span>
+<span class="cstat-no" title="statement not covered" >  if (data.account_type === 'agent') { //Handle agent</span>
+<span class="cstat-no" title="statement not covered" >    api.showAgent(req, res);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (data.account_type === 'resident') {</span>
+<span class="cstat-no" title="statement not covered" >    api.showCustomer(req, res);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    res.status(500).json({err: 'Invalid account type'});</span>
+  }
+});
+&nbsp;
+//Handle update user information (for both customer and agent)
+app.put('/api/account/:id', <span class="fstat-no" title="function not covered" >function(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  var data = req.headers;</span>
+<span class="cstat-no" title="statement not covered" >  if (data.account_type === 'agent') { //Handle agent</span>
+<span class="cstat-no" title="statement not covered" >    api.updateAgent(req, res);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (data.account_type === 'resident') {</span>
+<span class="cstat-no" title="statement not covered" >    api.updateCustomer(req, res);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    res.status(500).json({err: 'Invalid account type'});</span>
+  }
+});
+&nbsp;
+//Log user out
+app.get('/logout', <span class="fstat-no" title="function not covered" >function(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  security.logout(req);</span>
+<span class="cstat-no" title="statement not covered" >  res.redirect(302, '/');</span>
+});
+&nbsp;
+//Process note
+app.get('/api/processes/:process_id/notes', api.getProcessNotes);
+app.post('/api/process_notes', api.createProcessNote);
+app.put('/api/process_notes/:id', api.updateProcessNote);
+app.delete('/api/process_notes/:id', api.deleteProcessNote);
+&nbsp;
+&nbsp;
+/*****************************************************/
+/***************** Views Routing *********************/
+/*****************************************************/
+app.get('/', security.userAuthenticated(), routes.intro);
+app.get('/signin', security.userAuthenticated(), routes.intro);
+app.get('/dashboard', security.userRequiredLoggedIn(), routes.dashboard);
+app.get('/create_department', security.userRequiredLoggedIn(), routes.create_department);
+app.get('/create_office', security.userRequiredLoggedIn(), routes.create_office);
+app.get('/create_agent', security.userRequiredLoggedIn(), routes.create_agent);
+app.get('/create_workflow', security.userRequiredLoggedIn(), routes.create_workflow);
+app.get('/create_tag', security.userRequiredLoggedIn(), routes.create_tag);
+app.get('/create_task', security.userRequiredLoggedIn(), routes.create_task);
+app.get('/departments', security.userRequiredLoggedIn(), routes.departments);
+app.get('/offices', security.userRequiredLoggedIn(), routes.offices);
+app.get('/agents', security.userRequiredLoggedIn(), routes.agents);
+app.get('/report', security.userRequiredLoggedIn(), routes.report);
+app.get('/workflows', security.userRequiredLoggedIn(), routes.workflows);
+app.get('/workflow_case', security.userRequiredLoggedIn(), routes.workflow_case);
+app.get('/tags', security.userRequiredLoggedIn(), routes.tags);
+app.get('/tasks', security.userRequiredLoggedIn(), routes.tasks);
+app.get('/task_case', security.userRequiredLoggedIn(), routes.task_case);
+app.get('/account', security.userRequiredLoggedIn(), routes.account);
+&nbsp;
+/***************************************************************/
+/******************* Run the app               *****************/
+/***************************************************************/
+app.set('port', process.env.PORT || <span class="branch-1 cbranch-no" title="branch not covered" >8000)</span>;
+app.listen(app.get('port'), function () {
+  console.log('Server started on port', app.get('port'));
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 26 2017 21:14:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

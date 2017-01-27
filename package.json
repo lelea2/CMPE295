@@ -4,7 +4,7 @@
   "description": "CMPE295 master project -- Government workflow dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive -R spec -r should",
     "start": "node index.js"
   },
   "repository": {
@@ -47,6 +47,11 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "istanbul": "^0.4.1",
+    "jshint": "^2.9.1-rc1",
+    "jshint-full-path": "^1.1.1",
+    "mocha": "^2.3.4",
+    "should": "^7.1.1"
   }
 }
