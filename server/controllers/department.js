@@ -35,6 +35,18 @@ module.exports = {
     });
   },
 
+  show_stat(req, res) {
+    Department.findAll({
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']]
+    })
+    .then(function (department) {
+      res.status(200).json(department);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   showall(req, res) {
     Department.findAll()
     .then(function (departments) {

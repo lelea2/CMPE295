@@ -68,6 +68,20 @@ module.exports = {
     });
   },
 
+  show_configure_stat(req, res) {
+    ProcessType.findAll({
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      where: {
+        $or: [{is_deleted: null}, {is_deleted: false}]
+      }
+    }).then(function(result) {
+        res.status(200).json(result);
+      })
+      .catch(function(err) {
+        res.status(500).json(err);
+      });
+  },
+
   update_configure(req, res) {
     var data = req.body;
     var reqBody = {
