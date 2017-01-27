@@ -87,8 +87,8 @@ module.exports = {
       firstName: data.firstName,
       lastName: data.lastName
     };
-    if (data.password) {
-      reqBody.password = passwordHelpers.hashPassword(data.password);
+    if (data.changed_password) {
+      reqBody.password = passwordHelpers.hashPassword(data.changed_password);
     }
     Customer.update(reqBody, {
       where: {
