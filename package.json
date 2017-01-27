@@ -19,6 +19,7 @@
   "homepage": "https://github.com/lelea2/CMPE295#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "cities": "^1.1.2",
     "compression": "^1.6.2",

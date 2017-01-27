@@ -108,6 +108,14 @@ module.exports = {
   },
 
   show_stat(req, res) {
-
+    User.findAll({
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'count']]
+    })
+    .then(function(result) {
+      res.status(200).json(result);
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
   }
 };
