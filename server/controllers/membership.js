@@ -26,6 +26,21 @@ module.exports = {
     });
   },
 
+  show_agent_membership(req, res) {
+    Membership.findAll({
+      where: {
+        user_id: req.params.agent_id
+      },
+      include: [User, Role]
+    })
+    .then(function(memberships) {
+      res.status(200).json(memberships);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   show(req, res) {
     Membership.findAll({
       where: {
