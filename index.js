@@ -18,7 +18,9 @@ var express = require('express'),
     path = require('path'),
     compression = require('compression'),
     cookieParser = require('cookie-parser'),
-    BPromise = require("bluebird"),
+    BPromise = require('bluebird'),
+    log4js = require('log4js'),
+    logger = log4js.getLogger(),
     swagger = require('swagger-express'), //swagger for API view
     api = require('./api'), //API endpoint
     csrfCrypto = require('csrf-crypto'),
@@ -209,7 +211,8 @@ app.put('/api/account/:id', function(req, res) {
 //Handle statistic per user
 app.get('/api/stats', function(req, res) {
   var data = req.headers;
-  if (data.account_type === 'agent' && data.admin === true) {
+  if (data.account_type === 'agent' && data.admin === 'true') {
+    logger.debug('Getting stats for admin.');
     BPromise.all([
       users.show_stat(req, res),
       departments.show_stat(req, res),
@@ -226,8 +229,9 @@ app.get('/api/stats', function(req, res) {
       res.status(500).json({err: 'Server Error'});
     });
   } else if (data.account_type === 'agent') { //agent but not system admin
-
+    logger.debug('Getting stats for agent.');
   } else if (data.account_type === 'resident') {
+    logger.debug('Getting stats for resident.');
     res.status(500).json({err: 'Server Error'});
   } else {
     res.status(403).json({err: 'Invalid account type'});

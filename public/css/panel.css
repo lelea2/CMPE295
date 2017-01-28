@@ -1,0 +1,11 @@
+.admin-panel a > div {
+  height: 100px;
+  margin: 0 15px;
+  border: 1px solid #ededed;
+}
+
+.admin-panel a .count {
+  text-align: right;
+  font-weight: bold;
+  font-size: 20px;
+}
