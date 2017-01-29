@@ -136,6 +136,10 @@ h1 {
   font-weight: 300;
 }
 
+.right-rail > div {
+  padding: 15px;
+}
+
 .notification {
   position: fixed;
   bottom: 0;
