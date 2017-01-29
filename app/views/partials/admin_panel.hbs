@@ -1,27 +1,27 @@
 <link rel="stylesheet" type="text/css" href="../css/panel.css">
-<div class="admin-panel row">
+<div class="dashaboard-panel admin-panel row">
   {{{{raw-helper}}}}
   <a class="col-md-3" href="/departments">
-    <div>
+    <div class="blue">
       <p class="panel-heading">Departments</p>
       <p class="count">{{stats.department_count}}</p>
     <div>
   </a>
   <a class="col-md-3" href="/agents">
-    <div>
+    <div class="green">
       <p class="panel-heading">Agents</p>
       <p class="count">{{stats.agents_count}}</p>
     </div>
   </a>
   <a class="col-md-3" href="/workflows">
-    <div>
-      <p class="panel-heading">Workflow Configure</p>
+    <div class="red">
+      <p class="panel-heading">Workflows</p>
       <p class="count">{{stats.workflow_configure_count}}</p>
     </div>
   </a>
   <a class="col-md-3" href="/tasks">
-    <div>
-      <p class="panel-heading">Task Configure</p>
+    <div class="purple">
+      <p class="panel-heading">Tasks</p>
       <p class="count">{{stats.tasks_configure_count}}</p>
     </div>
   </a>

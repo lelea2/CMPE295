@@ -1,11 +1,39 @@
+.dashboard-panel {
+  background: transparent;
+  margin-left: 15px;
+}
+
 .admin-panel a > div {
   height: 100px;
-  margin: 0 15px;
-  border: 1px solid #ededed;
+  margin: 0 3px;
+}
+
+.admin-panel a .panel-heading {
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 .admin-panel a .count {
   text-align: right;
   font-weight: bold;
   font-size: 20px;
+  color: #fff;
+  padding: 10px;
+}
+
+.admin-panel a > div.blue {
+  background: #0078d7;
+}
+
+.admin-panel a > div.green {
+  background: #018574;
+}
+
+.admin-panel a > div.red {
+  background: #d13438;
+}
+
+.admin-panel a > div.purple {
+  background: #8764b8;
 }
