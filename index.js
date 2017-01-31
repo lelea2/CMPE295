@@ -138,12 +138,17 @@ app.post('/api/process_configure', api.createProcessType);
 app.put('/api/process_configure/:id', api.updateProcessType);
 app.delete('/api/process_configure/:id', api.deleteProcessType);
 
+//Tasks cases
+
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);
 app.get('/api/workflow_configure/:id', api.getWorkflowTypes);
 app.post('/api/workflow_configure', api.createWorkflowType);
 app.put('/api/workflow_configure/:id', api.updateWorkflowType);
 app.delete('/api/workflow_configure/:id', api.deleteWorkflowType);
+
+//Workflow cases
+
 
 //Roles
 app.get('/api/roles', api.getRoles);
