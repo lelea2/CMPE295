@@ -139,6 +139,8 @@ app.put('/api/process_configure/:id', api.updateProcessType);
 app.delete('/api/process_configure/:id', api.deleteProcessType);
 
 //Tasks cases
+app.get('/api/tasks', api.showTasks);
+
 
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);
@@ -148,6 +150,9 @@ app.put('/api/workflow_configure/:id', api.updateWorkflowType);
 app.delete('/api/workflow_configure/:id', api.deleteWorkflowType);
 
 //Workflow cases
+app.get('/api/workflows', api.getWorkflowCases);
+app.post('/api/workflows', api.createWorkflow);
+app.put('/api/workflows/:id', api.updateWorkflow);
 
 
 //Roles

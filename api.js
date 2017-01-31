@@ -712,6 +712,19 @@ exports.createWorkflow = workflows.create;
  */
 exports.updateWorkflow = workflows.update;
 
+/**
+ * @swagger
+ * path: /api/workflows
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get collection of workflow
+ *      notes: Return array of workflows object
+ *      responseClass: Workflow
+ *      nickname: get_workflows
+ *      consumes:
+ *        - text/html
+ */
+exports.getWorkflowCases = workflows.show_collection;
 
 /**
  * @swagger
@@ -801,6 +814,26 @@ exports.updateProcessType = processes.update_configure;
  *          dataType: string
  */
 exports.deleteProcessType = processes.delete_configure;
+
+/**
+ * @swagger
+ * path: /api/tasks
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Get all process collection
+ *      notes: Return array of process
+ *      responseClass: Process
+ *      nickname: showall_process
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: agent_id
+ *          description: Agent Id
+ *          paramType: query
+ *          required: true
+ *          dataType: string
+ */
+exports.showTasks = processes.show_per_agent;
 
 /**
  * @swagger
