@@ -837,6 +837,47 @@ exports.showTasks = processes.show_per_agent;
 
 /**
  * @swagger
+ * path: /api/tasks
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create new process
+ *      responseClass: Process
+ *      nickname: create_process
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - dataType: Process
+ *          paramType: body
+ *          description: process object
+ *          required: true
+ */
+exports.createTask = processes.create;
+
+/**
+ * @swagger
+ * path: /api/tasks/:id
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Update current process
+ *      responseClass: void
+ *      nickname: update_process
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Process Id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
+ *        - dataType: Process
+ *          paramType: body
+ *          description: process object
+ *          required: true
+ */
+exports.updateTask = processes.update;
+
+/**
+ * @swagger
  * path: /api/processes/{process_id}/notes
  * operations:
  *   -  httpMethod: GET
@@ -1112,10 +1153,8 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *       workflow_id:
  *         type: String
- *         required: true
  *       process_type:
  *         type: String
- *         required: true
  *       enabled_flag:
  *         type: Boolean
  *       currentStateId:

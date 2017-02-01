@@ -139,8 +139,15 @@ app.put('/api/process_configure/:id', api.updateProcessType);
 app.delete('/api/process_configure/:id', api.deleteProcessType);
 
 //Tasks cases
+app.post('/api/task', api.createTask);
 app.get('/api/tasks', api.showTasks);
+app.put('/api/task/:id', api.updateTask);
 
+//Process note
+app.get('/api/processes/:process_id/notes', api.getProcessNotes);
+app.post('/api/process_notes', api.createProcessNote);
+app.put('/api/process_notes/:id', api.updateProcessNote);
+app.delete('/api/process_notes/:id', api.deleteProcessNote);
 
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);
@@ -153,7 +160,6 @@ app.delete('/api/workflow_configure/:id', api.deleteWorkflowType);
 app.get('/api/workflows', api.getWorkflowCases);
 app.post('/api/workflows', api.createWorkflow);
 app.put('/api/workflows/:id', api.updateWorkflow);
-
 
 //Roles
 app.get('/api/roles', api.getRoles);
@@ -253,13 +259,6 @@ app.get('/logout', function(req, res) {
   security.logout(req);
   res.redirect(302, '/');
 });
-
-//Process note
-app.get('/api/processes/:process_id/notes', api.getProcessNotes);
-app.post('/api/process_notes', api.createProcessNote);
-app.put('/api/process_notes/:id', api.updateProcessNote);
-app.delete('/api/process_notes/:id', api.deleteProcessNote);
-
 
 /*****************************************************/
 /***************** Views Routing *********************/
