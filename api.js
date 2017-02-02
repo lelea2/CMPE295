@@ -974,6 +974,9 @@ exports.deleteProcessNote = process_notes.delete;
  *       address:
  *         type: String
  *         required: true
+ *       icon_url:
+ *         type: String
+ *         required: true
  *       phone:
  *         type: String
  *         required: true

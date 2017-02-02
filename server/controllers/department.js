@@ -15,6 +15,8 @@ module.exports = {
       name: data.name,
       description: data.description,
       phone: data.phone,
+      address: data.address,
+      icon_url: data.icon_url,
       group_email: data.group_email,
       unique_code: data.unique_code
     };

@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     address: DataTypes.STRING,
     phone: DataTypes.STRING,
+    icon_url: DataTypes.STRING,
     group_email: {
       type: DataTypes.STRING,
       unique: true
