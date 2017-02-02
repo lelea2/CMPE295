@@ -14,4 +14,12 @@ App.controller('createDepartmentController', ['$scope', '$http', function ($scop
     });
   };
 
+  $scope.initUpload = function() {
+
+  };
+
+  $scope.getSignedRequest = function(file) {
+    var xhr = new XMLHttpRequest();
+  };
+
 }]);

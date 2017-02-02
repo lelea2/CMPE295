@@ -27,6 +27,10 @@
       <label for="inputEmail">Department Email</label>
       <input type="text" id="inputEmail" ng-model="formDepartment.group_email" class="form-control" placeholder="Department email" required>
     </div>
+    <div>
+      <label for="inputIcon">Department Icon (Please select an image)</label>
+      <input type="file" id="inputIcon" ng-change="initUpload()" accept="image/*" />
+    </div>
     <button type="submit" class="btn btn-primary submit-form">Create Department</button>
   </form>
 </div>
