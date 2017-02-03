@@ -11,12 +11,15 @@ USER root
 COPY package.json /usr/src/app
 RUN npm install
 
-# Bundle app source
-COPY . /usr/src/app
-
+COPY bower.json .bowerrc* /usr/src/app/
 RUN npm i -g bower
 RUN echo '{ "allow_root": true }' > .bowerrc
 RUN bower install
+
+# Bundle app source
+COPY . /usr/src/app
+
+ENV NODE_ENV production
 
 EXPOSE 8000
 
