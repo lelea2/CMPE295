@@ -58,7 +58,11 @@ LINKEDGOV.phoneToNumber = function(str) {
 };
 
 LINKEDGOV.numberToPhone = function(text) {
-  return text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, '1-($1)-$2-$3');
+  if (!!text) {
+    return text.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, '1-($1)-$2-$3');
+  } else {
+    return text;
+  }
 };
 
 LINKEDGOV.getParamVal = function(name, url) {
