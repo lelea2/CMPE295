@@ -310,6 +310,26 @@ exports.getMemberships = memberships.show;
 
 /**
  * @swagger
+ * path: /api/memberships
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create membership
+ *      notes: return new membership object
+ *      responseClass: Membership
+ *      nickname: update_membership
+ *      consumes:
+ *        - text/html
+ *          application/json
+ *      parameters:
+ *        - dataType: Membership
+ *          paramType: body
+ *          description: membership object
+ *          required: true
+ */
+exports.createMembership = memberships.create;
+
+/**
+ * @swagger
  * path: /api/memberships/{id}
  * operations:
  *   -  httpMethod: PUT
@@ -321,6 +341,11 @@ exports.getMemberships = memberships.show;
  *        - text/html
  *          application/json
  *      parameters:
+ *        - name: id
+ *          description: membership id
+ *          paramType: path
+ *          required: true
+ *          dataType: string
  *        - dataType: Membership
  *          paramType: body
  *          description: membership object
@@ -1221,4 +1246,17 @@ exports.deleteProcessNote = process_notes.delete;
  *       notification_message:
  *         type: String
  *         required: true
+ *   Permission:
+ *     id: Permission
+ *     properties:
+ *       id:
+ *         type: String
+ *       manage_member:
+ *         type: Boolean
+ *       manage_write:
+ *         type: Boolean
+ *       manage_read:
+ *         type: Boolean
+ *       manage_delete:
+ *         type: Boolean
  */

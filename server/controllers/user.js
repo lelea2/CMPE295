@@ -3,6 +3,7 @@
 var User = require('../models/').Users;
 var Role = require('../models/').Roles;
 var uuid = require('node-uuid');
+var generator = require('generate-password');
 var BPromise = require('bluebird');
 var passwordHelpers = require('../helpers/passwordHelper');
 var security = require('../helpers/security');
@@ -12,7 +13,8 @@ module.exports = {
 
   create(req, res) {
     var data = req.body;
-    var hashPassword = passwordHelpers.hashPassword(data.password);
+    var pw = data.password || generator.generate({ length: 6, numbers: true }); //random generate password if needed
+    var hashPassword = passwordHelpers.hashPassword(pw);
     var userId =  uuid.v4();
     var reqBody = {
       id: userId,
@@ -121,7 +123,6 @@ module.exports = {
       deferred.reject({err: error});
     });
     return deferred.promise;
-
   }
 
 };
