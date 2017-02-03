@@ -1,6 +1,6 @@
 {
-  "name": "cmpe295-project",
-  "version": "1.0.0",
+  "name": "linkedgov-app",
+  "version": "0.0.1",
   "description": "CMPE295 master project -- Government workflow dashboard",
   "main": "index.js",
   "scripts": {
