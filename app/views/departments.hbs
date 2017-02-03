@@ -22,7 +22,7 @@
         <td>{{department.unique_code}}</td>
         <td>{{department.description}}</td>
         <td>{{department.group_email}}</td>
-        <td>{{department.phone}}</td>
+        <td>{{numberToPhone(department.phone)}}</td>
         <td><a href="/offices?department_id={{department.id}}">View office</a></td>
         <td><a ng-click="editDepartment(department.id)">Edit</a></td>
       </tr>
@@ -45,7 +45,7 @@
             <label for="inputName">Department Name</label>
             <input type="text" id="inputName" ng-model="formDepartment.name" class="form-control" placeholder="Department name" required autofocus>
             <label for="inputDescription">Department description</label>
-            <input type="text" id="inputDescription" ng-model="formDepartment.description" class="form-control" placeholder="Department description" required>
+            <textarea class="form-control" rows="2" ng-model="formDepartment.description" id="inputDescription" placeholder="Department description" required></textarea>
             <label for="inputCode">Department code</label>
             <input type="text" id="inputCode" ng-model="formDepartment.unique_code" class="form-control" placeholder="Department code" required>
             <label for="inputEmail">Department email</label>

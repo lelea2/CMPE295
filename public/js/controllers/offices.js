@@ -69,12 +69,16 @@ App.controller('officesController', ['$scope', '$http', function ($scope, $http)
       $('#myModal').modal({
         show: false
       });
-      window.location.reload();
+      window.location.href = '/office?department_id=' + $scope.formOffice.department_id;
     }, function(err) {
       $('#myModal').modal({
         show: false
       });
     });
+  };
+
+  $scope.numberToPhone = function(str) {
+    return LINKEDGOV.numberToPhone(str);
   };
 
 }]);

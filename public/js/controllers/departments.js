@@ -46,4 +46,8 @@ App.controller('departmentsController', ['$scope', '$http', function ($scope, $h
     });
   };
 
+  $scope.numberToPhone = function(str) {
+    return LINKEDGOV.numberToPhone(str);
+  };
+
 }]);

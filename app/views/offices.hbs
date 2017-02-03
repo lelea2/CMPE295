@@ -29,7 +29,7 @@
         <td>{{office.unique_code}}</td>
         <td>{{office.description}}</td>
         <td>{{office.group_email}}</td>
-        <td>{{office.phone}}</td>
+        <td>{{numberToPhone(office.phone)}}</td>
         <td><a ng-click="updateDetail(office.id)">Edit</a></td>
       </tr>
     </tbody>
@@ -51,7 +51,7 @@
             <label for="inputName">Office Name</label>
             <input type="text" id="inputName" ng-model="formOffice.name" class="form-control" placeholder="Office name" required autofocus>
             <label for="inputDescription">Office description</label>
-            <input type="text" id="inputDescription" ng-model="formOffice.description" class="form-control" placeholder="Office description" required>
+            <textarea class="form-control" rows="2" ng-model="formOffice.description" id="inputDescription" placeholder="Office description" required></textarea>
             <label for="inputCode">Office code</label>
             <input type="text" id="inputCode" ng-model="formOffice.unique_code" class="form-control" placeholder="code code" required>
             <label for="inputEmail">Office email</label>
