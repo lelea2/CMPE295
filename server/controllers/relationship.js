@@ -1,3 +1,7 @@
+/**
+ * Controller handle agent relationship in network
+ */
+
 'use strict';
 
 var neo4j = require('neo4j-driver').v1;
