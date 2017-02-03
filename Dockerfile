@@ -5,10 +5,13 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install dependencies
-COPY ./usr/src/app
+COPY package.json ./usr/src/app
 RUN npm install
 RUN bower install
 
-EXPOSE 5000
+# Bundle app source
+COPY . /usr/src/app
+
+EXPOSE 8000
 
 CMD ["npm", "start"]

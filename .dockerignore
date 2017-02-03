@@ -4,7 +4,9 @@
 reports/
 
 # NODE
-node_modules/
+node_modules
+npm-debug.log
+
 
 # WEBSTORM
 .idea/
@@ -20,4 +22,3 @@ release/
 
 # GIT
 .git/
-
