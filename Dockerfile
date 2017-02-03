@@ -11,6 +11,9 @@ USER root
 COPY package.json /usr/src/app
 RUN npm install
 RUN npm i -g bower
+
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
+
 RUN bower install
 
 # Bundle app source
