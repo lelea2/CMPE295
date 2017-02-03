@@ -4,6 +4,9 @@ FROM node:4.6.2
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+# Super user
+USER root
+
 # Install dependencies
 COPY package.json /usr/src/app
 RUN npm install
