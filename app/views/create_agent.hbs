@@ -21,7 +21,7 @@
     </div>
     <button type="submit" class="btn btn-primary submit-form">Create New Agent</button>
   </form>
-  <form ng-submit="createMembership()" ng-show="!showAgentForm">
+  <form ng-submit="createMembership()" ng-show="showAgentMembership">
     <div>
       <label>Group Type</label>
       <select class="form-control" ng-model="formMembership.group_type" ng-change="selectGroup()">

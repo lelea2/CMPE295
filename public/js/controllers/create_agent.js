@@ -7,6 +7,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.offices = [];
   $scope.currentDepartmentId = null;
   $scope.showAgentForm = true;
+  $scope.showAgentMembership = false;
   $scope.showOffices = false;
 
   $scope.init = function() {
@@ -35,12 +36,14 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   };
 
   $scope.getOffices = function() {
+    $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/offices?department_id=' + $scope.currentDepartmentId
     }).then(function(resp) {
       $scope.offices = resp.data;
+      $(document).trigger('linkedgov:loading_stop');
     });
   };
 
@@ -52,11 +55,24 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
       data: $scope.formAgent
     }).then(function(resp) {
       $scope.showAgentForm = false;
+      $scope.showAgentMembership = true;
     });
   };
 
-  $scope.createMembership = function() {
+  $scope.generateMembershipData = function() {
 
+  };
+
+  $scope.createMembership = function() {
+    $http({
+      method: 'POST',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/memberships',
+      data: $scope.generateMembershipData();
+    }).then(function(resp) {
+      $scope.showAgentForm = false;
+      $scope.showAgentMembership = false;
+    });
   };
 
   $scope.selectGroup = function() {
@@ -68,7 +84,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   };
 
   $scope.selectDepartment = function() {
-
+    $scope.getOffices();
   };
 
 }]);
