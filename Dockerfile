@@ -20,7 +20,6 @@ RUN bower install
 COPY . /usr/src/app
 
 ENV NODE_ENV production
-
-EXPOSE 8080
+ENV PORT 8000
 
 CMD ["npm", "start"]
