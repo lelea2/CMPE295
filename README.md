@@ -22,6 +22,10 @@ npm i
 ### Run application
 PORT=8000 nodemon index.js
 
+### Bash
+chmod +x run.sh
+./run.sh
+
 ```
 
 
