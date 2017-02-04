@@ -60,3 +60,4 @@ AWS_REGION=
 ###### References
 
 * https://github.com/nodejs/docker-node
+* https://hub.docker.com/r/digitallyseamless/nodejs-bower-grunt/~/dockerfile/
