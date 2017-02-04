@@ -1,4 +1,4 @@
-window.App = angular.module('workflowApp', ['ui.mask']);
+window.App = angular.module('linkgovApp', ['ui.mask']);
 
 App.run(['$window', '$rootScope', function($window, $rootScope) {
   $rootScope.online = navigator.onLine;
