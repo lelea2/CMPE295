@@ -1,6 +1,7 @@
 'use strict';
 
 var Permission = require('../models/').Permissions;
+var uuid = require('uuid/v4');
 
 var DEFAULT_PERMISSION = {
   manage_member: false,
@@ -14,7 +15,7 @@ module.exports = {
   create(req, res) {
     var data = req.body;
     var reqBody = {
-      id: uuid.v4(),
+      id: uuid(),
       manage_member: data.manage_member,
       manage_write: data.manage_write,
       manage_read: data.manage_read,
@@ -31,7 +32,7 @@ module.exports = {
 
   create_default(callback) {
     var reqBody = DEFAULT_PERMISSION;
-    reqBody.id = uuid.v4();
+    reqBody.id = uuid();
     Permission.create(reqBody)
       .then(function (newPermission) {
         callback(newPermission);

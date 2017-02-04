@@ -1,7 +1,7 @@
 'use strict';
 
 var Office = require('../models/').Offices;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var Department = require('../models/').Departments;
 var sequelize = require('sequelize');
 
@@ -10,7 +10,7 @@ module.exports = {
   create(req, res) {
     var data = req.body;
     var reqBody = {
-      id: uuid.v4(),
+      id: uuid(),
       name: data.name,
       description: data.description,
       phone: data.phone,

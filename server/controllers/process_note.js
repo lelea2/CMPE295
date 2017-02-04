@@ -2,14 +2,14 @@
 
 var ProcessNote = require('../models/').ProcessNotes;
 var User = require('../models/').Users;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 
 module.exports = {
 
   create(req, res) {
     var data = req.body;
     var reqBody = {
-      id: uuid.v4(),
+      id: uuid(),
       process_id: data.process_id,
       creator_id: data.creator_id,
       note: data.note

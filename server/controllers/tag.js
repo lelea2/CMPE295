@@ -1,14 +1,14 @@
 'use strict';
 
 var Tag = require('../models/').Tags;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 
 module.exports = {
 
   create(req, res) {
     var data = req.body;
     var reqBody = {
-      id: uuid.v4(),
+      id: uuid(),
       name: data.name,
       description: data.description,
       keywords: data.keywords

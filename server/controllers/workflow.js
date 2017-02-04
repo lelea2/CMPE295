@@ -5,7 +5,7 @@ var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
 var StateType = require('../models').StateTypes;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var sequelize = require('sequelize');
 var BPromise = require('bluebird');
 
@@ -93,7 +93,7 @@ module.exports = {
   //Configure new workflow type
   configure(req, res) {
     var data = req.body;
-    var id =  uuid.v4();
+    var id =  uuid();
     var reqBody = {
       id: id,
       name: data.name,
@@ -151,7 +151,7 @@ module.exports = {
 
   create(req, res) {
     var data = req.body;
-    var id =  uuid.v4();
+    var id =  uuid();
     var reqBody = {
       id: id,
       type_id: data.type_id,

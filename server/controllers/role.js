@@ -1,7 +1,7 @@
 'use strict';
 
 var Roles = require('../models/').Roles;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 
 module.exports = {
 

@@ -36,7 +36,6 @@
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
     "neo4j-driver": "^1.1.0",
-    "node-uuid": "^1.4.7",
     "pm2": "^2.3.0",
     "random-ip": "0.0.1",
     "save": "^2.3.0",
@@ -47,6 +46,7 @@
     "sidekiq": "^1.1.1",
     "swagger-express": "^1.0.5",
     "twilio": "^2.11.1",
+    "uuid": "^3.0.1",
     "winston": "^2.2.0"
   },
   "devDependencies": {

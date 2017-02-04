@@ -1,7 +1,7 @@
 'use strict';
 
 var Department = require('../models/').Departments;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var BPromise = require('bluebird');
 var sequelize = require('sequelize');
 
@@ -11,7 +11,7 @@ module.exports = {
     var data = req.body;
     // console.log(data);
     var reqBody = {
-      id: uuid.v4(),
+      id: uuid(),
       name: data.name,
       description: data.description,
       phone: data.phone,

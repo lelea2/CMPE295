@@ -1,6 +1,7 @@
 'use strict';
 
 var Notification = require('../models/').Notifications,
+    uuid = require('uuid/v4'),
     User = require('../models/').Users;
 
 module.exports = {

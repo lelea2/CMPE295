@@ -3,12 +3,12 @@
 var Membership = require('../models/').Memberships,
     User = require('../models/').Users,
     Role = require('../models/').Roles,
-    uuid = require('node-uuid');
+    uuid = require('uuid/v4');
 
 module.exports = {
 
   create(req, res) {
-    var id =  uuid.v4();
+    var id =  uuid();
     var data = req.body;
     Membership.create({
       id: id,

@@ -1,7 +1,7 @@
 'use strict';
 
 var Customer = require('../models/').Customers;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var passwordHelpers = require('../helpers/passwordHelper');
 var security = require('../helpers/security');
 
@@ -10,7 +10,7 @@ module.exports = {
   create(req, res) {
     var data = req.body;
     var hashPassword = passwordHelpers.hashPassword(data.password);
-    var userId =  uuid.v4();
+    var userId =  uuid();
     var reqBody = {
       id: userId,
       email: data.email,

@@ -11,7 +11,7 @@ configure_aws_cli(){
 
 deploy_cluster() {
 
-  family="linkgov-app-task-family"
+  family="linkedgov-webapp"
 
   make_task_def
   register_definition

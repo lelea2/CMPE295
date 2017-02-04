@@ -2,7 +2,7 @@
 
 var User = require('../models/').Users;
 var Role = require('../models/').Roles;
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var generator = require('generate-password');
 var BPromise = require('bluebird');
 var passwordHelpers = require('../helpers/passwordHelper');
@@ -15,7 +15,7 @@ module.exports = {
     var data = req.body;
     var pw = data.password || generator.generate({ length: 6, numbers: true }); //random generate password if needed
     var hashPassword = passwordHelpers.hashPassword(pw);
-    var userId =  uuid.v4();
+    var userId =  uuid();
     var reqBody = {
       id: userId,
       email: data.email,
