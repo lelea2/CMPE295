@@ -58,6 +58,9 @@ AWS_REGION=
 ###### Deployment
 
 ```
+//Encrypted .env file
+openssl aes-256-cbc -in .env -out secret-env-cipher
+
 
 ```
 
