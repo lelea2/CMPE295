@@ -64,8 +64,9 @@ openssl aes-256-cbc -in .env -out secret-env-cipher
 
 ```
 
-###### References
+###### References for deployment set up
 
 * https://github.com/nodejs/docker-node
 * https://hub.docker.com/r/digitallyseamless/nodejs-bower-grunt/~/dockerfile/
 * https://www.promptworks.com/blog/handling-environment-secrets-in-docker-on-the-aws-container-service
+* https://blog.codeship.com/zero-downtime-deployment-with-aws-ecs-and-elb/

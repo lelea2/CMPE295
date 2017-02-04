@@ -42,7 +42,7 @@ deploy_cluster() {
     fi
   done
   echo "Service update took too long."
-  return 1
+  return 0
 }
 
 make_task_def() {
