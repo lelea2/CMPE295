@@ -65,3 +65,4 @@ AWS_REGION=
 
 * https://github.com/nodejs/docker-node
 * https://hub.docker.com/r/digitallyseamless/nodejs-bower-grunt/~/dockerfile/
+* https://www.promptworks.com/blog/handling-environment-secrets-in-docker-on-the-aws-container-service

@@ -3,6 +3,10 @@ machine:
     - docker
 
 dependencies:
+  pre:
+    # update locally with:
+    # openssl aes-256-cbc -e -in secret-env-plain -out secret-env-cipher -k $KEY
+    - openssl aes-256-cbc -d -in config-cipher -k $KEY >> .env
   post:
     - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/linkedgov-app:$CIRCLE_SHA1 .
 
@@ -15,4 +19,4 @@ deployment:
   prod:
     branch: master
     commands:
-      - sh ./deploy.sh
+      - sh ./deploy.sh $CIRCLE_SHA1
