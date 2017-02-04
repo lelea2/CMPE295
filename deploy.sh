@@ -14,10 +14,13 @@ configure_aws_cli(){
 
 deploy_cluster() {
 
+  host_port=80
   family="linkedgov-webapp"
 
   make_task_def
   register_definition
+
+  echo "Revision: $revision"
 
   if [[ $(aws ecs update-service --cluster linkgov-app-cluster --service linkgov-app-service --task-definition $revision | \
                    $JQ '.service.taskDefinition') != $revision ]]; then
@@ -48,8 +51,8 @@ make_task_def() {
       "name": "linkedgov-app",
       "image": "%s.dkr.ecr.us-west-2.amazonaws.com/linkedgov-app:%s",
       "essential": true,
-      "memory": 500,
-      "cpu": 10,
+      "memory": 512,
+      "cpu": 2,
       "portMappings": [
         {
           "containerPort": 8000,
