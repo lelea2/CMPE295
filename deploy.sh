@@ -32,7 +32,7 @@ deploy_cluster() {
                    $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
       echo "Waiting for stale deployments:"
       echo "$stale"
-      sleep 10
+      sleep 5
     else
       echo "Deployed!"
       return 0
@@ -62,7 +62,7 @@ make_task_def() {
   task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $CIRCLE_SHA1)
 }
 
-push_ecr_image(){
+push_ecr_image() {
   eval $(aws ecr get-login --region us-west-2)
   docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/linkedgov-app:$CIRCLE_SHA1
 }
