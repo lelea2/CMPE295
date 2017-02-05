@@ -38,6 +38,12 @@ var express = require('express'),
     // roles = require('./server/controllers/role'),
     membership = require('./server/controllers/membership');
 
+//Configure logging
+log4js.loadAppender('file');
+log4js.addAppender(log4js.appenders.file('logs/access.log'), 'access');
+
+var logger = log4js.getLogger('access');
+
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json())
 
@@ -289,5 +295,5 @@ app.get('/account', security.userRequiredLoggedIn(), routes.account);
 /***************************************************************/
 app.set('port', process.env.PORT || 8000);
 app.listen(app.get('port'), function () {
-  console.log('Server started on port', app.get('port'));
+  logger.info('Server started on port: ' +  app.get('port'));
 });

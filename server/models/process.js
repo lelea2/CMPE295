@@ -29,6 +29,13 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    office_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Offices', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    },
     critical: DataTypes.ENUM('1','2','3','4','5'),
     due_date: DataTypes.DATE,
     details: DataTypes.BLOB //Include all schema detail for certain task
@@ -39,6 +46,7 @@ module.exports = function(sequelize, DataTypes) {
         Processes.belongsTo(models.ProcessTypes, { foreignKey: 'process_type' });
         Processes.belongsTo(models.Workflows, { foreignKey: 'workflow_id' });
         Processes.belongsTo(models.StateTypes, { foreignKey: 'currentStateId' });
+        Processes.belongsTo(models.Offices, { foreignKey: 'office_id' });
       }
     }
   });

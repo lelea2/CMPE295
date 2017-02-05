@@ -181,6 +181,24 @@ module.exports = {
     .catch(function (error) {
       res.status(500).json(error);
     });
+  },
+
+  //http://stackoverflow.com/questions/22643263/how-to-get-a-distinct-count-with-sequelize
+  //SELECT process_type, COUNT(DISTINCT(office_id)) as 'countOfOfficeId' GROUP BY process_type
+  process_stat(req, res) {
+    Process.findAll({
+      attributes: [
+        'process_type',
+        [sequelize.literal('COUNT(DISTINCT(office_id))'), 'countOfOfficeId']
+      ],
+      group: 'process_type'
+    })
+    .then(function (data) {
+      res.status(200).json(data);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
   }
 
 };
