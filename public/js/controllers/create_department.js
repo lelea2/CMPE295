@@ -34,6 +34,7 @@ App.controller('createDepartmentController', ['$scope', '$http', function ($scop
       if(xhr.readyState === 4) {
         if(xhr.status === 200) {
           console.log('Generate icon url: ' + url);
+          $scope.image_uploaded_msg = 'Image uploaded successfully';
           $scope.formDepartment.icon_url = url;
         }
         else {

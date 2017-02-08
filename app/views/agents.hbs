@@ -1,6 +1,20 @@
 {{> leftrail}}
 <div class="middle-rail" ng-controller="agentsController" data-ng-init="init()">
   <h3>All Agents</h3>
+  {{{{raw-helper}}}}
+  <div class="col-md-6" style="margin: 15px 0">
+    <select class="form-control" ng-model="currentDepartment" ng-change="selectDepartment()">
+      <option value="">Select a deparment</option>
+      <option ng-repeat="department in departments" value={{department.id}}>{{department.unique_code}}</option>
+    </select>
+  </div>
+  <div class="col-md-6" style="margin: 15px 0" ng-show="showOffice">
+    <select class="form-control" ng-model="currentOffice" ng-change="selectOffice()">
+      <option value="">All Offices</option>
+      <option ng-repeat="office in offices" value={{office.id}}>{{office.unique_code}}</option>
+    </select>
+  </div>
+  {{{{/raw-helper}}}}
   <table class="table table-striped table-bordered table-hover table-responsive">
     <thead>
       <tr>
@@ -20,7 +34,7 @@
         <td>{{agent.email}}</td>
         <td>{{agent.phone}}</td>
         <td>{{agent.role}}</td>
-        <td>{{agent.permission}}</td>
+        <td>{{editPermission(agent)}}</td>
       </tr>
     </tbody>
     {{{{/raw-helper}}}}

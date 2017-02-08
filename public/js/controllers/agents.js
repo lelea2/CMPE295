@@ -1,6 +1,10 @@
 App.controller('agentsController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.agents = [];
+  $scope.departments = [];
+  $scope.offices = [];
+  $scope.currentDepartment = null;
+  $scope.currentOffice = null;
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -12,6 +16,27 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
       //success, load to view process
       $(document).trigger('linkedgov:loading_stop');
       $scope.departments = resp.data;
+    });
+  };
+
+  $scope.selectDepartment = function() {
+    $scope.loadOffices();
+  };
+
+  $scope.selectOffice = function() {
+    $scope.loadMemberships('office', $scope.currentOffice);
+  };
+
+  $scope.loadMemberships = function(group_type, group_id) {
+    $(document).trigger('linkedgov:loading_start');
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/memberships?group_type=' + group_type + '&group_id=' + group_id
+    }).then(function(resp) {
+      //success, load to view process
+      $(document).trigger('linkedgov:loading_stop');
+      $scope.agents = resp.data;
     });
   };
 
@@ -30,6 +55,13 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
         $(document).trigger('linkedgov:loading_stop');
       });
     }
+  };
+
+  /**
+   * Helper function to edit permission
+   */
+  $scope.editPermission = function(agent) {
+
   };
 
 }]);
