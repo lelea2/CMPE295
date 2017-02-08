@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/lelea2/CMPE295#readme",
   "dependencies": {
+    "aws-sdk": "^2.10.0",
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
@@ -34,7 +35,7 @@
     "jsonpack": "^1.1.5",
     "log4js": "^1.1.0",
     "morgan": "^1.7.0",
-    "mysql": "^2.11.1",
+    "mysql": "^2.13.0",
     "neo4j-driver": "^1.1.0",
     "pm2": "^2.3.0",
     "random-ip": "0.0.1",

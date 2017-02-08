@@ -29,10 +29,11 @@
     </div>
     <div>
       <label for="inputIcon">Department Icon (Please select an image)</label>
-      <input type="file" id="inputIcon" ng-change="initUpload()" accept="image/*" />
+      <input type="file" id="inputIcon" custom-on-change="initUpload" accept="image/*" />
     </div>
     <button type="submit" class="btn btn-primary submit-form">Create Department</button>
   </form>
 </div>
 {{> rightrail}}
+<script src="../js/directives/files_directive.js"></script>
 <script src="../js/controllers/create_department.js"></script>

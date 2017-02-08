@@ -8,6 +8,8 @@ var StateType = require('../models').StateTypes;
 var uuid = require('uuid/v4');
 var sequelize = require('sequelize');
 var BPromise = require('bluebird');
+var cities = require('cities');
+//cities.gps_lookup(lat, lng);
 
 /**
  * Helper function to generate manage process for running query, create dependencies

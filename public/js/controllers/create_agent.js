@@ -54,13 +54,19 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
       url: '/api/agents',
       data: $scope.formAgent
     }).then(function(resp) {
+      $scope.formAgent = resp.data;
       $scope.showAgentForm = false;
       $scope.showAgentMembership = true;
     });
   };
 
   $scope.generateMembershipData = function() {
-
+    return {
+      user_id: $scope.formAgent.id,
+      group_id: ($scope.formMembership.group_type === 'department') ? $scope.formMembership.department_id : $scope.formMembership.office_id,
+      group_type: $scope.formMembership.group_type,
+      role_id: $scope.formMembership.role_id,
+    };
   };
 
   $scope.createMembership = function() {

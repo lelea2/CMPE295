@@ -1,6 +1,7 @@
 'use strict';
 
 var Membership = require('../models/').Memberships,
+    Permission = require('./permission'),
     User = require('../models/').Users,
     Role = require('../models/').Roles,
     uuid = require('uuid/v4');
@@ -10,19 +11,23 @@ module.exports = {
   create(req, res) {
     var id =  uuid();
     var data = req.body;
-    Membership.create({
-      id: id,
-      user_id: data.user_id,
-      group_id: data.group_id,
-      group_type: data.group_type,
-      role_id: data.role_id,
-      permission_id: data.permission_id
-    })
-    .then(function (newRecord) {
-      res.status(201).json(newRecord);
-    })
-    .catch(function (error) {
-      res.status(500).json(error);
+    Permission.create_default(function(resp) {
+      Membership.create({
+        id: id,
+        user_id: data.user_id,
+        group_id: data.group_id,
+        group_type: data.group_type,
+        role_id: data.role_id,
+        permission_id: resp.permission_id
+      })
+      .then(function (newRecord) {
+        res.status(201).json(newRecord);
+      })
+      .catch(function (error) {
+        res.status(500).json(error);
+      });
+    }, function(err) {
+      res.status(500).json(err);
     });
   },
 

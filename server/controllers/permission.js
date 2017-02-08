@@ -30,7 +30,7 @@ module.exports = {
       });
   },
 
-  create_default(callback) {
+  create_default(callback, errcallback) {
     var reqBody = DEFAULT_PERMISSION;
     reqBody.id = uuid();
     Permission.create(reqBody)
@@ -38,7 +38,7 @@ module.exports = {
         callback(newPermission);
       })
       .catch(function (error) {
-        callback(error);
+        errcallback(error);
       });
   },
 

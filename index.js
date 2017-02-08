@@ -20,6 +20,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     BPromise = require('bluebird'),
     log4js = require('log4js'),
+    aws = require('aws-sdk'),
     logger = log4js.getLogger(),
     swagger = require('swagger-express'), //swagger for API view
     api = require('./api'), //API endpoint
@@ -37,6 +38,13 @@ var express = require('express'),
     customers = require('./server/controllers/customer'),
     // roles = require('./server/controllers/role'),
     membership = require('./server/controllers/membership');
+
+//Initialize AWS region
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
+});
 
 //Configure logging
 log4js.loadAppender('file');
@@ -265,6 +273,33 @@ app.get('/api/stats', function(req, res) {
 app.get('/logout', function(req, res) {
   security.logout(req);
   res.redirect(302, '/');
+});
+
+//Upload to S3 (Create and return URL);
+app.get('/sign-s3', function(req, res) {
+  var s3 = new aws.S3();
+  var S3_BUCKET = process.env.S3_BUCKET;
+  var fileName = req.query['file-name'];
+  var fileType = req.query['file-type'];
+  var s3Params = {
+    Bucket: S3_BUCKET,
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+  s3.getSignedUrl('putObject', s3Params, function (err, data) {
+    if (err) {
+      logger.error(err);
+      return res.status(500).json({err: err});
+    }
+    console.log(data);
+    var returnData = {
+      signedRequest: data,
+      url: 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + fileName
+    };
+    res.status(200).json(returnData);
+  });
 });
 
 /*****************************************************/

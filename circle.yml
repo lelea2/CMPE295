@@ -21,5 +21,3 @@ deployment:
     branch: master
     commands:
       - sh ./deploy.sh $CIRCLE_SHA1
-
-
