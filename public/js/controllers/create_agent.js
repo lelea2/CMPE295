@@ -21,7 +21,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.getRoles = function() {
     $http({
       method: 'GET',
-      headers: LINKEDGOV.getHeaders(true),
+      headers: LINKEDGOV.getHeaders(false),
       url: '/api/roles'
     }).then(function(resp) {
       $scope.roles = resp.data;
@@ -31,7 +31,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.getDepartments = function() {
     $http({
       method: 'GET',
-      headers: LINKEDGOV.getHeaders(true),
+      headers: LINKEDGOV.getHeaders(false),
       url: '/api/departments'
     }).then(function(resp) {
       $scope.departments = resp.data;
@@ -42,7 +42,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
     $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
-      headers: LINKEDGOV.getHeaders(true),
+      headers: LINKEDGOV.getHeaders(false),
       url: '/api/departments/' + $scope.currentDepartmentId + '/offices'
     }).then(function(resp) {
       $scope.offices = resp.data;
@@ -75,7 +75,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.createMembership = function() {
     $http({
       method: 'POST',
-      headers: LINKEDGOV.getHeaders(true),
+      headers: LINKEDGOV.getHeaders(false),
       url: '/api/memberships',
       data: $scope.generateMembershipData()
     }).then(function(resp) {

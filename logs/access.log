@@ -130,8 +130,8 @@
 [2017-02-08 22:56:47.405] [INFO] access - Server started on port: 8000
 [2017-02-08 22:56:56.696] [INFO] access - Server started on port: 8000
 [2017-02-08 22:56:58.667] [INFO] access - Server started on port: 8000
-[2017-02-08 22:58:36.599] [INFO] access - Server started on port: 8000
-[2017-02-08 22:58:47.138] [INFO] access - Server started on port: 8000
-[2017-02-08 23:03:21.841] [INFO] access - Server started on port: 8000
-[2017-02-08 23:03:31.895] [INFO] access - Server started on port: 8000
-[2017-02-08 23:03:35.513] [INFO] access - Server started on port: 8000
+[2017-02-08 23:07:57.806] [DEBUG] access - Getting stats for admin.
+[2017-02-08 23:13:01.982] [DEBUG] access - Getting stats for admin.
+[2017-02-08 23:13:39.263] [INFO] access - Server started on port: 8000
+[2017-02-08 23:13:46.803] [INFO] access - Server started on port: 8000
+[2017-02-08 23:15:14.571] [INFO] access - Server started on port: 8000

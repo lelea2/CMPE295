@@ -62,7 +62,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   /**
    * Helper function to edit permission
    */
-  $scope.editPermission = function(agent) {
+  $scope.editAgent = function(agent) {
 
   };
 
