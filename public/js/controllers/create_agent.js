@@ -6,6 +6,9 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.departments = [];
   $scope.offices = [];
   $scope.currentDepartmentId = null;
+  $scope.currentOfficeId = null;
+  $scope.currentRoleId = null;
+  $scope.currentGroupType = 'department';
   $scope.showAgentForm = true;
   $scope.showAgentMembership = false;
   $scope.showOffices = false;
@@ -40,7 +43,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
-      url: '/api/offices?department_id=' + $scope.currentDepartmentId
+      url: '/api/departments/' + $scope.currentDepartmentId + '/offices'
     }).then(function(resp) {
       $scope.offices = resp.data;
       $(document).trigger('linkedgov:loading_stop');
@@ -50,7 +53,7 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.createAgent = function() {
     $http({
       method: 'POST',
-      headers: LINKEDGOV.getHeaders(true),
+      headers: LINKEDGOV.getHeaders(false), //should not set cookies
       url: '/api/agents',
       data: $scope.formAgent
     }).then(function(resp) {
@@ -63,9 +66,9 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
   $scope.generateMembershipData = function() {
     return {
       user_id: $scope.formAgent.id,
-      group_id: ($scope.formMembership.group_type === 'department') ? $scope.formMembership.department_id : $scope.formMembership.office_id,
-      group_type: $scope.formMembership.group_type,
-      role_id: $scope.formMembership.role_id,
+      group_id: ($scope.formMembership.group_type === 'department') ? $scope.currentDepartmentId : $scope.currentOfficeId,
+      group_type: $scope.currentGroupType,
+      role_id: $scope.currentRoleId,
     };
   };
 
@@ -74,23 +77,28 @@ App.controller('createAgentController', ['$scope', '$http', function ($scope, $h
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/memberships',
-      data: $scope.generateMembershipData();
+      data: $scope.generateMembershipData()
     }).then(function(resp) {
       $scope.showAgentForm = false;
       $scope.showAgentMembership = false;
+      $scope.formMembership = resp.data;
+      window.location = '/agents?created=true&group_type=' + $scope.formMembership.group_type + '&group_id=' + $scope.formMembership.group_id;
     });
   };
 
   $scope.selectGroup = function() {
-    if ($scope.formMembership.group_type === 'office') {
+    if ($scope.currentGroupType === 'office') {
       $scope.showOffices = true;
+      $scope.getOffices(); //get current offices
     } else {
       $scope.showOffices = false;
     }
   };
 
   $scope.selectDepartment = function() {
-    $scope.getOffices();
+    if ($scope.currentGroupType === 'office') {
+      $scope.getOffices(); //get current offices for department
+    }
   };
 
 }]);

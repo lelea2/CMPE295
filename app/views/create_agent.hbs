@@ -5,7 +5,7 @@
   <form ng-submit="createAgent()" ng-show="showAgentForm">
     <div>
       <label for="inputEmail">Agent Email</label>
-      <input type="text" id="inputEmail" ng-model="formAgent.name" class="form-control" placeholder="Agent email" required autofocus>
+      <input type="text" id="inputEmail" ng-model="formAgent.email" class="form-control" placeholder="Agent email" required autofocus>
     </div>
     <div>
       <label for="inputphone">Agent Phone</label>
@@ -22,34 +22,36 @@
     <button type="submit" class="btn btn-primary submit-form">Create New Agent</button>
   </form>
   <form ng-submit="createMembership()" ng-show="showAgentMembership">
+    {{{{raw-helper}}}}
     <div>
       <label>Group Type</label>
-      <select class="form-control" ng-model="formMembership.group_type" ng-change="selectGroup()">
-        <option value="department">Department></option>
+      <select class="form-control" ng-model="currentGroupType" ng-change="selectGroup()">
+        <option value="department">Department</option>
         <option value="office">Office</option>
       </select>
     </div>
     <div>
       <label>Departments</label>
-      <select class="form-control" ng-model="formMembership.department_id" ng-change="selectDepartment()">
+      <select class="form-control" ng-model="currentDepartmentId" ng-change="selectDepartment()">
         <option value="">Select a deparment</option>
-        <option ng-repeat="department in departments" value={{department.id}}>{{department.unique_code}}</option>
+        <option ng-repeat="department in departments" value="{{department.id}}">{{department.unique_code}}</option>
       </select>
     </div>
     <div ng-show="showOffices">
       <label>Offices</label>
-      <select class="form-control" ng-model="formMembership.office_id">
+      <select class="form-control" ng-model="currentOfficeId">
         <option value="">Select an office</option>
-        <option ng-repeat="office in offices" value={{office.id}}>{{office.unique_code}}</option>
+        <option ng-repeat="office in offices" value="{{office.id}}">{{office.unique_code}}</option>
       </select>
     </div>
     <div>
       <label>Roles</label>
-      <select class="form-control" ng-model="formMembership.role_id">
+      <select class="form-control" ng-model="currentRoleId">
         <option value="">Select a role</option>
-        <option ng-repeat="role in roles" value={{role.id}}>{{role.role}}</option>
+        <option ng-repeat="role in roles" value="{{role.id}}">{{role.role}}</option>
       </select>
     </div>
+    {{{{/raw-helper}}}}
     <button type="submit" class="btn btn-primary submit-form">Create Membership</button>
   </form>
 </div>

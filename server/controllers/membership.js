@@ -18,7 +18,7 @@ module.exports = {
         group_id: data.group_id,
         group_type: data.group_type,
         role_id: data.role_id,
-        permission_id: resp.permission_id
+        permission_id: resp.id
       })
       .then(function (newRecord) {
         res.status(201).json(newRecord);

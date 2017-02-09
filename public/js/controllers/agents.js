@@ -5,6 +5,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.offices = [];
   $scope.currentDepartment = null;
   $scope.currentOffice = null;
+  $scope.showOffice = false;
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -20,6 +21,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   };
 
   $scope.selectDepartment = function() {
+    $scope.showOffice = true;
     $scope.loadOffices();
   };
 
