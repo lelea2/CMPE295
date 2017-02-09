@@ -36,6 +36,7 @@ var express = require('express'),
     // tags = require('./server/controllers/tag'),
     users = require('./server/controllers/user'),
     customers = require('./server/controllers/customer'),
+    permission = require('./server/controllers/permission'),
     // roles = require('./server/controllers/role'),
     membership = require('./server/controllers/membership');
 
@@ -137,6 +138,10 @@ app.get('/api/memberships', api.getMemberships);
 app.post('/api/memberships', api.createMembership);
 app.put('/api/memberships/:id', api.updateMembership);
 app.delete('/api/memberships/:id', api.deleteMembership);
+
+//Permission
+app.put('/api/permission/:id', permission.update);
+app.get('/api/permission/:id', permission.show); //show specific permission
 
 //Tags
 app.get('/api/tags', api.getTags);

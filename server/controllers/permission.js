@@ -61,6 +61,20 @@ module.exports = {
     .catch(function (error) {
       res.status(500).json(error);
     });
+  },
+
+  show(req, res) {
+    Permission.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (permission) {
+      res.status(200).json(permission);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
   }
 
 };

@@ -1,6 +1,7 @@
 'use strict';
 
 var Membership = require('../models/').Memberships,
+    Permissions = require('../models/').Permissions,
     Permission = require('./permission'),
     User = require('../models/').Users,
     Role = require('../models/').Roles,
@@ -31,12 +32,13 @@ module.exports = {
     });
   },
 
+  //Show membership of user (who might belong to multiple offices)
   show_agent_membership(req, res) {
     Membership.findAll({
       where: {
         user_id: req.params.agent_id
       },
-      include: [User, Role]
+      include: [User, Role, Permissions]
     })
     .then(function(memberships) {
       res.status(200).json(memberships);
@@ -47,17 +49,19 @@ module.exports = {
   },
 
   show(req, res) {
+    console.log('show explicit membership...');
     Membership.findAll({
       where: {
         group_id: req.query.group_id,
         group_type: req.query.group_type
       },
-      include: [User, Role]
+      include: [User, Role, Permissions]
     })
     .then(function (memberships) {
       res.status(200).json(memberships);
     })
     .catch(function (error) {
+      console.log(error);
       res.status(500).json(error);
     });
   },
