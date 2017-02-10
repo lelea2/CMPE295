@@ -3,8 +3,10 @@
   <h3>DashBoard</h3>
   {{#if _isAdmin}}
     {{> admin_panel}}
+    <div id="mynetwork"></div>
   {{/if}}
   {{> loading}}
 </div>
 {{> rightrail}}
+<script src="../lib/vis/dist/vis.min.js"></script>
 <script src="../js/controllers/dashboard.js"></script>
