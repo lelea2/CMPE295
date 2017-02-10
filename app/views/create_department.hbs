@@ -31,8 +31,8 @@
       <label for="inputIcon">Department Icon (Please select an image)</label>
       <input type="file" id="inputIcon" custom-on-change="initUpload" accept="image/*" />
       {{{{raw-helper}}}}
-      <img ng-src="{{formDepartment.icon_url}}" />
-      <p class="success-msg">{{image_uploaded_msg}}</p>
+      <img ng-src="{{formDepartment.icon_url}}" style="margin-top: 10px; width: 80px; height: 35px" />
+      <p class="success-msg" style="margin-top: 10px">{{image_uploaded_msg}}</p>
       {{{{/raw-helper}}}}
     </div>
     <button type="submit" class="btn btn-primary submit-form">Create Department</button>

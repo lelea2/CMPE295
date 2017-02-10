@@ -1,6 +1,7 @@
 App.controller('agentsController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.agents = [];
+  $scope.formAgent = {};
   $scope.departments = [];
   $scope.offices = [];
   $scope.currentDepartment = null;
@@ -63,7 +64,30 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
    * Helper function to edit permission
    */
   $scope.editAgent = function(agent) {
+    $scope.formAgent = agent || {};
+    // console.log($scope.formOffice);
+    $('#myModal').modal({
+      show: true
+    });
+  };
 
+  $scope.updateAgent = function() {
+
+  };
+
+  $scope.getCurrentAgent = function(id) {
+    if (!!id && $scope.agents.length > 0) {
+      for (var i = 0; i < $scope.agents.length; i++) {
+        if ($scope.agents[i].id === id) {
+          return $scope.agents[i];
+        }
+      }
+    }
+  };
+
+  $scope.numberToPhone = function(str) {
+    console.log(str);
+    return LINKEDGOV.numberToPhone(str);
   };
 
 }]);

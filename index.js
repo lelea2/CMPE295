@@ -25,6 +25,7 @@ var express = require('express'),
     swagger = require('swagger-express'), //swagger for API view
     api = require('./api'), //API endpoint
     csrfCrypto = require('csrf-crypto'),
+    uuid = require('uuid/v4'),
     expressHbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     routes = require('./app/routes'),
