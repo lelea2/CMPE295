@@ -1,9 +1,11 @@
+<link rel="stylesheet" type="text/css" href="../lib/vis/dist/vis.min.css">
+<link rel="stylesheet" type="text/css" href="../css/dashboard.css">
 {{> leftrail}}
 <div class="middle-rail" ng-controller="dashboardController" data-ng-init="init()">
   <h3>DashBoard</h3>
   {{#if _isAdmin}}
     {{> admin_panel}}
-    <div id="mynetwork"></div>
+    <div class="mynetwork" id="mynetwork"></div>
   {{/if}}
   {{> loading}}
 </div>
