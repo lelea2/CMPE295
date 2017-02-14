@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="../lib/vis/dist/vis.min.css">
+<link rel="stylesheet" type="text/css" href="../css/workflow.css">
 {{> leftrail}}
 <div class="middle-rail" ng-controller="workflowsController" data-ng-init="init()">
   <h3>All Workflow Types</h3>
@@ -42,6 +43,7 @@
           <h4 class="modal-title">View Process Configure Details</h4>
         </div>
         <div class="modal-body">
+          <div id="myworkflow"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
