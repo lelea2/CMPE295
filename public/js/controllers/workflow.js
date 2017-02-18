@@ -1,8 +1,10 @@
-App.controller('workflowsController', ['$scope', '$http', function ($scope, $http) {
+App.controller('workflowsController', ['$scope', '$http', '$q', function ($scope, $http, $q) {
 
   $scope.workflow_types = [];
   $scope.tags = [];
   $scope.currentTag = '';
+  $scope.current_flow = null;
+  $scope.dialog_loading = true;
 
   $scope.init = function() {
     $scope.currentTag = LINKEDGOV.getParamVal('tag_id') || '';
@@ -16,63 +18,123 @@ App.controller('workflowsController', ['$scope', '$http', function ($scope, $htt
       $scope.tags = resp.data;
     });
     //Get all workflow configure
+    $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
       url: (!!$scope.currentTag) ? ('/api/workflow_configure/?tag_id=' + $scope.currentTag) : '/api/workflow_configure'
     }).then(function(resp) {
       //success, load to view process
+      $(document).trigger('linkedgov:loading_stop');
       $scope.workflow_types = resp.data;
+    });
+
+    //Handle generate on dialog show
+    $('#myGraphModal').on('shown.bs.modal', function () {
+      $scope.drawGraph($scope.current_flow);
     });
   };
 
   $scope.viewProcess = function(item) {
-    var flows = $scope.generateWorkflow(item.flows);
+    $scope.current_flow = item.flows;
     $('#myGraphModal').modal({
       show: true
     });
-    $scope.drawGraph(flows);
   };
 
   $scope.drawGraph = function(flows) {
-    var nodes = [
-      {id: 1, label: 'Node 1'},
-      {id: 2, label: 'Node 2'},
-      {id: 3, label: 'Node 3:\nLeft-Aligned', font: {'face': 'Monospace', align: 'left'}},
-      {id: 4, label: 'Node 4'},
-      {id: 5, label: 'Node 5\nLeft-Aligned box', shape: 'box',
-       font: {'face': 'Monospace', align: 'left'}}
-    ];
-
-    // create an array with edges
-    var edges = [
-      {from: 1, to: 2, label: 'middle',     font: {align: 'middle'}},
-      {from: 1, to: 3, label: 'top',        font: {align: 'top'}},
-      {from: 2, to: 4, label: 'horizontal', font: {align: 'horizontal'}},
-      {from: 2, to: 5, label: 'bottom',     font: {align: 'bottom'}}
-    ];
-
-    // create a network
-    var container = document.getElementById('myworkflow');
-    var data = {
-      nodes: nodes,
-      edges: edges
-    };
-    var options = {};
-    var network = new vis.Network(container, data, options);
+    $scope.generateWorkflow(flows).then(function(data) {
+      var nodes = data.nodeArr,
+          edges = data.edgeArr;
+      // create a network
+      var container = document.getElementById('myworkflow');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {};
+      var network = new vis.Network(container, data, options);
+    });
   };
 
   $scope.generateWorkflow = function(flows) {
-    console.log(flows);
-    var tasks_arr = []; //array to store unique tasks
-    for(var key in flows) {
-      if (tasks_arr.indexOf(key) < 0) {
-        tasks_arr.push(key);
+    //{"tasks":
+    // [{"process_id":"50365895-eeb8-4342-8a66-2ebbb3fd9c78",
+    //   "block_process_id":[]},
+    //   {"process_id":"ef768e31-e2c5-4976-a3ab-9db08c76bf28",
+    //   "block_process_id":["50365895-eeb8-4342-8a66-2ebbb3fd9c78","85fdcff2-0df1-4c2a-b2b7-5c69c9311f84"]}]}
+    var tasks = flows.tasks;
+    var nodeHash = [];
+    var nodeArr = [{
+      id: 1,
+      label: '<Start Workflow>'
+    }]; //Generate node array
+    var edgeArr = []; //Generate edge array
+    for (var i = 0; i < tasks.length; i++) {
+      var task = tasks[i],
+          process_id = task.process_id,
+          block_process = task.block_process_id;
+      if (nodeHash.indexOf(process_id) < 0) {
+        nodeHash.push(process_id);
+          edgeArr.push({
+          from: block_process[j],
+          to: process_id
+        });
+      }
+      if (block_process.length === 0) {
+        edgeArr.push({
+          from: 1,
+          to: process_id
+        });
       } else {
-        //don't push to new tasks_arr
+        for (var j = 0; j < block_process.length; j++) {
+          if (nodeHash.indexOf(block_process[j]) < 0) {
+            nodeHash.push(block_process[j]);
+          }
+          edgeArr.push({
+            from: block_process[j],
+            to: process_id
+          });
+        }
       }
     }
-
+    //Start getting all process
+    //{"id":"50365895-eeb8-4342-8a66-2ebbb3fd9c78",
+    // "name":"Validate registered vehicle",
+    // "description":"Task to validate vehicle is registered based on license plate",
+    // "department_id":"7582e3ab-670a-4993-aaee-f3006c23598e",
+    // "type":"auto-approve",
+    // "is_deleted":null,
+    // "createdAt":"2017-01-25T14:14:36.000Z",
+    // "updatedAt":"2017-01-25T14:14:36.000Z",
+    // "Department":{"id":"7582e3ab-670a-4993-aaee-f3006c23598e",
+    // "name":"Department of mobility and vehicle",
+    // "description":"DMV",
+    // "address":null,
+    // "phone":"n/a","icon_url":null,
+    // "group_email":"dmv@gov.com","unique_code":"DMV",
+    // "createdAt":"2016-11-16T14:12:02.000Z","updatedAt":"2016-11-16T14:12:02.000Z"}}
+    var deferred = $q.defer();
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/process_configure?filters=' + nodeHash.join('~')
+    }).then(function(resp) {
+      for (var i = 0; i < resp.data.length; i++) {
+        var node = resp.data[i];
+        nodeArr.push({
+          id: node.id,
+          label: node.Department.unique_code + '\n' + node.name,
+          font: {'face': 'Monospace', align: 'center'}
+        });
+      }
+      deferred.resolve({
+        nodeArr: nodeArr,
+        edgeArr: edgeArr
+      });
+      $scope.dialog_loading = false;
+    });
+    return deferred.promise;
   };
 
   $scope.selectTag = function() {

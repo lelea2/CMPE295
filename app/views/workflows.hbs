@@ -43,6 +43,9 @@
           <h4 class="modal-title">View Process Configure Details</h4>
         </div>
         <div class="modal-body">
+          <div ng-show="dialog_loading">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
           <div id="myworkflow"></div>
         </div>
         <div class="modal-footer">

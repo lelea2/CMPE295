@@ -4,10 +4,13 @@
 
 [![CircleCI](https://circleci.com/gh/lelea2/CMPE295.svg?style=svg)](https://circleci.com/gh/lelea2/CMPE295)
 
-###### Demo
+###### Swagger
 
 ![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/swagger.png)
 
+###### WebUI
+
+![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/register.png)
 
 ###### How to run application
 
@@ -53,6 +56,7 @@ AWS_REGION=
 * Angular
 * HandleBar
 * Twitter Bootstrap
+* Vis.js
 
 
 ###### Deployment
