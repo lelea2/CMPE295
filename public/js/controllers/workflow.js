@@ -67,7 +67,8 @@ App.controller('workflowsController', ['$scope', '$http', '$q', function ($scope
     var nodeHash = [];
     var nodeArr = [{
       id: 1,
-      label: '<Start Workflow>'
+      label: '<Start Workflow>',
+      shape: 'box'
     }]; //Generate node array
     var edgeArr = []; //Generate edge array
     for (var i = 0; i < tasks.length; i++) {
@@ -84,16 +85,23 @@ App.controller('workflowsController', ['$scope', '$http', '$q', function ($scope
       if (block_process.length === 0) {
         edgeArr.push({
           from: 1,
-          to: process_id
+          to: process_id,
+          arrows:'to'
         });
       } else {
         for (var j = 0; j < block_process.length; j++) {
           if (nodeHash.indexOf(block_process[j]) < 0) {
             nodeHash.push(block_process[j]);
+             edgeArr.push({ //since block_process never been there, it should be execute from the start
+              from: 1,
+              to: block_process[j],
+              arrows:'to'
+            });
           }
           edgeArr.push({
             from: block_process[j],
-            to: process_id
+            to: process_id,
+            arrows:'to'
           });
         }
       }
@@ -125,7 +133,8 @@ App.controller('workflowsController', ['$scope', '$http', '$q', function ($scope
         nodeArr.push({
           id: node.id,
           label: node.Department.unique_code + '\n' + node.name,
-          font: {'face': 'Monospace', align: 'center'}
+          font: {'face': 'Monospace', align: 'center'},
+          shape: 'box'
         });
       }
       deferred.resolve({

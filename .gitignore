@@ -5,3 +5,4 @@ public/lib
 coverage
 **coverage**
 logs/**
+logs/access.log
