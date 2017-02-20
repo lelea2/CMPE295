@@ -5,6 +5,7 @@ var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
 var StateType = require('../models').StateTypes;
+var NotificationCtrl = require('./notification');
 var uuid = require('uuid/v4');
 var sequelize = require('sequelize');
 var BPromise = require('bluebird');
@@ -166,6 +167,21 @@ module.exports = {
     };
     Workflow.create(reqBody)
     .then(function (newRecords) {
+      //Create notification
+      if (!!data.file) {
+        WorkflowFile.create({
+          id: uuid(),
+          worflow_id: newRecords.id,
+          filename: data.filename,
+          mimeType: data.mimeType,
+          file: data.file //fileurl
+        })
+        .then(function(record) {
+        })
+        .catch(function(error) {
+        });
+      }
+      NotificationCtrl.createNotification('workflow', newRecords.id, 'created', 'New worfklow has been created');
       res.status(201).json(newRecords);
     })
     .catch(function (error) {

@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     task_id: DataTypes.STRING,
     task_type: DataTypes.ENUM('workflow', 'process'),
-    notification_type: DataTypes.ENUM('assigned','unassigned','commented','contacted'),
+    notification_type: DataTypes.ENUM('created', 'assigned','unassigned','commented','contacted'),
     notification_message: DataTypes.STRING
   }, {
     classMethods: {

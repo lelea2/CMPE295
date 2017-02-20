@@ -21,8 +21,20 @@ module.exports = {
     });
   },
 
-  create(req, res) {
-
+  createNotification(task_type, task_id, notification_type, notification_message) {
+    var data = {
+      id: uuid(),
+      task_id: task_id,
+      task_type: task_type,
+      notification_type: notification_type,
+      notification_message: notification_message
+    };
+    Notification.create(data)
+    .then(function(resp) {
+    })
+    .catch(function(err) {
+      console.log('Create notification err: ' + err);
+    });
   }
 
 };
