@@ -10,7 +10,14 @@ var uuid = require('uuid/v4');
 var sequelize = require('sequelize');
 var BPromise = require('bluebird');
 var cities = require('cities');
-//cities.gps_lookup(lat, lng);
+// cities.gps_lookup(37.27, -121.86)
+// { zipcode: '95136',
+//   state_abbr: 'CA',
+//   latitude: '37.269343',
+//   longitude: '-121.84939',
+//   city: 'San Jose',
+//   state: 'California',
+//   distance: 0.941698561849326 }
 
 /**
  * Helper function to generate manage process for running query, create dependencies

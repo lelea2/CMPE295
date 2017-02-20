@@ -6,8 +6,7 @@ var Notification = require('../models/').Notifications,
 
 module.exports = {
 
-  show(req, res) {
-    var dataBody = {};
+  show_workflow(req, res) {
     Notification.findAll({
       where: {
         task_type: 'workflow'
@@ -19,6 +18,11 @@ module.exports = {
     .catch(function (error) {
       res.status(500).json(error);
     });
+  },
+
+  show_task(req, res) {
+    var dataBody = {};
+
   },
 
   createNotification(task_type, task_id, notification_type, notification_message) {
