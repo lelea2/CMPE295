@@ -37,42 +37,47 @@ var Region = require('../models').Regions;
 // process_type: data.process_type, //process_id
 // critial: data.critical,
 // due_date: data.due_date
-function manageProcesses(workflow_id, tasks_arr, critical_id) {
-  var hashArr = []; //keep track of unique process_id
-  var processArr = [];
-  var processObj = []; //object of process object
-  var funcArr = [];
-  for(var i = 0; i < tasks_arr.length; i++) {
-    var process_id = tasks_arr[i].process_id,
-        block_process_id = tasks_arr[i].block_process_id;
-    if (hashArr.indexOf(process_id) < 0) {
-      hashArr.push(process_id);
-      processArr.push(uuid()); //process detail created has the same index as process
-    }
-    for (var k = 0; k < block_process_id.length; k++) {
-      if (hashArr.indexOf(block_process_id[k]) < 0) {
-        hashArr.push(block_process_id[k]);
-        processArr.push(uuid());
+function manageProcesses(workflow_id, critical_id) {
+  console.log(">>>>>>>>>> Create process details <<<<<<<<<<<<< ")
+  show_configure_one(workflow_id, function(tasks_arr) {
+    var hashArr = []; //keep track of unique process_id
+    var processArr = [];
+    var processObj = []; //object of process object
+    var funcArr = [];
+    for(var i = 0; i < tasks_arr.length; i++) {
+      var process_id = tasks_arr[i].process_id,
+          block_process_id = tasks_arr[i].block_process_id;
+      if (hashArr.indexOf(process_id) < 0) {
+        hashArr.push(process_id);
+        processArr.push(uuid()); //process detail created has the same index as process
+      }
+      for (var k = 0; k < block_process_id.length; k++) {
+        if (hashArr.indexOf(block_process_id[k]) < 0) {
+          hashArr.push(block_process_id[k]);
+          processArr.push(uuid());
+        }
       }
     }
-  }
-  for (var i = 0; i < hashArr.length; i++) {
-    var obj = {
-      id: processArr[i],
-      workflow_id: workflow_id,
-      enabled_flag: true, //default enabled_flag is true
-      currentStateId: 1, //state type should be open initially
-      block_states: getBlockStates(getObject(tasks_arr, hashArr[i]), hashArr, processArr),
-      process_type: hashArr[i],
-      critial: critical_id,
-      due_date: setDate()
+    for (var i = 0; i < hashArr.length; i++) {
+      var obj = {
+        id: processArr[i],
+        workflow_id: workflow_id,
+        enabled_flag: true, //default enabled_flag is true
+        currentStateId: 1, //state type should be open initially
+        block_states: getBlockStates(getObject(tasks_arr, hashArr[i]), hashArr, processArr),
+        process_type: hashArr[i],
+        critial: critical_id,
+        due_date: setDate()
+      }
+      funcArr.push(ProcessCtrl.create_new_process(obj));
     }
-    funcArr.push(ProcessCtrl.create_new_process(obj));
-  }
-  BPromise.all(funcArr).then(function(result) {
-    console.log('All processes created...');
-  }, function(err) {
-    console.log(err);
+    BPromise.all(funcArr).then(function(result) {
+      console.log('All processes created...');
+    }, function(err) {
+      console.log(err);
+    });
+  }, function(error) {
+    console.log(error);
   });
 }
 
@@ -105,6 +110,23 @@ function setDate() {
   var twentyDaysFromNow = now + THIRTY_DAYS;
   return twentyDaysFromNow;
 }
+
+/******************************************************************/
+
+function show_configure_one(workflow_id, cb, cb_err) {
+  WorkflowType.findOne({
+    where: {
+      id: workflow_id
+    }
+  })
+  then(function(data) {
+    var flows = JSON.parse(data.flows.toString('utf-8'));
+    cb(flows.tasks || []);
+  })
+  .catch(function (error) {
+    cb_err(error);
+  });
+};
 
 /******************************************************************/
 
@@ -257,6 +279,7 @@ module.exports = {
         .catch(function(error) {
         });
       }
+      manageProcesses(id, data.critial);
       NotificationCtrl.createNotification('workflow', newRecords.id, 'created', 'New worfklow has been created');
       res.status(201).json(newRecords);
     })
