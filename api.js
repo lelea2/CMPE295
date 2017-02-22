@@ -1111,7 +1111,7 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: Integer
  *         required: true
  *       critical:
- *         type: Integer
+ *         type: String
  *       due_date:
  *         type: String
  *       longitude:
@@ -1120,6 +1120,8 @@ exports.deleteProcessNote = process_notes.delete;
  *       latitude:
  *         type: Double
  *         required: true
+ *       processed:
+ *         type: Boolean
  *   WorkflowFile:
  *     id: WorkflowFile
  *     properties:
@@ -1155,7 +1157,7 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *         required: true
  *       is_deleted:
- *         type: boolean
+ *         type: Boolean
  *   Process:
  *     id: Process
  *     properties:

@@ -1,5 +1,7 @@
 'use strict';
 
+var JsonField = require('sequelize-json');
+
 module.exports = function(sequelize, DataTypes) {
   var Processes = sequelize.define('Processes', {
     id: {
@@ -21,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    block_states: DataTypes.BLOB,
+    block_states: JsonField(sequelize, 'Processes', 'block_states'),
     process_type: {
       type: DataTypes.STRING,
       references: {

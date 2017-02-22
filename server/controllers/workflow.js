@@ -37,9 +37,9 @@ var Region = require('../models').Regions;
 // process_type: data.process_type, //process_id
 // critial: data.critical,
 // due_date: data.due_date
-function manageProcesses(workflow_id, critical_id) {
+function manageProcesses(workflow_type_id, workflow_id, critical_id) {
   console.log(">>>>>>>>>> Create process details <<<<<<<<<<<<< ")
-  show_configure_one(workflow_id, function(tasks_arr) {
+  show_configure_one(workflow_type_id, function(tasks_arr) {
     var hashArr = []; //keep track of unique process_id
     var processArr = [];
     var processObj = []; //object of process object
@@ -64,11 +64,14 @@ function manageProcesses(workflow_id, critical_id) {
         workflow_id: workflow_id,
         enabled_flag: true, //default enabled_flag is true
         currentStateId: 1, //state type should be open initially
-        block_states: getBlockStates(getObject(tasks_arr, hashArr[i]), hashArr, processArr),
+        block_states: {
+          states: getBlockStates(getObject(tasks_arr, hashArr[i]), hashArr, processArr)
+        },
         process_type: hashArr[i],
-        critial: critical_id,
+        critical: critical_id,
         due_date: setDate()
       }
+      console.log(obj);
       funcArr.push(ProcessCtrl.create_new_process(obj));
     }
     BPromise.all(funcArr).then(function(result) {
@@ -85,13 +88,16 @@ function manageProcesses(workflow_id, critical_id) {
 /** Start helper functions to generate process **/
 
 function getBlockStates(arr, hashArr, processArr) {
+  console.log(">>> Get Block states");
   if (arr.length === 0) {
+    console.log(">>>> No block state");
     return [];
   }
   var result = [];
   for (var i = 0; i < arr.length; i++) {
     result.push(processArr[hashArr.indexOf(arr[i])]);
   }
+  console.log(result);
   return result;
 }
 
@@ -114,12 +120,15 @@ function setDate() {
 /******************************************************************/
 
 function show_configure_one(workflow_id, cb, cb_err) {
+  console.log(">>>> Workflow_id: " + workflow_id);
   WorkflowType.findOne({
     where: {
       id: workflow_id
     }
   })
-  then(function(data) {
+  .then(function(result) {
+    var data = result.dataValues;
+    console.log(data);
     var flows = JSON.parse(data.flows.toString('utf-8'));
     cb(flows.tasks || []);
   })
@@ -257,8 +266,8 @@ module.exports = {
       type_id: data.type_id,
       currentStateId: 1, //data.state, ==> Initial state of workflow is open
       note: data.note,
-      critial: data.critial,
-      due_date: data.due_date,
+      critical: data.critical,
+      due_date: data.due_date || setDate(),
       longitude: data.longitude,
       latitude: data.latitude,
       processed: false //Initial workflow create should be false
@@ -275,15 +284,17 @@ module.exports = {
           file: data.file //fileurl
         })
         .then(function(record) {
+          //crate file
         })
-        .catch(function(error) {
+        .catch(function(error2) {
         });
       }
-      manageProcesses(id, data.critial);
+      manageProcesses(data.type_id, id, data.critial); //workflow_type_id, workflow_critical_id
       NotificationCtrl.createNotification('workflow', newRecords.id, 'created', 'New worfklow has been created');
       res.status(201).json(newRecords);
     })
     .catch(function (error) {
+      console.log(error);
       res.status(500).json(error);
     });
   },

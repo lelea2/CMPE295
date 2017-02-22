@@ -9,7 +9,7 @@ module.exports = {
   show_workflow(req, res) {
     Notification.findAll({
       where: {
-        task_type: 'workflow'
+        task: 'workflow' //task_type
       }
     })
     .then(function (data) {
@@ -28,7 +28,7 @@ module.exports = {
     var data = {
       id: uuid(),
       task_id: task_id,
-      task_type: task_type,
+      task: task_type, //task_type
       notification_type: notification_type,
       notification_message: notification_message
     };
