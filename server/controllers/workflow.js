@@ -10,6 +10,7 @@ var uuid = require('uuid/v4');
 var sequelize = require('sequelize');
 var BPromise = require('bluebird');
 var cities = require('cities');
+var Region = require('../models').Regions;
 // cities.gps_lookup(37.27, -121.86)
 // { zipcode: '95136',
 //   state_abbr: 'CA',
@@ -170,7 +171,8 @@ module.exports = {
       critial: data.critial,
       due_date: data.due_date,
       longitude: data.longitude,
-      latitude: data.latitude
+      latitude: data.latitude,
+      processed: false //Initial workflow create should be false
     };
     Workflow.create(reqBody)
     .then(function (newRecords) {

@@ -21,7 +21,6 @@ module.exports = {
   },
 
   show_task(req, res) {
-    var dataBody = {};
 
   },
 
