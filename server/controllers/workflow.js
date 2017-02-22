@@ -143,7 +143,7 @@ function show_configure_one(workflow_id, cb, cb_err) {
       var office_id = result[rand].id
       cb(flows.tasks || [], office_id);
     })
-    catch(function(err1) {
+    .catch(function(err1) {
       cb_err(err1);
     });
   })
