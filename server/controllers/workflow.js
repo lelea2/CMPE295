@@ -1,6 +1,7 @@
 'use strict';
 
 var Workflow = require('../models/').Workflows;
+var Office = require('../models/').Offices;
 var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
@@ -39,7 +40,7 @@ var Region = require('../models').Regions;
 // due_date: data.due_date
 function manageProcesses(workflow_type_id, workflow_id, critical_id) {
   console.log(">>>>>>>>>> Create process details <<<<<<<<<<<<< ")
-  show_configure_one(workflow_type_id, function(tasks_arr) {
+  show_configure_one(workflow_type_id, function(tasks_arr, office_id) {
     var hashArr = []; //keep track of unique process_id
     var processArr = [];
     var processObj = []; //object of process object
@@ -69,6 +70,7 @@ function manageProcesses(workflow_type_id, workflow_id, critical_id) {
         },
         process_type: hashArr[i],
         critical: critical_id,
+        office_id: office_id,
         due_date: setDate()
       }
       console.log(obj);
@@ -130,12 +132,29 @@ function show_configure_one(workflow_id, cb, cb_err) {
     var data = result.dataValues;
     console.log(data);
     var flows = JSON.parse(data.flows.toString('utf-8'));
-    cb(flows.tasks || []);
+    var department_id = data.department_id;
+    Office.findAll({
+      where: {
+        department_id: department_id
+      }
+    })
+    .then(function(result) {
+      var rand = generateRand(0, result.length);
+      var office_id = result[rand].id
+      cb(flows.tasks || [], office_id);
+    })
+    catch(function(err1) {
+      cb_err(err1);
+    });
   })
   .catch(function (error) {
     cb_err(error);
   });
 };
+
+function generateRand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1));
+}
 
 /******************************************************************/
 

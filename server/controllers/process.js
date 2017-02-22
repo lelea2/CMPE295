@@ -134,7 +134,8 @@ module.exports = {
       block_states: data.block_states,
       process_type: data.process_type,
       critical: data.critical,
-      due_date: data.due_date
+      due_date: data.due_date,
+      office_id: data.office_id
     };
     Process.create(reqBody)
     .then(function(result) {
