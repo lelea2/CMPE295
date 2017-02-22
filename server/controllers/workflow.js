@@ -289,7 +289,8 @@ module.exports = {
         .catch(function(error2) {
         });
       }
-      manageProcesses(data.type_id, id, data.critial); //workflow_type_id, workflow_critical_id
+      manageProcesses(data.type_id, id, data.critical); //workflow_type_id, workflow_critical_id
+      //Create notifications...
       NotificationCtrl.createNotification('workflow', newRecords.id, 'created', 'New worfklow has been created');
       res.status(201).json(newRecords);
     })

@@ -133,7 +133,7 @@ module.exports = {
       currentStateId: data.currentStateId,
       block_states: data.block_states,
       process_type: data.process_type,
-      critial: data.critical,
+      critical: data.critical,
       due_date: data.due_date
     };
     Process.create(reqBody)
