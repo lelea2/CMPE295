@@ -124,26 +124,26 @@ module.exports = {
     });
   },
 
-  create(req, res) {
-    var data = req.body;
-    var id =  uuid();
+  create_new_process(data) {
+    var deferred = BPromise.pending(); //Or Q.defer() in Q
     var reqBody = {
-      id: id,
+      id: data.id,
       workflow_id: data.workflow_id,
       enabled_flag: data.enabled_flag,
       currentStateId: data.currentStateId,
-      next_states: data.next_states,
+      block_states: data.block_states,
       process_type: data.process_type,
       critial: data.critical,
       due_date: data.due_date
     };
     Process.create(reqBody)
-      .then(function (newProcess) {
-        res.status(201).json(newProcess);
-      })
-      .catch(function (error) {
-        res.status(500).json(error);
-      });
+    .then(function(result) {
+      deferred.resolve(result);
+    })
+    .catch(function(error) {
+      deferred.reject({err: error});
+    });
+    return deferred.promise;
   },
 
   update(req, res) {
@@ -151,7 +151,6 @@ module.exports = {
     var reqBody = {
       enabled_flag: data.enabled_flag,
       currentStateId: data.currentStateId,
-      next_states: data.next_states,
       critial: data.critical,
       due_date: data.due_date
     };

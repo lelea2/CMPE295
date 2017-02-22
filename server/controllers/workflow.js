@@ -6,6 +6,7 @@ var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
 var StateType = require('../models').StateTypes;
 var NotificationCtrl = require('./notification');
+var ProcessCtrl = require('./process');
 var uuid = require('uuid/v4');
 var sequelize = require('sequelize');
 var BPromise = require('bluebird');
@@ -22,25 +23,91 @@ var Region = require('../models').Regions;
 
 /**
  * Helper function to generate manage process for running query, create dependencies
+ * {"tasks": [
+    {"process_id":"50365895-eeb8-4342-8a66-2ebbb3fd9c78",
+      "block_process_id":[]},
+    {"process_id":"ef768e31-e2c5-4976-a3ab-9db08c76bf28",
+      "block_process_id":["50365895-eeb8-4342-8a66-2ebbb3fd9c78","85fdcff2-0df1-4c2a-b2b7-5c69c9311f84"]}]}
  */
-function manageProcesses(flows) {
-  var processes = {};
-  var tasks_arr = [];
-  for(var i = 0; i < flows.length; i++) {
-    var item = flows[i];
-    if (tasks_arr.indexOf(item.process_id) < 0) {
-      tasks_arr.push(item.process_id);
-    } else {
-      //don't push to new tasks_arr
+// id: data.id,
+// workflow_id: data.workflow_id,
+// enabled_flag: data.enabled_flag,
+// currentStateId: data.currentStateId,
+// block_states: data.block_states,
+// process_type: data.process_type, //process_id
+// critial: data.critical,
+// due_date: data.due_date
+function manageProcesses(workflow_id, tasks_arr, critical_id) {
+  var hashArr = []; //keep track of unique process_id
+  var processArr = [];
+  var processObj = []; //object of process object
+  var funcArr = [];
+  for(var i = 0; i < tasks_arr.length; i++) {
+    var process_id = tasks_arr[i].process_id,
+        block_process_id = tasks_arr[i].block_process_id;
+    if (hashArr.indexOf(process_id) < 0) {
+      hashArr.push(process_id);
+      processArr.push(uuid()); //process detail created has the same index as process
     }
-    for (var j = 0; j < item.block_process_id.length; j++) {
-      var block_item = item.block_process_id[j];
-      if (tasks_arr.indexOf(block_item) < 0) {
-        tasks_arr.push(block_item);
+    for (var k = 0; k < block_process_id.length; k++) {
+      if (hashArr.indexOf(block_process_id[k]) < 0) {
+        hashArr.push(block_process_id[k]);
+        processArr.push(uuid());
       }
     }
   }
+  for (var i = 0; i < hashArr.length; i++) {
+    var obj = {
+      id: processArr[i],
+      workflow_id: workflow_id,
+      enabled_flag: true, //default enabled_flag is true
+      currentStateId: 1, //state type should be open initially
+      block_states: getBlockStates(getObject(tasks_arr, hashArr[i]), hashArr, processArr),
+      process_type: hashArr[i],
+      critial: critical_id,
+      due_date: setDate()
+    }
+    funcArr.push(ProcessCtrl.create_new_process(obj));
+  }
+  BPromise.all(funcArr).then(function(result) {
+    console.log('All processes created...');
+  }, function(err) {
+    console.log(err);
+  });
 }
+
+/******************************************************************/
+/** Start helper functions to generate process **/
+
+function getBlockStates(arr, hashArr, processArr) {
+  if (arr.length === 0) {
+    return [];
+  }
+  var result = [];
+  for (var i = 0; i < arr.length; i++) {
+    result.push(processArr[hashArr.indexOf(arr[i])]);
+  }
+  return result;
+}
+
+function getObject(arr, value) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].process_id === value) {
+      return arr[i].block_process_id;
+    }
+  }
+  return [];
+}
+
+function setDate() {
+  var now = new Date();
+  var THIRTY_DAYS = 20 * 24 * 60 * 60 * 1000;
+  var twentyDaysFromNow = now + THIRTY_DAYS;
+  return twentyDaysFromNow;
+}
+
+/******************************************************************/
+
 
 module.exports = {
 
@@ -166,7 +233,7 @@ module.exports = {
     var reqBody = {
       id: id,
       type_id: data.type_id,
-      currentStateId: data.state,
+      currentStateId: 1, //data.state, ==> Initial state of workflow is open
       note: data.note,
       critial: data.critial,
       due_date: data.due_date,
@@ -314,4 +381,3 @@ module.exports = {
   }
 
 };
-

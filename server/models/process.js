@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    next_states: DataTypes.BLOB,
+    block_states: DataTypes.BLOB,
     process_type: {
       type: DataTypes.STRING,
       references: {

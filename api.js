@@ -862,24 +862,6 @@ exports.showTasks = processes.show_per_agent;
 
 /**
  * @swagger
- * path: /api/tasks
- * operations:
- *   -  httpMethod: POST
- *      summary: Create new process
- *      responseClass: Process
- *      nickname: create_process
- *      consumes:
- *        - text/html
- *      parameters:
- *        - dataType: Process
- *          paramType: body
- *          description: process object
- *          required: true
- */
-exports.createTask = processes.create;
-
-/**
- * @swagger
  * path: /api/tasks/:id
  * operations:
  *   -  httpMethod: PUT

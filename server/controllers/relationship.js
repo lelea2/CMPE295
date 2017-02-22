@@ -15,17 +15,18 @@ var session = driver.session();
 
 module.exports = {
   create(req, res) {
+    var id = req.params.id,
+        role = req.params.role;
     session
-      .run( "CREATE (a:Person {name: {name}, title: {title}})", {name: "Arthur", title: "King"})
+      .run( "CREATE (a:Agent {id: {id}, role: {role}})", {id: id, role: role})
       .then(function() {
         console.log('sucess');
-        return session.run( "MATCH (a:Person) WHERE a.name = {name} RETURN a.name AS name, a.title AS title",
-            {name: "Arthur"})
+        return session.run( "MATCH (a:Agent) WHERE a.id = {id} RETURN a.id AS id, a.role AS role",
+            {id: id})
       }, function(err) {
         console.log(err);
       })
       .then(function( result ) {
-        console.log( result.records[0].get("title") + " " + result.records[0].get("name") );
         session.close();
         driver.close();
       });

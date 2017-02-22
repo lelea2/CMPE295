@@ -160,7 +160,6 @@ app.put('/api/process_configure/:id', api.updateProcessType);
 app.delete('/api/process_configure/:id', api.deleteProcessType);
 
 //Tasks cases
-app.post('/api/task', api.createTask);
 app.get('/api/tasks', api.showTasks);
 app.put('/api/task/:id', api.updateTask);
 
