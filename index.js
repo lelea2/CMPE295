@@ -15,7 +15,6 @@ require('dotenv').load(); //loading .env variables to file
 
 var express = require('express'),
     app = express(),
-    router = express.Router(),
     path = require('path'),
     compression = require('compression'),
     cookieParser = require('cookie-parser'),
@@ -336,5 +335,7 @@ app.get('/account', security.userRequiredLoggedIn(), routes.account);
 /***************************************************************/
 app.set('port', process.env.PORT || 8000);
 app.listen(app.get('port'), function () {
+  // console.log(app._router.stack);
+  require('./document')(app._router.stack);
   logger.info('Server started on port: ' +  app.get('port'));
 });
