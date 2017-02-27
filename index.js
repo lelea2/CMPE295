@@ -15,6 +15,7 @@ require('dotenv').load(); //loading .env variables to file
 
 var express = require('express'),
     app = express(),
+    router = express.Router(),
     path = require('path'),
     compression = require('compression'),
     cookieParser = require('cookie-parser'),
