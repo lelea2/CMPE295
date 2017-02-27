@@ -307,6 +307,11 @@ app.get('/sign-s3', function(req, res) {
   });
 });
 
+//Check healthcheck (integration test for page load)
+app.get('/healthcheck', function(req, res) {
+  res.status(200).send('ok');
+});
+
 /*****************************************************/
 /***************** Views Routing *********************/
 /*****************************************************/
@@ -336,6 +341,8 @@ app.get('/account', security.userRequiredLoggedIn(), routes.account);
 app.set('port', process.env.PORT || 8000);
 app.listen(app.get('port'), function () {
   // console.log(app._router.stack);
-  require('./document')(app._router.stack);
+  require('./document')(app._router.stack); //View all routes available for the app
   logger.info('Server started on port: ' +  app.get('port'));
 });
+
+module.exports = app;

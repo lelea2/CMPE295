@@ -12,4 +12,9 @@ describe('models', function () {
     var models = require('../../server/models');
     expect(models.Memberships).to.be.ok();
   });
+
+  it('returns the roles model', function() {
+    var models = require('../../server/models');
+    expect(models.Roles).to.be.ok();
+  });
 });
