@@ -4,6 +4,8 @@
 
 [![CircleCI](https://circleci.com/gh/lelea2/CMPE295.svg?style=svg)](https://circleci.com/gh/lelea2/CMPE295)
 
+[![Code Climate](https://codeclimate.com/github/lelea2/CMPE295/badges/gpa.svg)](https://codeclimate.com/github/lelea2/CMPE295)
+
 ###### Swagger
 
 ![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/swagger.png)
