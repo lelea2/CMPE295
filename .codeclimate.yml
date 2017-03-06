@@ -49,3 +49,4 @@ exclude_paths:
 - public/lib
 - public/swagger
 - public/images
+- e2etesting

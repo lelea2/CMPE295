@@ -1,0 +1,42 @@
+{
+  "name": "parallel-protractor-test",
+  "version": "0.0.1",
+  "description": "Running parallel end 2 end tests in using Protractor from the same spec",
+  "main": "parallelize.js",
+  "scripts": {
+    "test": "echo Write unit tests!",
+    "start-hub": "webdriver-manager start",
+    "protractor": "protractor conf.js",
+    "time-protractor": "time npm run protractor",
+    "run-one": "protractor conf.js --suite=one",
+    "run-spread": "protractor conf.js --suite=spread",
+    "parallel": "node -r ./parallelize.js node_modules/.bin/protractor conf.js --suite=one",
+    "commit": "commit-wizard",
+    "pretest": "npm run format && npm run lint",
+    "lint": "standard --verbose parallelize.js",
+    "format": "standard-format -w parallelize.js",
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
+  },
+  "files": ["parallelize.js"],
+  "devDependencies": {
+    "chai": "3.5.0",
+    "chai-as-promised": "5.3.0",
+    "check-more-types": "2.20.2",
+    "lazy-ass": "1.4.0",
+    "mocha": "2.4.5",
+    "pre-git": "3.8.3",
+    "protractor": "3.2.2",
+    "standard": "6.0.8",
+    "standard-format": "2.1.1"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": "simple",
+      "pre-commit": ["npm run test"],
+      "pre-push": [],
+      "post-commit": [],
+      "post-checkout": [],
+      "post-merge": []
+    }
+  }
+}

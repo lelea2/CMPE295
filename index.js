@@ -55,7 +55,7 @@ log4js.addAppender(log4js.appenders.file('logs/access.log'), 'access');
 var logger = log4js.getLogger('access');
 
 app.use(bodyParser.urlencoded({"extended": false}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(cookieParser('keycatboard'));
 // app.use(csrfCrypto({ key: 'cmpe295project' }));
