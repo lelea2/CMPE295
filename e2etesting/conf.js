@@ -1,6 +1,6 @@
 exports.config = {
   framework: 'mocha',
-  seleniumAddress: 'http://localhost:4444/wd/hub',
+  // seleniumAddress: 'http://localhost:4444/wd/hub',
   // specs: ['spec.js'],
   suites: {
     one: 'suite/spec.js', // all tests in single file
@@ -14,7 +14,6 @@ exports.config = {
   },
   capabilities: {
     browserName: 'chrome',
-    directConnect: true,
     shardTestFiles: true,
     maxInstances: 2
   }

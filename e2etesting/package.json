@@ -5,7 +5,8 @@
   "main": "parallelize.js",
   "scripts": {
     "test": "echo Write unit tests!",
-    "start-hub": "webdriver-manager start",
+    "postinstall": "node ./webdriver-manager.fix.js",
+    "start-hub": "node_modules/.bin/webdriver-manager start",
     "protractor": "protractor conf.js",
     "time-protractor": "time npm run protractor",
     "run-one": "protractor conf.js --suite=one",
