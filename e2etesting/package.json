@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo Write unit tests!",
     "postinstall": "node ./webdriver-manager.fix.js",
-    "start-hub": "node_modules/.bin/webdriver-manager start",
+    "start-hub": "./node_modules/protractor/bin/webdriver-manager start",
     "protractor": "protractor conf.js",
     "time-protractor": "time npm run protractor",
     "run-one": "protractor conf.js --suite=one",
@@ -18,7 +18,9 @@
     "format": "standard-format -w parallelize.js",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
   },
-  "files": ["parallelize.js"],
+  "files": [
+    "parallelize.js"
+  ],
   "devDependencies": {
     "chai": "3.5.0",
     "chai-as-promised": "5.3.0",
@@ -33,11 +35,16 @@
   "config": {
     "pre-git": {
       "commit-msg": "simple",
-      "pre-commit": ["npm run test"],
+      "pre-commit": [
+        "npm run test"
+      ],
       "pre-push": [],
       "post-commit": [],
       "post-checkout": [],
       "post-merge": []
     }
+  },
+  "dependencies": {
+    "protractor": "4.0.8"
   }
 }

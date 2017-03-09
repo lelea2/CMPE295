@@ -308,9 +308,11 @@ app.get('/sign-s3', function(req, res) {
 });
 
 //Check healthcheck (integration test for page load)
-app.get('/healthcheck', function(req, res) {
-  res.status(200).send('ok');
-});
+app.use('/healthcheck', require('express-healthcheck')({
+  healthy: function () {
+    return { everything: 'is ok' };
+  }
+}));
 
 /*****************************************************/
 /***************** Views Routing *********************/
