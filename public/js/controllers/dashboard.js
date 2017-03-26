@@ -1,6 +1,7 @@
 App.controller('dashboardController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.stats = {};
+  $scope.graphs = [];
 
   $scope.init = function() {
     $http({
@@ -11,15 +12,28 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
       //success, load to view process
       $scope.stats = resp.data;
     });
-    //Draw network from response
-    $scope.drawNetwork();
+    $scope.getNetwork();
+  };
+
+  $scope.getNetwork = function() {
+    console.log('>>>> Get network <<<<<');
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/graphs'
+    }).then(function(resp) {
+      //success, load to view process
+      $scope.graphs = resp.data;
+      //Draw network from response
+      $scope.drawNetwork();
+    });
   };
 
   $scope.drawNetwork = function() {
     var color = 'gray';
     var len = undefined;
 
-    var nodes = [{id: 0, label: "0", group: 0},
+    var nodes = [{id: 0, label: 'San Jose City', group: 0},
         {id: 1, label: "1", group: 0},
         {id: 2, label: "2", group: 0},
         {id: 3, label: "3", group: 1},

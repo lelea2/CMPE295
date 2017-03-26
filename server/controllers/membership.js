@@ -5,7 +5,8 @@ var Membership = require('../models/').Memberships,
     Permission = require('./permission'),
     User = require('../models/').Users,
     Role = require('../models/').Roles,
-    uuid = require('uuid/v4');
+    uuid = require('uuid/v4'),
+    BPromise = require('bluebird');
 
 module.exports = {
 
@@ -94,6 +95,25 @@ module.exports = {
     })
     .catch(function (error) {
       res.status(500).json(error);
+    });
+  },
+
+  //This function is to show member per office
+  showMemberPerOffice(grou_id, group_type) {
+    return new BPromise(function(resolve, reject) {
+      Membership.findAll({
+        where: {
+          group_id: grou_id,
+          group_type: group_type
+        },
+        include: [Role]
+      })
+      .then(function(data) {
+        resolve(data);
+      })
+      .catch(function(err) {
+        reject(err);
+      });
     });
   }
 

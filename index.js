@@ -33,7 +33,7 @@ var express = require('express'),
     departments = require('./server/controllers/department'),
     workflows = require('./server/controllers/workflow'),
     tasks = require('./server/controllers/process'),
-    // offices = require('./server/controllers/office'),
+    offices = require('./server/controllers/office'),
     // tags = require('./server/controllers/tag'),
     users = require('./server/controllers/user'),
     customers = require('./server/controllers/customer'),
@@ -57,7 +57,7 @@ var logger = log4js.getLogger('access');
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json());
 
-app.use(cookieParser('keycatboard'));
+app.use(cookieParser('cmpe295secret'));
 // app.use(csrfCrypto({ key: 'cmpe295project' }));
 // app.use(csrfCrypto.enforcer());
 
@@ -245,6 +245,7 @@ app.put('/api/account/:id', function(req, res) {
 });
 
 //Handle statistic per user
+//Dashboard tiles
 app.get('/api/stats', function(req, res) {
   var data = req.headers;
   if (data.account_type === 'agent' && data.admin === 'true') {
@@ -273,6 +274,9 @@ app.get('/api/stats', function(req, res) {
     res.status(403).json({err: 'Invalid account type'});
   }
 });
+
+//Handle response for social network graph
+app.get('/api/graphs', offices.showStat);
 
 //Log user out
 app.get('/logout', function(req, res) {
@@ -343,7 +347,8 @@ app.get('/account', security.userRequiredLoggedIn(), routes.account);
 app.set('port', process.env.PORT || 8000);
 app.listen(app.get('port'), function () {
   // console.log(app._router.stack);
-  require('./document')(app._router.stack); //View all routes available for the app
+  //Comment this out if you want to see all routes
+  // require('./document')(app._router.stack); //View all routes available for the app
   logger.info('Server started on port: ' +  app.get('port'));
 });
 
