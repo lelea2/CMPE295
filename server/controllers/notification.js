@@ -7,6 +7,7 @@ var Notification = require('../models/').Notifications,
 module.exports = {
 
   show_workflow(req, res) {
+    console.log('>>> Show workflow notifications');
     Notification.findAll({
       where: {
         task: 'workflow' //task_type

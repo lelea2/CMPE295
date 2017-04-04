@@ -202,9 +202,9 @@ app.get('/api/customer/:id', api.showCustomer);
 app.get('/api/notifications', function(req, res) {
   var role = req.query.role || 'agent';
   if (role === 'admin') { //generate notifications for admin
-    notifications.notifications(req, res);
+    notifications.show_workflow(req, res);
   } else {
-
+    notifications.show_task(req, res);
   }
 });
 

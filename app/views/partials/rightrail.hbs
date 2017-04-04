@@ -1,6 +1,14 @@
 <div class="right-rail visible-md visible-lg">
   <div class="notifications" ng-controller="productNotificationsController" data-ng-init="init()">
     <h5>Notifications</h5>
+    <ul class="notification-list">
+      {{{{raw-helper}}}}
+      <li ng-repeat="notification in notifications" class="clearfix">
+        <p>{{notification.notification_message}}</p>
+        <p class="pull-right create-date"><em>{{formatDate(notification.createdAt)}}</en><p>
+      </li>
+      {{{{/raw-helper}}}}
+    </ul>
   </div>
 </div>
 <script src="../js/controllers/product_notifications.js"></script>

@@ -246,3 +246,27 @@ a:hover,
 a:focus {
   cursor: pointer;
 }
+
+.notifications h5 {
+  border-bottom: 3px dotted #eee;
+  padding-bottom: 10px;
+}
+
+ul.notification-list {
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+ul.notification-list li {
+  border-bottom: 1px solid #ededed;
+  padding: 5px 0;
+}
+
+ul.notification-list li .create-date{
+  font-size: 10px;
+  color: #999;
+}
+
+.clearfix {
+  clear: both;
+}
