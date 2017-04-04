@@ -21,7 +21,17 @@ module.exports = {
   },
 
   show_task(req, res) {
-
+    Notification.findAll({
+      where: {
+        task: 'task' //task_type
+      }
+    })
+    .then(function (data) {
+      res.status(200).json(data);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
   },
 
   createNotification(task_type, task_id, notification_type, notification_message) {

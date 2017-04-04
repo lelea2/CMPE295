@@ -39,7 +39,8 @@ var express = require('express'),
     customers = require('./server/controllers/customer'),
     permission = require('./server/controllers/permission'),
     // roles = require('./server/controllers/role'),
-    membership = require('./server/controllers/membership');
+    membership = require('./server/controllers/membership'),
+    notifications = require('./server/controllers/notification');
 
 //Initialize AWS region
 aws.config.update({
@@ -195,6 +196,17 @@ app.get('/api/agents/:id', api.showAgent);
 app.post('/api/customers', api.createCustomer);
 app.put('/api/customer/:id', api.updateCustomer);
 app.get('/api/customer/:id', api.showCustomer);
+
+//Handle notifications
+//notification is different between admin and agent
+app.get('/api/notifications', function(req, res) {
+  var role = req.query.role || 'agent';
+  if (role === 'admin') { //generate notifications for admin
+    notifications.notifications(req, res);
+  } else {
+
+  }
+});
 
 //Handle user login (for both customer and agent)
 app.post('/api/login', function(req, res) {
