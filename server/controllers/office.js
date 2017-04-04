@@ -99,9 +99,7 @@ module.exports = {
     var calls= [];
     Department.findAll().then(function(departments) {
       console.log('>>>> Total department: <<<<<<' + departments.length);
-      Office.findAll({
-        include: [Department]
-      })
+      Office.findAll()
       .then(function(offices) {
         for (var i = 0; i < offices.length; i++) {
           var office = offices[i];
@@ -112,7 +110,7 @@ module.exports = {
           for (var i = 0; i < offices.length; i++) {
             var office = offices[i];
             // console.log(values[i]);
-            office.members = values[i];
+            office.dataValues.members = values[i];
             // console.log(office);
             arr.push(office);
           }
