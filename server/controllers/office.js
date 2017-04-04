@@ -97,27 +97,35 @@ module.exports = {
   showStat(req, res) {
     var arr = [];
     var calls= [];
-    Office.findAll({
-      include: [Department]
-    })
-    .then(function(offices) {
-      for (var i = 0; i < offices.length; i++) {
-        var office = offices[i];
-        calls.push(MembershipCtlr.showMemberPerOffice(office.id, 'office'));
-      }
-      BPromise.all(calls).then(function(values) {
-        // console.log(values); //members in office value
+    Department.findAll().then(function(departments) {
+      console.log('>>>> Total department: <<<<<<' + departments.length);
+      Office.findAll({
+        include: [Department]
+      })
+      .then(function(offices) {
         for (var i = 0; i < offices.length; i++) {
           var office = offices[i];
-          // console.log(values[i]);
-          office.members = values[i];
-          console.log(office);
-          arr.push(office);
+          calls.push(MembershipCtlr.showMemberPerOffice(office.id, 'office'));
         }
-        res.status(200).json({data: arr});
+        BPromise.all(calls).then(function(values) {
+          // console.log(values); //members in office value
+          for (var i = 0; i < offices.length; i++) {
+            var office = offices[i];
+            // console.log(values[i]);
+            office.members = values[i];
+            // console.log(office);
+            arr.push(office);
+          }
+          res.status(200).json({
+            departments: departments,
+            offices: arr
+          });
+        });
+      })
+      .catch(function(error) {
+        res.status(500).json(error);
       });
-    })
-    .catch(function(error) {
+    }).catch(function(error) {
       res.status(500).json(error);
     });
   }

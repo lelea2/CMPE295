@@ -24,6 +24,7 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
     }).then(function(resp) {
       //success, load to view process
       $scope.graphs = resp.data;
+      console.log($scope.graphs);
       //Draw network from response
       $scope.drawNetwork();
     });
@@ -32,11 +33,10 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
   $scope.drawNetwork = function() {
     var color = 'gray';
     var len = undefined;
+    var departments = $scope.graphs.departments;
 
     var nodes = [{id: 0, label: 'San Jose City', group: 0},
-        {id: 1, label: "1", group: 0},
-        {id: 2, label: "2", group: 0},
-        {id: 3, label: "3", group: 1},
+=        {id: 3, label: "3", group: 1},
         {id: 4, label: "4", group: 1},
         {id: 5, label: "5", group: 1},
         {id: 6, label: "6", group: 2},
@@ -64,8 +64,8 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
         {id: 28, label: "28", group: 9},
         {id: 29, label: "29", group: 9}
     ];
-    var edges = [{from: 1, to: 0},
-        {from: 2, to: 0},
+    //Connect dots in graphs
+    var edges = [
         {from: 4, to: 3},
         {from: 5, to: 4},
         {from: 4, to: 0},
@@ -93,7 +93,22 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
         {from: 28, to: 27},
         {from: 29, to: 28},
         {from: 28, to: 0}
-    ]
+    ];
+
+    //Generate network based on departments
+    for (var i = 0; i < departments.length; i++) {
+      var department = departments[i];
+      nodes.push({
+        id: department.id,
+        label: department.unique_code,
+        group: department.id
+      });
+      //linked department to city
+      edges.push({
+        from: department.id,
+        to: 0
+      });
+    }
 
     // create a network
     var container = document.getElementById('mynetwork');
