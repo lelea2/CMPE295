@@ -89,9 +89,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
     }).then(function(resp) {
       $scope.loadMemberships('office', $scope.currentOffice);
       //Close model
-      $('#myModal').modal({
-        show: false
-      });
+      $('#myModal').modal('hide');
     }, function(err) {
       alert('Error update role');
     });

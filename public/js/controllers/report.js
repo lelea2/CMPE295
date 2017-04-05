@@ -1,6 +1,7 @@
 App.controller('reportController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.agents = [];
+  $scope.workflow_cases = [];
+  $scope.tasks = [];
 
   $scope.init = function() {
 
