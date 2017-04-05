@@ -372,7 +372,8 @@ module.exports = {
     var reqBody = {},
         filter = req.query.filter,
         fromDate = req.query.fromDate || new Date(new Date() - 30 * 24 * 60 * 60 * 1000),
-        toDate = req.query.toDate || new Date();
+        toDate = req.query.toDate || new Date(),
+        reqBody = {};
     if (filter === 'workflow_type') {
       reqBody = {
         where: {
@@ -381,10 +382,11 @@ module.exports = {
             $lt: fromDate,
             $gt: toDate
           }
-        }
+        },
       };
     }
-    Workflow.findaAll(reqBody)
+    reqBody.include = [WorkflowType];
+    Workflow.findAll(reqBody)
     .then(function(data) {
       res.status(200).json(data)
     })

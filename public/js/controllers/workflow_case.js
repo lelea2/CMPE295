@@ -1,6 +1,6 @@
 App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.workflows = [];
+  $scope.workflow_cases = [];
 
   $scope.init = function() {
     $http({
@@ -9,8 +9,13 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
       url: '/api/workflows'
     }).then(function(resp) {
       //success, load to view process
-      $scope.workflows = resp.data;
+      console.log(resp.data);
+      $scope.workflow_cases = resp.data;
     });
+  };
+
+  $scope.formatDate = function(date) {
+    return LINKEDGOV.formatDate(date);
   };
 
 }]);
