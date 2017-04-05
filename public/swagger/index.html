@@ -19,8 +19,9 @@
 
     <script type="text/javascript">
     $(function () {
+        var host = "http://" + window.location.host;
         window.swaggerUi = new SwaggerUi({
-                discoveryUrl: "http://localhost:8000/api-docs.json",
+                discoveryUrl: host + "/api-docs.json",
                 dom_id:"swagger-ui-container",
                 supportHeaderParams: false,
                 supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
