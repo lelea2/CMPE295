@@ -7,6 +7,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.currentDepartment = null;
   $scope.currentOffice = null;
   $scope.showOffice = false;
+  $scope.roles = [];
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -19,6 +20,8 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
       $(document).trigger('linkedgov:loading_stop');
       $scope.departments = resp.data;
     });
+    //Get roles to display in dialog
+    $scope.getRoles();
   };
 
   $scope.selectDepartment = function() {
@@ -32,6 +35,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
 
   $scope.loadMemberships = function(group_type, group_id) {
     $(document).trigger('linkedgov:loading_start');
+    $scope.agents = [];
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
@@ -65,6 +69,8 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
    */
   $scope.editAgent = function(agent) {
     $scope.formAgent = agent || {};
+    console.log($scope.formAgent);
+    $scope.currentRoleId = '' + $scope.formAgent.role_id;
     // console.log($scope.formOffice);
     $('#myModal').modal({
       show: true
@@ -72,7 +78,23 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   };
 
   $scope.updateAgent = function() {
-
+    console.log($scope.currentRoleId);
+    $http({
+      method: 'PUT',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/memberships/' + $scope.formAgent.id, //membership update
+      data: {
+        role_id: parseInt($scope.currentRoleId, 10)
+      }
+    }).then(function(resp) {
+      $scope.loadMemberships('office', $scope.currentOffice);
+      //Close model
+      $('#myModal').modal({
+        show: false
+      });
+    }, function(err) {
+      alert('Error update role');
+    });
   };
 
   $scope.getCurrentAgent = function(id) {
@@ -88,6 +110,17 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.numberToPhone = function(str) {
     console.log(str);
     return LINKEDGOV.numberToPhone(str);
+  };
+
+  $scope.getRoles = function() {
+    console.log('>>> Get roles on agent page <<<<<<');
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(false),
+      url: '/api/roles'
+    }).then(function(resp) {
+      $scope.roles = resp.data;
+    });
   };
 
 }]);

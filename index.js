@@ -290,6 +290,11 @@ app.get('/api/stats', function(req, res) {
 //Handle response for social network graph
 app.get('/api/graphs', offices.showStat);
 
+//Handle report api
+app.get('/api/report', function(req,res) {
+
+});
+
 //Log user out
 app.get('/logout', function(req, res) {
   security.logout(req);
