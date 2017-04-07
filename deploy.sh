@@ -2,6 +2,7 @@
 
 set -e
 set -u
+set -o pipefail
 
 # more bash-friendly output for jq
 JQ="jq --raw-output --exit-status"
@@ -32,7 +33,7 @@ deploy_cluster() {
   # not really necessary, but nice for demos
   for attempt in {1..30}; do
     if stale=$(aws ecs describe-services --cluster linkgov-app-cluster --services linkgov-app-service | \
-                   $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
+                  $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
       echo "Waiting for stale deployments:"
       echo "$stale"
       sleep 5
@@ -42,7 +43,7 @@ deploy_cluster() {
     fi
   done
   echo "Service update took too long."
-  return 0
+  return 1
 }
 
 make_task_def() {
