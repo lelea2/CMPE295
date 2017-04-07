@@ -7,6 +7,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.currentDepartment = null;
   $scope.currentOffice = null;
   $scope.showOffice = false;
+  // $scope.membership_stats = [];
   $scope.roles = [];
 
   $scope.init = function() {
@@ -22,6 +23,38 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
     });
     //Get roles to display in dialog
     $scope.getRoles();
+    $scope.loadMembershipStats();
+  };
+
+  $scope.loadMembershipStats = function() {
+    console.log('>>>> Loading memberships <<<<');
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/membership_stats'
+    }).then(function(resp) {
+      //success, load to view process
+      console.log(resp.data);
+      $(document).trigger('linkedgov:loading_stop');
+      // $scope.membership_stats = resp.data;
+      var data = resp.data;
+      var arr = [];
+      for (var i = 0; i < data.length; i++) {
+        var obj = data[i];
+        arr.push({
+          label: obj.Role.role,
+          value: obj.roles_count
+        });
+      }
+      //Generate morris chart
+      Morris.Donut({
+        element: 'agents-donut',
+        data: arr,
+        backgroundColor: '#ccc',
+        labelColor: '#4A5549',
+        colors: ["#0078d7", "#018574", "#ffb900"]
+      });
+    });
   };
 
   $scope.selectDepartment = function() {
@@ -47,19 +80,20 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
     });
   };
 
+  //Load office don't need affect for now
   $scope.loadOffices = function() {
     if (!!$scope.currentDepartment) {
-      $(document).trigger('linkedgov:loading_start');
+      // $(document).trigger('linkedgov:loading_start');
       $http({
         method: 'GET',
         headers: LINKEDGOV.getHeaders(true),
         url: '/api/departments/' + $scope.currentDepartment + '/offices'
       }).then(function(resp) {
-        $(document).trigger('linkedgov:loading_stop');
+        // $(document).trigger('linkedgov:loading_stop');
         $scope.offices = resp.data;
       }, function(err) {
         $scope.offices = [];
-        $(document).trigger('linkedgov:loading_stop');
+        // $(document).trigger('linkedgov:loading_stop');
       });
     }
   };

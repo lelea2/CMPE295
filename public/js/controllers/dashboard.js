@@ -17,6 +17,7 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
 
   $scope.getNetwork = function() {
     console.log('>>>> Get network <<<<<');
+    $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
@@ -27,6 +28,9 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
       console.log($scope.graphs);
       //Draw network from response
       $scope.drawNetwork();
+      window.setTimeout(function() {
+        $(document).trigger('linkedgov:loading_stop');
+      }, 1000);
     });
   };
 

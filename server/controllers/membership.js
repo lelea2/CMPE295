@@ -6,7 +6,8 @@ var Membership = require('../models/').Memberships,
     User = require('../models/').Users,
     Role = require('../models/').Roles,
     uuid = require('uuid/v4'),
-    BPromise = require('bluebird');
+    BPromise = require('bluebird'),
+    sequelize = require('sequelize');
 
 module.exports = {
 
@@ -114,6 +115,27 @@ module.exports = {
       .catch(function(err) {
         reject(err);
       });
+    });
+  },
+
+  //Show agent stats on agent page
+  show_membership_stat(req, res) {
+    Membership.findAll({
+      attributes: [
+        'role_id',
+        [sequelize.literal('COUNT(DISTINCT(Memberships.id))'), 'roles_count']
+      ],
+      include: [{
+        model: Role,
+        attributes: ['id', 'role']
+      }],
+      group: 'Memberships.role_id'
+    })
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
     });
   }
 

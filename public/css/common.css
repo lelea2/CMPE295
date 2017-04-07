@@ -270,3 +270,20 @@ ul.notification-list li .create-date{
 .clearfix {
   clear: both;
 }
+
+.btn {
+  border: 1px solid #0078d7;
+  background: #0078d7;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background: #0063b1;
+  border: 1px solid #0063b1;
+}
+
+.btn.btn-link {
+  background: transparent;
+  border: none;
+}

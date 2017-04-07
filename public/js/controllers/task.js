@@ -7,7 +7,7 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   $scope.formTask = {};
 
   $scope.init = function() {
-    // $scope.currentDepartment = LINKEDGOV.getParamVal('department_id') || '';
+    $scope.currentDepartment = LINKEDGOV.getParamVal('department_id') || '';
     $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
@@ -46,7 +46,8 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
       //Generate morris chart
       Morris.Donut({
         element: 'task-donut',
-        data: arr
+        data: arr,
+        colors: ["#0078d7", "#018574", "#ffb900", "#744d89", "#E74856", "#FF8C00", "#E300BC"]
       });
       $scope.tasks_stat = resp.data;
     });
