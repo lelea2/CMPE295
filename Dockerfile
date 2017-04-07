@@ -7,14 +7,19 @@ WORKDIR /usr/src/app
 # Super user
 USER root
 
+# Install bower globally
+RUN npm install -g bower
+
 # Install dependencies
 COPY package.json /usr/src/app
 RUN npm install
 
-COPY bower.json .bowerrc* /usr/src/app/
-RUN npm i -g bower
-RUN echo '{ "allow_root": true }' > .bowerrc
-RUN bower install
+# Install Bower Dependencies
+COPY bower.json bower.json
+COPY .bowerrc .bowerrc
+RUN bower install --allow-root
+#RUN echo '{ "allow_root": true }' > /root/.bowerrc
+#RUN bower install
 
 # Bundle app source
 COPY . /usr/src/app
