@@ -10,16 +10,15 @@ USER root
 # Install bower globally
 RUN npm install -g bower
 
-# Install dependencies
-COPY package.json /usr/src/app
-RUN npm install
-
 # Install Bower Dependencies
 COPY bower.json bower.json
 COPY .bowerrc .bowerrc
-RUN bower install --allow-root
-#RUN echo '{ "allow_root": true }' > /root/.bowerrc
-#RUN bower install
+RUN echo '{ "allow_root": true, "directory": "public/lib" }' > .bowerrc
+RUN bower install
+
+# Install NPM dependencies
+COPY package.json /usr/src/app
+RUN npm install
 
 # Bundle app source
 COPY . /usr/src/app
