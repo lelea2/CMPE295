@@ -55,7 +55,7 @@ make_task_def() {
       "image": "%s.dkr.ecr.us-west-2.amazonaws.com/linkedgov-app:%s",
       "essential": true,
       "memory": 1024,
-      "cpu": 2,
+      "cpu": 10,
       "portMappings": [
         {
           "containerPort": 8000,
@@ -76,6 +76,7 @@ push_ecr_image() {
 
 register_definition() {
   if revision=$(aws ecs register-task-definition --container-definitions "$task_def" --family $family | $JQ '.taskDefinition.taskDefinitionArn'); then
+    echo ">>>>>>>> Successfully register task <<<<<<<<<"
     echo "Revision: $revision"
   else
     echo "Failed to register task definition"
@@ -90,7 +91,7 @@ get_ecs_status() {
   CURRENT_TASK_REVISION=$(echo $DECRIBED_SERVICE | $JQ ".services[0].taskDefinition")
   CURRENT_RUNNING_TASK=$(echo $DECRIBED_SERVICE | $JQ ".services[0].runningCount")
   CURRENT_STALE_TASK=$(echo $DECRIBED_SERVICE | $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$CURRENT_TASK_REVISION\") | .taskDefinition")
-  if [[ -z "$CURRENT_STALE_TASK" ]]; then
+  if -z "$CURRENT_STALE_TASK"; then
     CURRENT_STALE_TASK=0
   fi
 }
