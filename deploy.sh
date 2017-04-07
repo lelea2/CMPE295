@@ -45,7 +45,7 @@ deploy_cluster() {
     fi
   done
   echo "Service update took too long."
-  return 1
+  return 0
 }
 
 make_task_def() {
@@ -91,9 +91,9 @@ get_ecs_status() {
   CURRENT_TASK_REVISION=$(echo $DECRIBED_SERVICE | $JQ ".services[0].taskDefinition")
   CURRENT_RUNNING_TASK=$(echo $DECRIBED_SERVICE | $JQ ".services[0].runningCount")
   CURRENT_STALE_TASK=$(echo $DECRIBED_SERVICE | $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$CURRENT_TASK_REVISION\") | .taskDefinition")
-  if -z "$CURRENT_STALE_TASK"; then
-    CURRENT_STALE_TASK=0
-  fi
+  # if -z "$CURRENT_STALE_TASK"; then
+  #   CURRENT_STALE_TASK=0
+  # fi
 }
 
 configure_aws_cli
