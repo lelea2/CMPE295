@@ -1,6 +1,7 @@
 {{> leftrail}}
 <div class="middle-rail" ng-controller="tasksController" data-ng-init="init()">
   <h3>All Tasks</h3>
+  <div id="task-donut"></div>
   {{{{raw-helper}}}}
   <div class="col-md-6" style="margin: 15px 0">
     <select class="form-control" ng-model="currentDepartment" ng-change="selectDepartment()">
@@ -72,4 +73,8 @@
   </div>
 </div>
 {{> rightrail}}
+<!-- JS for chart -->
+<script src="../lib/raphael/raphael.min.js"></script>
+<script src="../lib/morrisjs/morris.min.js"></script>
+<!-- End JS for chart -->
 <script src="../js/controllers/task.js"></script>

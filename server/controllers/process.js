@@ -205,9 +205,13 @@ module.exports = {
     ProcessType.findAll({
       attributes: [
         'department_id',
-        [sequelize.literal('COUNT(DISTINCT(id))'), 'tasks_count']
+        [sequelize.literal('COUNT(DISTINCT(ProcessTypes.id))'), 'tasks_count']
       ],
-      group: 'department_id'
+      include: [{
+        model: Department,
+        attributes: ['id', 'unique_code']
+      }],
+      group: 'ProcessTypes.department_id'
     })
     .then(function(data) {
       res.status(200).json(data);

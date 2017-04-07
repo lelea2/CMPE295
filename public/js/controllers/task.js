@@ -24,14 +24,29 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   };
 
   $scope.loadTasksStat = function() {
+    $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/tasks_stats'
     }).then(function(resp) {
       //success, load to view process
-      // $(document).trigger('linkedgov:loading_stop');
+      $(document).trigger('linkedgov:loading_stop');
       console.log(resp.data);
+      var data = resp.data;
+      var arr = [];
+      for (var i = 0; i < data.length; i++) {
+        var obj = data[i];
+        arr.push({
+          label: obj.Department.unique_code,
+          value: obj.tasks_count
+        });
+      }
+      //Generate morris chart
+      Morris.Donut({
+        element: 'task-donut',
+        data: arr
+      });
       $scope.tasks_stat = resp.data;
     });
   };
