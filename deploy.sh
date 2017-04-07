@@ -30,7 +30,10 @@ deploy_cluster() {
 
   # wait for older revisions to disappear
   # not really necessary, but nice for demos
-  for attempt in {1..30}; do
+  for attempt in {1..240}; do
+    get_ecs_status
+    echo "$(date "+%Y-%m-%d %H:%M:%S") Running : $CURRENT_RUNNING_TASK, Desired : $CURRENT_DESIRED_COUNT, Stale : $CURRENT_STALE_TASK"
+
     if stale=$(aws ecs describe-services --cluster linkgov-app-cluster --services linkgov-app-service | \
                   $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
       echo "Waiting for stale deployments:"
@@ -51,7 +54,7 @@ make_task_def() {
       "name": "linkedgov-app",
       "image": "%s.dkr.ecr.us-west-2.amazonaws.com/linkedgov-app:%s",
       "essential": true,
-      "memory": 512,
+      "memory": 1024,
       "cpu": 2,
       "portMappings": [
         {
@@ -78,7 +81,18 @@ register_definition() {
     echo "Failed to register task definition"
     return 1
   fi
+}
 
+get_ecs_status() {
+  DECRIBED_SERVICE=$(aws ecs describe-services --cluster linkgov-app-cluster \
+                                               --services linkgov-app-service);
+  CURRENT_DESIRED_COUNT=$(echo $DECRIBED_SERVICE | $JQ ".services[0].desiredCount")
+  CURRENT_TASK_REVISION=$(echo $DECRIBED_SERVICE | $JQ ".services[0].taskDefinition")
+  CURRENT_RUNNING_TASK=$(echo $DECRIBED_SERVICE | $JQ ".services[0].runningCount")
+  CURRENT_STALE_TASK=$(echo $DECRIBED_SERVICE | $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$CURRENT_TASK_REVISION\") | .taskDefinition")
+  if [[ -z "$CURRENT_STALE_TASK" ]]; then
+    CURRENT_STALE_TASK=0
+  fi
 }
 
 configure_aws_cli
