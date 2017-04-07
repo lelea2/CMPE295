@@ -22,8 +22,8 @@ deploy_cluster() {
 
   echo "Revision: $revision"
 
-  if [[ $(aws ecs update-service --cluster linkgov-app-cluster --service linkgov-app-service --task-definition $revision | \
-                   $JQ '.service.taskDefinition') != $revision ]]; then
+  if $(aws ecs update-service --cluster linkgov-app-cluster --service linkgov-app-service --task-definition $revision | \
+                   $JQ '.service.taskDefinition') != $revision; then
     echo "Error updating service."
     return 1
   fi
@@ -66,6 +66,7 @@ make_task_def() {
 }
 
 push_ecr_image() {
+  echo ">>>> Push docker image <<<<"
   eval $(aws ecr get-login --region us-west-2)
   docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/linkedgov-app:$CIRCLE_SHA1
 }
