@@ -2,6 +2,7 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
 
   $scope.departments = [];
   $scope.tasks = [];
+  $scope.tasks_stat = [];
   $scope.currentDepartment = '';
   $scope.formTask = {};
 
@@ -19,6 +20,20 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     });
 
     $scope.loadTasksPerDepartment();
+    $scope.loadTasksStat();
+  };
+
+  $scope.loadTasksStat = function() {
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/tasks_stats'
+    }).then(function(resp) {
+      //success, load to view process
+      // $(document).trigger('linkedgov:loading_stop');
+      console.log(resp.data);
+      $scope.tasks_stat = resp.data;
+    });
   };
 
   $scope.loadTasksPerDepartment = function() {

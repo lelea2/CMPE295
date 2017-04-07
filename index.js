@@ -162,6 +162,7 @@ app.delete('/api/process_configure/:id', api.deleteProcessType);
 
 //Tasks cases
 app.get('/api/tasks', api.showTasks);
+app.get('/api/tasks_stats', tasks.process_per_department);
 app.put('/api/task/:id', api.updateTask);
 
 //Process note
