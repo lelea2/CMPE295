@@ -181,6 +181,9 @@ app.delete('/api/workflow_configure/:id', api.deleteWorkflowType);
 
 //Workflow cases
 app.get('/api/workflows', api.getWorkflowCases);
+/** show workflow for customer **/
+/** /api/customer_workflows/?customer_id= **/
+app.get('/api/customer_workflows', workflows.show_by_customer);
 app.post('/api/workflows', api.createWorkflow);
 app.put('/api/workflows/:id', api.updateWorkflow);
 

@@ -424,7 +424,7 @@ module.exports = {
   show_by_customer(req, res) {
     WorklowCustomer.findAll({
       where: {
-        customer_id: req.headers.u //userId in case of customer logged in
+        customer_id: req.query.customer_id//userId in case of customer logged in
       },
       include: [Workflow]
     })

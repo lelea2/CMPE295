@@ -25,7 +25,8 @@ module.exports = function(sequelize, DataTypes) {
     due_date: DataTypes.DATE,
     longitude: DataTypes.DECIMAL(10, 2),
     latitude: DataTypes.DECIMAL(10, 2),
-    processed: DataTypes.BOOLEAN
+    processed: DataTypes.BOOLEAN,
+    finished: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
