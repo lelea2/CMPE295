@@ -7,7 +7,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.currentDepartment = null;
   $scope.currentOffice = null;
   $scope.showOffice = false;
-  // $scope.membership_stats = [];
+  $scope.membership_stats = [];
   $scope.roles = [];
 
   $scope.init = function() {
@@ -36,24 +36,30 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
       //success, load to view process
       console.log(resp.data);
       $(document).trigger('linkedgov:loading_stop');
-      // $scope.membership_stats = resp.data;
-      var data = resp.data;
-      var arr = [];
-      for (var i = 0; i < data.length; i++) {
-        var obj = data[i];
-        arr.push({
-          label: obj.Role.role,
-          value: obj.roles_count
-        });
-      }
-      //Generate morris chart
-      Morris.Donut({
-        element: 'agents-donut',
-        data: arr,
-        backgroundColor: '#ccc',
-        labelColor: '#4A5549',
-        colors: ["#0078d7", "#018574", "#ffb900"]
+      $scope.membership_stats = resp.data;
+      $scope.drawPieChart();
+    });
+  };
+
+  $scope.drawPieChart = function() {
+    var data = $scope.membership_stats;
+    var arr = [];
+    for (var i = 0; i < data.length; i++) {
+      var obj = data[i];
+      arr.push({
+        label: obj.Role.role,
+        value: obj.roles_count
       });
+    }
+    //Generate morris chart
+    Morris.Donut({
+      element: 'agents-donut',
+      data: arr,
+      backgroundColor: '#ccc',
+      labelColor: '#4A5549',
+      colors: ["#0078d7", "#018574", "#ffb900"],
+      resize: true,
+      redraw: true
     });
   };
 

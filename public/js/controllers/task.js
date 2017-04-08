@@ -33,23 +33,29 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     }).then(function(resp) {
       //success, load to view process
       $(document).trigger('linkedgov:loading_stop');
-      console.log(resp.data);
-      var data = resp.data;
-      var arr = [];
-      for (var i = 0; i < data.length; i++) {
-        var obj = data[i];
-        arr.push({
-          label: obj.Department.unique_code,
-          value: obj.tasks_count
-        });
-      }
-      //Generate morris chart
-      Morris.Donut({
-        element: 'task-donut',
-        data: arr,
-        colors: ["#0078d7", "#018574", "#ffb900", "#744d89", "#E74856", "#FF8C00", "#E300BC"]
-      });
+      // console.log(resp.data);
       $scope.tasks_stat = resp.data;
+      $scope.drawPieChart();
+    });
+  };
+
+  $scope.drawPieChart = function() {
+    var data = $scope.tasks_stat;
+    var arr = [];
+    for (var i = 0; i < data.length; i++) {
+      var obj = data[i];
+      arr.push({
+        label: obj.Department.unique_code,
+        value: obj.tasks_count
+      });
+    }
+    //Generate morris chart
+    Morris.Donut({
+      element: 'task-donut',
+      data: arr,
+      colors: ["#0078d7", "#018574", "#ffb900", "#744d89", "#E74856", "#FF8C00", "#E300BC"],
+      resize: true,
+      redraw: true
     });
   };
 
