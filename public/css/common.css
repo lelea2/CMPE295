@@ -287,3 +287,13 @@ ul.notification-list li .create-date{
   background: transparent;
   border: none;
 }
+
+.btn.btn-default {
+  background: #eee;
+}
+
+#map {
+  height:300px;
+  /*width:1000px;*/
+  box-shadow: 3px 3px 10px gray;
+}
