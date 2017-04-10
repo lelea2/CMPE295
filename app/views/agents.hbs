@@ -68,16 +68,16 @@
               <label>Edit Permission</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Manage member</label>
+              <label><input type="checkbox" value="{{permission.manage_member}}">Manage member</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Manage write</label>
+              <label><input type="checkbox" value="{{permission.manage_write}}">Manage write</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="">Manage red</label>
+              <label><input type="checkbox" value="{{permission.manage_read}}">Manage read</label>
             </div>
             <div class="checkbox disabled">
-              <label><input type="checkbox" value="">Manage delete</label>
+              <label><input type="checkbox" value="{{permission.manage_delete}}">Manage delete</label>
             </div>
             <button type="submit" class="btn btn-primary submit-form">Update Permission</button>
             {{{{/raw-helper}}}}

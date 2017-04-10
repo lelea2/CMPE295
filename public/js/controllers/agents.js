@@ -9,6 +9,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.showOffice = false;
   $scope.membership_stats = [];
   $scope.roles = [];
+  $scope.permission = {};
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -111,6 +112,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
     $scope.formAgent = agent || {};
     console.log($scope.formAgent);
     $scope.currentRoleId = '' + $scope.formAgent.role_id;
+    $scope.permission = $scope.formAgent.Permission;
     // console.log($scope.formOffice);
     $('#myModal').modal({
       show: true
@@ -146,7 +148,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   };
 
   $scope.numberToPhone = function(str) {
-    console.log(str);
+    // console.log(str);
     return LINKEDGOV.numberToPhone(str);
   };
 
