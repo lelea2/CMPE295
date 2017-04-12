@@ -30,6 +30,12 @@ App.controller('notificationController', ['$scope', '$http', function ($scope, $
       }, 5000);
     }
     $(document).bind('linkedgov:notification_shown', $scope.showNotication);
+    $(document).bind('linkedgov:notification_inpage', $scope.showInPageNotication);
+  };
+
+  $scope.showInPageNotication = function(e, params) {
+    $scope.showMessage = true;
+    $scope.showNotication(e, params);
   };
 
   $scope.showNotication = function(e, params) {

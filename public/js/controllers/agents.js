@@ -9,7 +9,12 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
   $scope.showOffice = false;
   $scope.membership_stats = [];
   $scope.roles = [];
-  $scope.permission = {};
+  $scope.permission = {
+    manage_member: false,
+    manage_write: false,
+    manage_read: false,
+    manage_delete: false
+  };
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -113,9 +118,30 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
     console.log($scope.formAgent);
     $scope.currentRoleId = '' + $scope.formAgent.role_id;
     $scope.permission = $scope.formAgent.Permission;
+    // console.log($scope.permission);
     // console.log($scope.formOffice);
     $('#myModal').modal({
       show: true
+    });
+  };
+
+  $scope.editPermission = function() {
+    console.log($scope.permission);
+    $http({
+      method: 'PUT',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/permission/' + $scope.permission.id, //membership update
+      data: $scope.permission
+    }).then(function(resp) {
+      $scope.loadMemberships('office', $scope.currentOffice);
+      $(document).trigger('linkedgov:notification_shown', {
+        message: 'Update Agent permission successfully',
+        type: 'success'
+      });
+      //Close model
+      $('#myModal').modal('hide');
+    }, function(err) {
+      alert('Error update role');
     });
   };
 
@@ -130,6 +156,10 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
       }
     }).then(function(resp) {
       $scope.loadMemberships('office', $scope.currentOffice);
+      $(document).trigger('linkedgov:notification_shown', {
+        message: 'Update Agent role successfully',
+        type: 'success'
+      });
       //Close model
       $('#myModal').modal('hide');
     }, function(err) {
