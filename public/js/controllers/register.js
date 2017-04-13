@@ -6,10 +6,13 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
   $scope.signinState = true;
   $scope.signupState = false;
   $scope.membershipState = false;
+  $scope.currMemberData = {};
   $scope.errMessage = '';
   $scope.errMessageShow = false;
   $scope.errMembershipMessage = '';
   $scope.errMembershipMessageShow = false;
+
+  $scope.currentDepartmentId = null;
 
   $scope.roles = [];
   $scope.departments = [];
@@ -54,11 +57,14 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/signup',
       data: $scope.formSignupData
-    }).then(function(data) {
+    }).then(function(resp) {
       if ($scope.formSignupData.account_type === 'agent') {
+        console.log(resp.data);
+        $scope.currMemberData = resp.data;
         $scope.showProcessMembership();
-      } else {
-        window.location = '/dashboard';
+      } else { //If choose to signup as customer, notifity customer to use mobile app
+        console.log('>>>> Choose to sign up as customer <<<<<');
+        window.location = '/intro';
       }
     }, function(err) {
       $scope.errMessage = 'Signup failed. Please try again!';
@@ -82,6 +88,8 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
 
   $scope.showProcessMembership = function() {
     $scope.membershipState = true;
+    $scope.signupState = false;
+
     if ($scope.departments.length === 0) {
       $http({
         method: 'GET',
@@ -100,6 +108,20 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
       }).then(function(resp) {
         // console.log(resp.data);
         $scope.roles = resp.data;
+      });
+    }
+  };
+
+  $scope.selectDepartment = function() {
+    if (!!$scope.currentDepartmentId) {
+      $(document).trigger('linkedgov:loading_start');
+      $http({
+        method: 'GET',
+        headers: LINKEDGOV.getHeaders(false),
+        url: '/api/departments/' + $scope.currentDepartmentId + '/offices'
+      }).then(function(resp) {
+        $scope.offices = resp.data;
+        $(document).trigger('linkedgov:loading_stop');
       });
     }
   };

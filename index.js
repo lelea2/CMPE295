@@ -72,7 +72,7 @@ app.use(cookieParser('cmpe295secret'));
 //Set up userId
 app.use(function(req, res, next) {
   res.locals._userId = security.getUserId(req) || '';
-  res.locals._role = security.getRole(req) || '';
+  res.locals._role = security.getRole(req) || 'customer';
   res.locals._isAdmin = security.isAdmin(req) || '';
   res.locals._currentYear = new Date().getFullYear();
   next();

@@ -57,7 +57,7 @@
   <form class="form-membership" ng-submit="processMembership()" ng-show="membershipState">
     <h2 class="form-membership-heading">Register membership</h2>
     <div class="form-group departments">
-      <select class="form-control" ng-model="formMembershipData.department">
+      <select class="form-control" ng-model="currentDepartmentId" ng-change="selectDepartment()">
         <option value="">Select department</option>
         <option ng-repeat="department in departments" value={{department.id}}>{{department.unique_code}}</option>
       </select>
@@ -71,7 +71,7 @@
     <div class="form-group roles">
       <select class="form-control" ng-model="formMembershipData.role">
         <option value="">Select role</option>
-        <option ng-repeat="roles in roles" value={{role.id}}>{{role.role}}</option>
+        <option ng-repeat="role in roles" value={{role.id}}>{{role.role}}</option>
       </select>
     </div>
     <div class="alert alert-danger" ng-show="errMembershipMessageShow">
