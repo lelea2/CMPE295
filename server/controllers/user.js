@@ -30,7 +30,7 @@ module.exports = {
         if (req.headers.setcookie === 'true') {
           security.setUserCookie(req, {
             id: userId,
-            role: 'customer'
+            role: 'agent'
           });
         }
         res.status(201).json(newUser);

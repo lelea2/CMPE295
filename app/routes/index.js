@@ -221,3 +221,14 @@ exports.account = function(req, res, next) {
     res.send(minifyHTML(html));
   });
 };
+
+//Display blocks page for customer if log in by browser
+exports.block = function(req, res, next) {
+  res.render('block', { title: 'Block', layout: 'main', controller: 'block' }, function (err, html) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.send(minifyHTML(html));
+  });
+};

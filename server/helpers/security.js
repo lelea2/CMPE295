@@ -101,7 +101,16 @@ module.exports = (function() {
       if (userId === '' || userId.length !== 36) {
         next();
       } else {
-        res.redirect(302, '/dashboard');
+        if (isAdmin(req)) {
+          console.log('>>> Log in as admin <<<<');
+          res.redirect(302, '/dashboard');
+        } else if (getRole(req) === 'agent') {
+          console.log('>>> Log in as agent <<<<');
+          res.redirect(302, '/report');
+        } else { //customer
+          console.log('>>> Log in as customer <<<<');
+          res.redirect(302, '/block');
+        }
       }
     };
   }

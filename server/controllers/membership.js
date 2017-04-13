@@ -35,18 +35,18 @@ module.exports = {
   },
 
   //Show membership of user (who might belong to multiple offices)
-  show_agent_membership(req, res) {
+  show_agent_membership(agent_id, cb, cbError) {
     Membership.findAll({
       where: {
-        user_id: req.params.agent_id
+        user_id: agent_id
       },
       include: [User, Role, Permissions]
     })
     .then(function(memberships) {
-      res.status(200).json(memberships);
+      cb(memberships[0].dataValues);
     })
     .catch(function (error) {
-      res.status(500).json(error);
+      cbError(error);
     });
   },
 

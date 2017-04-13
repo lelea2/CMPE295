@@ -6,7 +6,7 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
   $scope.signinState = true;
   $scope.signupState = false;
   $scope.membershipState = false;
-  $scope.currMemberData = {};
+  $scope.currMemberData = null;
   $scope.errMessage = '';
   $scope.errMessageShow = false;
   $scope.errMembershipMessage = '';
@@ -72,12 +72,25 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
     });
   };
 
+  $scope.generateMembershipData = function() {
+    console.log($scope.currMemberData);
+    console.log($scope.formMembershipData);
+    if ($scope.currMemberData && $scope.formMembershipData.role && $scope.formMembershipData.office) {
+      return {
+        user_id: $scope.currMemberData.id,
+        group_id: $scope.formMembershipData.office,
+        group_type: 'office',
+        role_id: $scope.formMembershipData.role
+      };
+    }
+  };
+
   $scope.processMembership = function() {
     $http({
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
       url: '/api/memberships',
-      data: $scope.formMembershipData
+      data: $scope.generateMembershipData()
     }).then(function(data) {
       window.location = '/dashboard';
     }, function(err) {

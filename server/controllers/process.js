@@ -219,6 +219,22 @@ module.exports = {
     .catch(function(err) {
       res.status(500).json(err);
     });
+  },
+
+  //Adding process per office
+  process_per_office(office_id, res) {
+    ProcessAdmin.findAll({
+      where: {
+        office_id: office_id
+      },
+      include: [Process]
+    })
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
   }
 
 };

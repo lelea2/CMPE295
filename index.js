@@ -284,6 +284,12 @@ app.get('/api/stats', function(req, res) {
     });
   } else if (data.account_type === 'agent') { //agent but not system admin
     logger.debug('Getting stats for agent.');
+    membership.show_agent_membership(security.getUserId(req), function(resp) {
+      //Find tasks that tied to office that user is in
+      tasks.process_per_office(resp.group_id, res);
+    }, function(err) {
+      res.status(403).json({err: 'Invalid account type'});
+    });
   } else if (data.account_type === 'resident') {
     logger.debug('Getting stats for resident.');
     res.status(500).json({err: 'Server Error'});
@@ -362,6 +368,7 @@ app.get('/tags', security.userRequiredLoggedIn(), routes.tags);
 app.get('/tasks', security.userRequiredLoggedIn(), routes.tasks);
 app.get('/task_case', security.userRequiredLoggedIn(), routes.task_case);
 app.get('/account', security.userRequiredLoggedIn(), routes.account);
+app.get('/block', routes.block);
 
 /***************************************************************/
 /******************* Run the app               *****************/
