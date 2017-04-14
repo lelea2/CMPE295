@@ -4,6 +4,7 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
   $scope.processShow = false;
 
   $scope.init = function() {
+    $(document).trigger('linkedgov:loading_start');
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
@@ -11,11 +12,13 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
     }).then(function(resp) {
       //success, load to view process
       console.log(resp.data);
+      $(document).trigger('linkedgov:loading_end');
       $scope.workflow_cases = resp.data;
     });
   };
 
   $scope.viewProcess = function(item) {
+    $(document).trigger('linkedgov:loading_start');
     var workflow_id = item.id;
     $scope.processShow = true;
     $http({
@@ -24,6 +27,7 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
       url: '/api/workflows/' + workflow_id + '/process'
     }).then(function(resp) {
       //success, load to view process
+      $(document).trigger('linkedgov:loading_end');
       console.log(resp.data);
     });
   };
