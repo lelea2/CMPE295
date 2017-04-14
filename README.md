@@ -65,6 +65,8 @@ AWS_REGION=
 
 ```
 //Encrypted .env file
+openssl aes-256-cbc -e -in secret-env-plain -out secret-env-cipher -k $KEY
+
 openssl aes-256-cbc -in .env -out secret-env-cipher
 
 
@@ -76,3 +78,5 @@ openssl aes-256-cbc -in .env -out secret-env-cipher
 * https://hub.docker.com/r/digitallyseamless/nodejs-bower-grunt/~/dockerfile/
 * https://www.promptworks.com/blog/handling-environment-secrets-in-docker-on-the-aws-container-service
 * https://blog.codeship.com/zero-downtime-deployment-with-aws-ecs-and-elb/
+* https://github.com/circleci/encrypted-files
+

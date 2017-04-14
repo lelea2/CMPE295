@@ -186,6 +186,7 @@ app.get('/api/workflows', api.getWorkflowCases);
 app.get('/api/customer_workflows', workflows.show_by_customer);
 app.post('/api/workflows', api.createWorkflow);
 app.put('/api/workflows/:id', api.updateWorkflow);
+app.get('/api/workflow_stats', workflows.show_workflow_stat);
 
 //Roles
 app.get('/api/roles', api.getRoles);

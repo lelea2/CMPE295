@@ -469,6 +469,20 @@ module.exports = {
     .catch(function(err) {
       res.status(500).json(err);
     });
+  },
+
+  show_workflow_stat(req, res) {
+    Workflow.findAll({
+      attributes: [
+        [sequelize.literal('COUNT(DISTINCT(Workflow.critical))', 'critical_count')]
+      ]
+    })
+    .then(function(result) {
+      res.status(200).json(result);
+    })
+    .catch(function(error) {
+      res.status(500).json(err);
+    });
   }
 
 };
