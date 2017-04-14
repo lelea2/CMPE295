@@ -5,6 +5,7 @@ var Office = require('../models/').Offices;
 var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
 var WorklowCustomer = require('../models').WorklowCustomers;
+var ProcessType = require('../models/').ProcessTypes;
 var StateType = require('../models').StateTypes;
 var NotificationCtrl = require('./notification');
 var ProcessCtrl = require('./process');
@@ -40,11 +41,13 @@ var Region = require('../models').Regions;
 // due_date: data.due_date
 function manageProcesses(workflow_type_id, workflow_id, critical_id) {
   console.log(">>>>>>>>>> Create process details <<<<<<<<<<<<< ")
-  show_configure_one(workflow_type_id, function(tasks_arr, office_id) {
+
+  show_workflowtype_configure(workflow_type_id, function(tasks_arr) {
     var hashArr = []; //keep track of unique process_id
     var processArr = [];
     var processObj = []; //object of process object
     var funcArr = [];
+    /************ Generate tasks array *****************/
     for(var i = 0; i < tasks_arr.length; i++) {
       var process_id = tasks_arr[i].process_id,
           block_process_id = tasks_arr[i].block_process_id;
@@ -55,34 +58,47 @@ function manageProcesses(workflow_type_id, workflow_id, critical_id) {
       for (var k = 0; k < block_process_id.length; k++) {
         if (hashArr.indexOf(block_process_id[k]) < 0) {
           hashArr.push(block_process_id[k]);
-          processArr.push(uuid());
+          processArr.push(uuid()); //generate new process array
         }
       }
     }
+    console.log('>>>>>>>>>>>>>>> Generate process array <<<<<<<<<<<<<');
+    console.log(processArr);
+    console.log('-----------------------------------------------------');
+    /************ End Generate tasks array *****************/
+    //Start assign tasks for offices
     for (var i = 0; i < hashArr.length; i++) {
-      var obj = {
-        id: processArr[i],
-        workflow_id: workflow_id,
-        enabled_flag: true, //default enabled_flag is true
-        currentStateId: 1, //state type should be open initially
-        block_states: {
-          states: getBlockStates(getObject(tasks_arr, hashArr[i]), hashArr, processArr)
-        },
-        process_type: hashArr[i],
-        critical: critical_id,
-        office_id: office_id,
-        due_date: setDate()
-      }
-      console.log(obj);
-      funcArr.push(ProcessCtrl.create_new_process(obj));
+      var currProcessType = hashArr[i];
+      var currProcess = processArr[i];
+      show_processtype_configure_one(hashArr[i], function(office_id) {
+        var obj = {
+          id: currProcess,
+          workflow_id: workflow_id,
+          enabled_flag: true, //default enabled_flag is true
+          currentStateId: 1, //state type should be open initially
+          block_states: {
+            states: getBlockStates(getObject(tasks_arr, currProcessType), hashArr, processArr)
+          },
+          office_id: office_id,
+          process_type: currProcessType,
+          critical: critical_id,
+          due_date: setDate()
+        }
+        console.log(obj);
+        funcArr.push(ProcessCtrl.create_new_process(obj));
+        if (i === hashArr.length - 1) { //last index
+          BPromise.all(funcArr).then(function(result) {
+            console.log('All processes created...');
+          }, function(err) {
+            console.log(err);
+          });
+        }
+      }, function(err) {
+        console.log(err);
+      });
     }
-    BPromise.all(funcArr).then(function(result) {
-      console.log('All processes created...');
-    }, function(err) {
-      console.log(err);
-    });
-  }, function(error) {
-    console.log(error);
+  }, function(err2) {
+    console.log(err2);
   });
 }
 
@@ -121,27 +137,28 @@ function setDate() {
 
 /******************************************************************/
 
-function show_configure_one(workflow_id, cb, cb_err) {
-  console.log(">>>> Workflow_id: " + workflow_id);
-  WorkflowType.findOne({
+//helper to find out office
+function show_processtype_configure_one(process_type_id, cb, cb_err) {
+  console.log(">>>> Process_type_id: " + process_type_id);
+  ProcessType.findOne({
     where: {
-      id: workflow_id
+      id: process_type_id
     }
   })
   .then(function(result) {
     var data = result.dataValues;
+    console.log('>>> show process type configure <<<<<');
     console.log(data);
-    var flows = JSON.parse(data.flows.toString('utf-8'));
     var department_id = data.department_id;
     Office.findAll({
       where: {
         department_id: department_id
       }
     })
-    .then(function(result) {
+    .then(function(result) { //Random generate office
       var rand = generateRand(0, result.length);
       var office_id = result[rand].id
-      cb(flows.tasks || [], office_id);
+      cb(office_id);
     })
     .catch(function(err1) {
       cb_err(err1);
@@ -152,6 +169,26 @@ function show_configure_one(workflow_id, cb, cb_err) {
   });
 };
 
+//Show workflow type configure
+function show_workflowtype_configure(worflow_type_id, cb, cb_error) {
+  WorkflowType.findOne({
+    where: {
+      id: worflow_type_id
+    }
+  })
+  .then(function(result) {
+    var data = result.dataValues;
+    console.log('>>> show process type configure <<<<<');
+    console.log(data);
+    var flows = JSON.parse(data.flows.toString('utf-8'));
+    cb(flows.tasks || []);
+  })
+  .catch(function (error) {
+    cb_err(error);
+  });
+}
+
+//Random getting office?
 function generateRand(min, max) {
   return Math.floor(Math.random() * (max - min + 1));
 }
