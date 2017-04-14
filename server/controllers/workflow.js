@@ -13,6 +13,8 @@ var sequelize = require('sequelize');
 var BPromise = require('bluebird');
 var cities = require('cities');
 var Region = require('../models').Regions;
+var RedisQueue = require('./queue');
+
 // cities.gps_lookup(37.27, -121.86)
 // { zipcode: '95136',
 //   state_abbr: 'CA',
