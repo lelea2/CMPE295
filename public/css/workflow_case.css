@@ -7,8 +7,20 @@
   height: 100%;
   background: #eee;
   padding: 20px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+  animation-delay: 2s;
 }
 
 .process-overlay .back_link {
   font-size: 16px;
+}
+
+@-webkit-keyframes process-overlay  {
+  100% { right: 0; }
+}
+
+@keyframes process-overlay  {
+  100% { left: 0; }
 }
