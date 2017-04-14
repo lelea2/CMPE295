@@ -472,16 +472,20 @@ module.exports = {
   },
 
   show_workflow_stat(req, res) {
+    console.log('>>>> Show workflow stat <<<<');
     Workflow.findAll({
       attributes: [
-        [sequelize.literal('COUNT(DISTINCT(Workflow.critical))', 'critical_count')]
-      ]
+        'critical',
+        [sequelize.literal('COUNT(DISTINCT(id))'), 'criticalCount']
+      ],
+      group: 'critical'
     })
-    .then(function(result) {
-      res.status(200).json(result);
+    .then(function(data) {
+      res.status(200).json(data);
     })
     .catch(function(error) {
-      res.status(500).json(err);
+      console.log(error);
+      res.status(500).json(error);
     });
   }
 

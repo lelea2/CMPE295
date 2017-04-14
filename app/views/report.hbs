@@ -1,17 +1,25 @@
+<link rel="stylesheet" type="text/css" href="../css/report.css">
 {{> leftrail}}
 <div class="middle-rail" ng-controller="reportController" data-ng-init="init()">
   <h3>Reports</h3>
-  <div class="col-md-6">
-    Workflows
+  <div class="col-md-4 panel-report">
+    <h5>Workflows</h5>
+    <div id="workflow-donut-chart"></div>
+    <a class="pull-right" href="/workflow_case">View details</a>
   </div>
-  <div class="col-md-6">
-    Tasks
+  <div class="col-md-7 panel-report pull-right">
+    <h5>Workflow Progress</h5>
+    <div id="workflow-chart"></div>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12" style="margin-top: 15px">
     <div id="map"></div>
   </div>
   {{> loading}}
 </div>
 {{> rightrail}}
+<!-- JS for chart -->
+<script src="../lib/raphael/raphael.min.js"></script>
+<script src="../lib/morrisjs/morris.min.js"></script>
+<!-- End JS for chart -->
 <script src="../js/controllers/report.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDJYFwjsXej__9jqM2jKXz00Egc128-LKA"></script>

@@ -15,6 +15,8 @@ App.controller('reportController', ['$scope', '$http', function ($scope, $http) 
 
   $scope.init = function() {
     $scope.drawMap();
+    $scope.drawWorkflow();
+    $scope.drawProgressChart();
   };
 
   $scope.drawMap = function() {
@@ -65,5 +67,57 @@ App.controller('reportController', ['$scope', '$http', function ($scope, $http) 
     });
     $scope.markers.push(marker);
   };
+
+  $scope.drawWorkflow = function() {
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/workflow_stats'
+    }).then(function(resp) {
+      //success, load to view process
+      var data = resp.data;
+      var arr = [];
+      for (var i = 0; i < data.length; i++) {
+        var obj = data[i];
+        arr.push({
+          label: 'Critical-Level: ' + obj.critical,
+          value: obj.criticalCount
+        });
+      }
+      //Generate morris chart
+      Morris.Donut({
+        element: 'workflow-donut-chart',
+        data: arr,
+        colors: ["#0078d7", "#018574", "#ffb900", "#744d89", "#E74856", "#FF8C00", "#E300BC"],
+        resize: true,
+        redraw: true
+      });
+    });
+  };
+
+  $scope.drawProgressChart = function() {
+    var data = [
+        { y: '1/2017', a: 5, b: 4},
+        { y: '2/2017', a: 6,  b: 2},
+        { y: '3/2017', a: 5,  b: 5},
+        { y: '4/2017', a: 7,  b: 6},
+        { y: '5/2017', a: 8,  b: 6}
+      ],
+      config = {
+        data: data,
+        element: 'workflow-chart',
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['Total done', 'Total created'],
+        fillOpacity: 0.6,
+        hideHover: 'auto',
+        behaveLikeLine: true,
+        resize: true,
+        pointFillColors:['#ffffff'],
+        pointStrokeColors: ['black'],
+        lineColors:['gray','red']
+      };
+    Morris.Area(config);
+  }
 
 }]);
