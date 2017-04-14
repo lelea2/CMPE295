@@ -1107,6 +1107,12 @@ exports.deleteProcessNote = process_notes.delete;
  *       type_id:
  *         type: String
  *         required: true
+ *       customer_id:
+ *         type: String
+ *         required: optional
+ *       note:
+ *         type: String
+ *         required: optional
  *       currentStateId:
  *         type: Integer
  *         required: true
