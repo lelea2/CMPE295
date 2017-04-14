@@ -113,6 +113,7 @@ App.controller('reportController', ['$scope', '$http', function ($scope, $http) 
         hideHover: 'auto',
         behaveLikeLine: true,
         resize: true,
+        redraw: true,
         pointFillColors:['#ffffff'],
         pointStrokeColors: ['black'],
         lineColors:['gray','red']

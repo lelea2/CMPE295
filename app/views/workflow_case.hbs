@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="../css/workflow_case.css">
 {{> leftrail}}
 <div class="middle-rail" ng-controller="workflowCaseController" data-ng-init="init()">
   <h3>Workflow cases</h3>
@@ -25,6 +26,9 @@
     </tbody>
     {{{{/raw-helper}}}}
   </table>
+  <div class="process-overlay" ng-show="processShow">
+    <a ng-click="back()"><i class="fa fa-arrow-left"></i> Back</a>
+  </div>
   {{> loading}}
   {{> notification}}
 </div>

@@ -248,6 +248,7 @@ module.exports = {
       res.status(200).json(data);
     })
     .catch(function(err) {
+      console.log(err);
       res.status(500).json(err);
     });
   }
