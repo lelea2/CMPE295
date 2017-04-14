@@ -242,10 +242,24 @@ module.exports = {
     Process.findAll({
       where: {
         workflow_id: req.params.id
-      }
+      },
+      include: [ProcessType]
     })
     .then(function(data) {
-      res.status(200).json(data);
+      console.log('>>>>> Getting data <<<<<<');
+      //console.log(data);
+      var arr = [];
+      for ( var i = 0; i < data.length; i++) {
+        var obj = data[i].dataValues;
+        arr.push({
+          id: obj.id,
+          enabled_flag: obj.enabled_flag,
+          currentStateId: obj.currentStateId,
+          block_states: JSON.parse(obj.block_states.toString('utf-8')).states,
+          ProcessType: obj.ProcessType
+        });
+      }
+      res.status(200).json(arr);
     })
     .catch(function(err) {
       console.log(err);

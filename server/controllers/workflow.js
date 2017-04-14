@@ -195,8 +195,6 @@ function generateRand(min, max) {
 }
 
 /******************************************************************/
-
-
 module.exports = {
 
   show_configure(req, res) {

@@ -18,7 +18,6 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
   };
 
   $scope.viewProcess = function(item) {
-    $(document).trigger('linkedgov:loading_start');
     var workflow_id = item.id;
     $scope.processShow = true;
     $http({
@@ -27,7 +26,6 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
       url: '/api/workflows/' + workflow_id + '/process'
     }).then(function(resp) {
       //success, load to view process
-      $(document).trigger('linkedgov:loading_end');
       console.log(resp.data);
     });
   };

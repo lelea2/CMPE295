@@ -4,41 +4,49 @@
 
 'use strict';
 
-var MYQUEUE = 'cmpe295queue'
 var RedisSMQ = require('rsmq');
 var rsmq = new RedisSMQ( {host: process.env.REDIS_URL, port: 6379, ns: 'rsmq'} );
-var RSMQWorker = require( 'rsmq-worker' );
-var worker = new RSMQWorker(MYQUEUE);
 
 console.log('testing connect to redis queue');
 
-worker.on( 'message', function( msg, next, id ){
-  // process your message
-  console.log('Message id : ' + id);
-  console.log(msg);
-  next();
-});
 
-worker.on('ready', function() {
-  console.log('queue is ready...');
-});
+//function to create new queue
+function createQueue(queuename, cb) {
+  //Create queue
+  rsmq.createQueue( {qname: queuename}, function (err, resp) {
+    if (resp === 1) {
+      console.log('queue created');
+      cb(queuename);
+    } else {
+      console.log('>>> Error create message queue <<<<');
+    }
+  });
+}
 
-// optional error listeners
-worker.on('error', function( err, msg ){
-  console.log( 'ERROR', err, msg.id );
-});
-worker.on('exceeded', function( msg ){
-  console.log( 'EXCEEDED', msg.id );
-});
-worker.on('timeout', function( msg ){
-  console.log( 'TIMEOUT', msg.id, msg.rc );
-});
+//Send message
+function sendMessage(queuename, data, cb) {
+  rsmq.sendMessage({qname: queuename, message: data}, function (err, resp) {
+    if (resp) {
+      console.log("Message sent. ID:", resp);
+      cb(resp);
+    }
+  });
+}
 
-worker.start();
+//Receive message
+function recevieMessage(queuename, cb) {
+  rsmq.receiveMessage({qname: 'queuename'}, function (err, resp) {
+    if (resp.id) {
+      cb(resp);
+    } else {
+      console.log('No messages for me...');
+    }
+  });
+}
 
-//Create queue
-rsmq.createQueue( {qname: MYQUEUE}, function (err, resp) {
-  if (resp === 1) {
-    console.log('queue created');
-  }
-});
+module.exports = {
+  createQueue: createQueue,
+  sendMessage: sendMessage,
+  recevieMessage: recevieMessage
+}
+
