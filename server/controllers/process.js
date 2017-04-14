@@ -235,6 +235,21 @@ module.exports = {
     .catch(function(err) {
       res.status(500).json(err);
     });
+  },
+
+  //Getting process per workflow
+  process_per_workflow(req, res) {
+    Process.findAll({
+      where: {
+        workflow_id: req.params.id
+      }
+    })
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
   }
 
 };
