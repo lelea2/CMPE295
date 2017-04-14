@@ -20,13 +20,19 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    customer_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Customers',
+        key: 'id'
+      }
+    },
     note: DataTypes.STRING,
     critical: DataTypes.ENUM('1','2','3','4','5'),
     due_date: DataTypes.DATE,
     longitude: DataTypes.DECIMAL(10, 2),
     latitude: DataTypes.DECIMAL(10, 2),
-    processed: DataTypes.BOOLEAN,
-    finished: DataTypes.BOOLEAN
+    processed: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

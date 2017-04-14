@@ -255,6 +255,8 @@ a:focus {
 ul.notification-list {
   padding: 0 !important;
   list-style: none !important;
+  max-height: 354px;
+  overflow: auto;
 }
 
 ul.notification-list li {

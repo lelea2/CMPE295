@@ -4,7 +4,6 @@ var Workflow = require('../models/').Workflows;
 var Office = require('../models/').Offices;
 var WorkflowType = require('../models/').WorkflowTypes;
 var WorkflowFile = require('../models').WorkflowFiles;
-var WorklowCustomer = require('../models').WorklowCustomers;
 var ProcessType = require('../models/').ProcessTypes;
 var StateType = require('../models').StateTypes;
 var NotificationCtrl = require('./notification');
@@ -459,11 +458,10 @@ module.exports = {
   //Show workflows by customers id
   //Customer might want to track their own case at this time
   show_by_customer(req, res) {
-    WorklowCustomer.findAll({
+    Worklow.findAll({
       where: {
         customer_id: req.query.customer_id//userId in case of customer logged in
-      },
-      include: [Workflow]
+      }
     })
     .then(function(data) {
       res.status(200).json(data);
