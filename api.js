@@ -715,7 +715,7 @@ exports.createWorkflow = workflows.create;
 
 /**
  * @swagger
- * path: /api/workflows/:id
+ * path: /api/workflows/{id}
  * operations:
  *   -  httpMethod: PUT
  *      summary: Update workflow
@@ -736,6 +736,30 @@ exports.createWorkflow = workflows.create;
  *          required: true
  */
 exports.updateWorkflow = workflows.update;
+
+/**
+ * @swagger
+ * path: /api/workflows/{id}/files
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Create workflow file
+ *      notes: create workflow file object
+ *      responseClass: WorkflowFile
+ *      nickname: create_workflow_file
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: id
+ *          description: Workflow Id
+ *          paramType: path
+ *          dataType: string
+ *          required: true
+ *        - dataType: WorkflowFile
+ *          paramType: body
+ *          description: workflow file object
+ *          required: true
+ */
+exports.createWorkflowFile = workflows.create_workflow_file;
 
 /**
  * @swagger
@@ -798,7 +822,7 @@ exports.createProcessType = processes.configure;
 
 /**
  * @swagger
- * path: /api/process_configure/:id
+ * path: /api/process_configure/{id}
  * operations:
  *   -  httpMethod: PUT
  *      summary: Update process type
@@ -822,7 +846,7 @@ exports.updateProcessType = processes.update_configure;
 
 /**
  * @swagger
- * path: /api/process_configure/:id
+ * path: /api/process_configure/{id}
  * operations:
  *   -  httpMethod: DELETE
  *      summary: Delete process type
@@ -862,7 +886,7 @@ exports.showTasks = processes.show_per_agent;
 
 /**
  * @swagger
- * path: /api/tasks/:id
+ * path: /api/tasks/{id}
  * operations:
  *   -  httpMethod: PUT
  *      summary: Update current process
@@ -1135,7 +1159,6 @@ exports.deleteProcessNote = process_notes.delete;
  *         type: String
  *       workflow_id:
  *         type: String
- *         required: true
  *       filename:
  *         type: String
  *         required: true

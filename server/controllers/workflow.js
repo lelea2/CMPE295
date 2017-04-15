@@ -90,6 +90,8 @@ function manageProcesses(workflow_type_id, workflow_id, critical_id) {
         if (i === hashArr.length - 1) { //last index
           BPromise.all(funcArr).then(function(result) {
             console.log('All processes created...');
+            //all process create, then create queue
+            createQueue(procressArr, worfklow_id);
           }, function(err) {
             console.log(err);
           });
@@ -100,6 +102,14 @@ function manageProcesses(workflow_type_id, workflow_id, critical_id) {
     }
   }, function(err2) {
     console.log(err2);
+  });
+}
+
+/**** Helper function to create queue ****/
+function createQueue(processArr, workflow_id) {
+  RedisQueue.createQueue(workflow_id, function() {
+    console.log('>>> Create queue <<<<');
+
   });
 }
 
@@ -330,19 +340,22 @@ module.exports = {
     Workflow.create(reqBody)
     .then(function (newRecords) {
       //Create notification
-      if (!!data.file) {
-        WorkflowFile.create({
-          id: uuid(),
-          worflow_id: newRecords.id,
-          filename: data.filename,
-          mimeType: data.mimeType,
-          file: data.file //fileurl
-        })
-        .then(function(record) {
-          //crate file
-        })
-        .catch(function(error2) {
-        });
+      if (!!data.files && data.files.length > 0) {
+        for (var i = 0; i < data.files.length; i++) {
+          var obj = data.files[i];
+          WorkflowFile.create({
+            id: uuid(),
+            worflow_id: newRecords.id,
+            filename: obj.filename,
+            mimeType: obj.mimeType,
+            file: obj.file //fileurl
+          })
+          .then(function(record) {
+            //crate file
+          })
+          .catch(function(error2) {
+          });
+        }
       }
       manageProcesses(data.type_id, id, data.critical); //workflow_type_id, workflow_critical_id
       //Create notifications...
@@ -351,6 +364,25 @@ module.exports = {
     })
     .catch(function (error) {
       console.log(error);
+      res.status(500).json(error);
+    });
+  },
+
+  create_workflow_file(req, res) {
+    var data = req.body;
+    console.log(req.params.id);
+    var reqBody = {
+      id: uuid(),
+      workflow_id: req.params.id,
+      filename: data.filename,
+      mimeType: data.mimeType,
+      file: data.file //fileurl
+    };
+    WorkflowFile.create(reqBody)
+    .then(function(record) {
+      res.status(201).json(record);
+    })
+    .catch(function(error) {
       res.status(500).json(error);
     });
   },

@@ -26,9 +26,19 @@
     </tbody>
     {{{{/raw-helper}}}}
   </table>
+  {{{{raw-helper}}}}
   <div class="process-overlay" ng-show="processShow">
     <a class="back_link" ng-click="back()"><i class="fa fa-arrow-left"></i> Back</a>
+    <div class="col-md-12 workflow-detail">
+      <h4>{{workflow.WorkflowType.name}}</h4>
+      <p><em>Created: {{formatDate(workflow.createdAt)}}</em></p>
+      <p>Note: {{workflow.note || 'N/A'}}</p>
+      <ul class="files" ng-repeat="file in files">
+        <li><img src="{{file.file}}" /><li>
+      </ul>
+    </div>
   </div>
+  {{{{/raw-helper}}}}
   {{> loading}}
   {{> notification}}
 </div>
