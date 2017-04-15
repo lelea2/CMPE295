@@ -24,3 +24,18 @@
 @keyframes process-overlay  {
   100% { left: 0; }
 }
+
+.workflow-detail img {
+  width: 250px;
+}
+}
+
+.workflow-detail ul {
+  list-style: none;
+}
+
+.workflow-detail ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+

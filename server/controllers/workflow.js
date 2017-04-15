@@ -424,7 +424,7 @@ module.exports = {
   show_files(req, res) {
     WorkflowFile.findAll({
       where: {
-        workflow_id: req.params.workflow_id
+        workflow_id: req.params.id
       }
     })
     .then(function(data) {
