@@ -171,6 +171,7 @@ app.get('/api/processes/:process_id/notes', api.getProcessNotes);
 app.post('/api/process_notes', api.createProcessNote);
 app.put('/api/process_notes/:id', api.updateProcessNote);
 app.delete('/api/process_notes/:id', api.deleteProcessNote);
+app.get('/api/process_admin', tasks.show_task_admin);
 
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);

@@ -42,8 +42,22 @@
       //This is in order to maintain angular syntax
       'raw-helper': function(options) {
         return options.fn();
-      }
+      },
 
+      'helperMissing': function(/* [args, ] options */) {
+        var options = arguments[arguments.length - 1];
+        console.log(options);
+        // throw new Handlebars.Exception('Unknown field: ' + options.name);
+      },
+
+      'if': function(value, options) {
+        console.log(value);
+        if (!!value) {
+          options.fn(this);
+        } else {
+          options.inverse(this);
+        }
+      }
     };
 
     /************* END HELPERS *************/

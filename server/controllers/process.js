@@ -3,8 +3,9 @@
 var Process = require('../models/').Processes;
 var ProcessType = require('../models/').ProcessTypes;
 var ProcessFile = require('../models/').ProcessFiles;
-var ProcessAdmin = require('../models/').ProcessAdmins;
+var ProcessAdmin = require('../models/').ProcessAdmin;
 var Department = require('../models/').Departments;
+var Office = require('../models/').Offices;
 var StateType = require('../models').StateTypes;
 var User = require('../models/').Users;
 var uuid = require('uuid/v4');
@@ -183,6 +184,24 @@ module.exports = {
     });
   },
 
+  show_task_admin(req, res) {
+    ProcessAdmin.findAll({
+      where: {
+        process_id: {
+          $in: req.query.filters.split('~')
+        }
+      },
+      include: [User]
+    })
+    .then(function (data) {
+      res.status(200).json(data);
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.status(500).json(error);
+    });
+  },
+
   //http://stackoverflow.com/questions/22643263/how-to-get-a-distinct-count-with-sequelize
   //SELECT process_type, COUNT(DISTINCT(office_id)) as 'countOfOfficeId' GROUP BY process_type
   process_stat(req, res) {
@@ -243,7 +262,7 @@ module.exports = {
       where: {
         workflow_id: req.params.id
       },
-      include: [ProcessType]
+      include: [ProcessType, StateType, Office]
     })
     .then(function(data) {
       console.log('>>>>> Getting data <<<<<<');
@@ -255,8 +274,11 @@ module.exports = {
           id: obj.id,
           enabled_flag: obj.enabled_flag,
           currentStateId: obj.currentStateId,
+          critical: obj.critical,
           block_states: JSON.parse(obj.block_states.toString('utf-8')).states,
-          ProcessType: obj.ProcessType
+          ProcessType: obj.ProcessType,
+          StateType: obj.StateType,
+          Office: obj.Office || {}
         });
       }
       res.status(200).json(arr);

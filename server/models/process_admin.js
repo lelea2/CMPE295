@@ -2,6 +2,12 @@
 
 module.exports = function(sequelize, DataTypes) {
   var ProcessAdmin = sequelize.define('ProcessAdmin', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
+    },
     process_id: {
       type: DataTypes.STRING,
       references: {
@@ -13,6 +19,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       references: {
         model: 'Users', // Can be both a string representing the table name, or a reference to the model
+        key: 'id'
+      }
+    },
+    office_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Offices', // Can be both a string representing the table name, or a reference to the model
         key: 'id'
       }
     }
