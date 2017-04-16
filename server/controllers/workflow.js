@@ -87,16 +87,21 @@ function manageProcesses(workflow_type_id, workflow_id, critical_id) {
         }
         console.log(obj);
         funcArr.push(ProcessCtrl.create_new_process(obj));
-        if (i === hashArr.length - 1) { //last index
+        console.log(hashArr.length);
+        console.log(i);
+        if (i === hashArr.length) { //last index
+          console.log('>>> Last index <<<<');
           BPromise.all(funcArr).then(function(result) {
             console.log('All processes created...');
             //all process create, then create queue
-            createQueue(procressArr, worfklow_id);
+            createQueue(processArr, workflow_id, critical_id);
           }, function(err) {
+            console.log('>> Error queue not created <<<<');
             console.log(err);
           });
         }
       }, function(err) {
+        console.log('>>>> Error getting process configure <<<<<');
         console.log(err);
       });
     }
@@ -106,10 +111,29 @@ function manageProcesses(workflow_type_id, workflow_id, critical_id) {
 }
 
 /**** Helper function to create queue ****/
-function createQueue(processArr, workflow_id) {
+function createQueue(processArr, workflow_id, critical) {
   RedisQueue.createQueue(workflow_id, function() {
     console.log('>>> Create queue <<<<');
-
+    RedisQueue.sendMessage(workflow_id, {
+      processArr: processArr,
+      workflow_id: workflow_id,
+      critical: critical
+    }, function() {
+      console.log('>>>> Successfullly send message');
+      if (parseInt(critical, 10) > 1) { //If critical > 1, then process workflow immediately after queue
+        Workflow.update({currentStateId: 2}, { //update workflow to become process
+          where: {
+            id: workflow_id
+          }
+        })
+        .then(function (updateRecords) {
+          console.log('>>>> Update workflow record after queue <<<<<');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    });
   });
 }
 
@@ -201,7 +225,7 @@ function show_workflowtype_configure(worflow_type_id, cb, cb_error) {
 
 //Random getting office?
 function generateRand(min, max) {
-  return Math.floor(Math.random() * (max - min + 1));
+  return Math.floor(Math.random() * (max - min));
 }
 
 /******************************************************************/
@@ -331,7 +355,7 @@ module.exports = {
       type_id: data.type_id,
       currentStateId: 1, //data.state, ==> Initial state of workflow is open
       note: data.note,
-      critical: data.critical,
+      critical: data.critical || "1",
       due_date: data.due_date || setDate(),
       longitude: data.longitude,
       latitude: data.latitude,

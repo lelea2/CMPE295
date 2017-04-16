@@ -126,26 +126,27 @@ module.exports = {
   },
 
   create_new_process(data) {
-    var deferred = BPromise.pending(); //Or Q.defer() in Q
-    var reqBody = {
-      id: data.id,
-      workflow_id: data.workflow_id,
-      enabled_flag: data.enabled_flag,
-      currentStateId: data.currentStateId,
-      block_states: data.block_states,
-      process_type: data.process_type,
-      critical: data.critical,
-      due_date: data.due_date,
-      office_id: data.office_id
-    };
-    Process.create(reqBody)
-    .then(function(result) {
-      deferred.resolve(result);
-    })
-    .catch(function(error) {
-      deferred.reject({err: error});
+    return new BPromise(function(resolve, reject) {
+      var reqBody = {
+        id: data.id,
+        workflow_id: data.workflow_id,
+        enabled_flag: data.enabled_flag,
+        currentStateId: data.currentStateId,
+        block_states: data.block_states,
+        process_type: data.process_type,
+        critical: data.critical,
+        due_date: data.due_date,
+        office_id: data.office_id
+      };
+      Process.create(reqBody)
+      .then(function(result) {
+        console.log('>>>> Successfully create promise <<<<');
+        return resolve(result);
+      })
+      .catch(function(error) {
+        return reject({err: error});
+      });
     });
-    return deferred.promise;
   },
 
   update(req, res) {

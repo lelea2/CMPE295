@@ -9,11 +9,21 @@ var rsmq = new RedisSMQ( {host: process.env.REDIS_URL, port: 6379, ns: 'rsmq'} )
 
 console.log('testing connect to redis queue');
 
+rsmq.createQueue( {qname: 'cmpe295test'}, function (err, resp) {
+  if (resp === 1) {
+    console.log('>>> Create queue cmpe295test <<<<');
+  }
+});
+
 
 //function to create new queue
 function createQueue(queuename, cb) {
   //Create queue
+  console.log('>>> Creating Redis queuename: ' + queuename);
+  // console.log(rsmq);
   rsmq.createQueue( {qname: queuename}, function (err, resp) {
+    console.log(resp);
+    console.log(err);
     if (resp === 1) {
       console.log('queue created');
       cb(queuename);
