@@ -7,7 +7,7 @@
 console.log(process.env.REDIS_URL);
 
 var RedisSMQ = require('rsmq');
-var rsmq = new RedisSMQ( {host: '127.0.0.1', port: 6379, ns: 'rsmq'} );
+var rsmq = new RedisSMQ( {host: process.env.REDIS_URL, port: 6379, ns: 'rsmq'} );
 var RSMQWorker = require( 'rsmq-worker' );
 var worker = new RSMQWorker( 'cmpe295test' );
 
