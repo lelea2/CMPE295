@@ -7,3 +7,4 @@ coverage
 **logs/**
 **logs/access.log
 **bower_components**
+newrelic_agent.log
