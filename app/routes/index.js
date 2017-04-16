@@ -138,7 +138,11 @@ exports.offices = function(req, res, next) {
 
 //Display agents page
 exports.agents = function(req, res, next) {
-  res.render('agents', { title: 'Agents', layout: 'main', controller: 'agents' }, function (err, html) {
+  var renderer = 'agents_office';
+  if (security.isAdmin(req)) {
+    renderer = 'agents';
+  }
+  res.render(renderer, { title: 'Agents', layout: 'main', controller: 'agents' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);

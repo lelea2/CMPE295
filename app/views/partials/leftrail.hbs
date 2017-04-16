@@ -70,9 +70,11 @@
           <li>
             <a href="/agents">View Agents</a>
           </li>
+          {{#if _isAdmin}}
           <li>
             <a href="/create_agent">Configure Agent</a>
           </li>
+          {{/if}}
         </ul>
       <!-- /.nav-second-level -->
       </li>
