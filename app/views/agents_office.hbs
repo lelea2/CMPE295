@@ -1,5 +1,14 @@
 {{> leftrail}}
 <div class="middle-rail" ng-controller="agentsController" data-ng-init="init()">
+  {{{{raw-helper}}}}
+  <div class="col-md-6">
+    <h4>Agent available for {{membership.Office.unique_code}}</h4>
+    <h6><b>Total count: </b> {{agents.length}} </h6>
+  </div>
+  {{{{/raw-helper}}}}
+  <div class="col-md-6">
+    {{> membership_agent}}
+  </div>
   {{> loading}}
   {{> notification}}
 </div>
