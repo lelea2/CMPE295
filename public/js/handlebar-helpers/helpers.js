@@ -26,7 +26,7 @@
       },
 
       eq: function(val, val2, block) {
-        if(val == val2){
+        if(val == val2) {
           return block(this);
         }
       },

@@ -243,11 +243,12 @@ module.exports = {
 
   //Adding process per office
   process_per_office(office_id, res) {
-    ProcessAdmin.findAll({
+    console.log('>>>> Process per office_id: ' + office_id);
+    Process.findAll({
       where: {
         office_id: office_id
       },
-      include: [Process]
+      include: [ProcessType]
     })
     .then(function(data) {
       res.status(200).json(data);

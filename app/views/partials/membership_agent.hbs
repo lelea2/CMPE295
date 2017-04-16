@@ -1,0 +1,13 @@
+{{{{raw-helper}}}}
+<div class="membership">
+  <p><em>Email:</em> <b>{{membership.User.email}}</b></p>
+  <p><em>Role:</em> <b>{{membership.Role.role}}</b><p>
+  <p><b>Permissions:</b></p>
+  <ul>
+    <li><em>Manage member: </em>{{membership.Permission.manage_member}}</li>
+    <li><em>Manage write: </em>{{membership.Permission.manage_write}}</li>
+    <li><em>Manage read: </em>{{membership.Permission.manage_read}}</li>
+    <li><em>Manage delete: </em>{{membership.Permission.manage_delete}}</li>
+  </ul>
+</div>
+{{{{/raw-helper}}}}

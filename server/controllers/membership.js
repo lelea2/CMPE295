@@ -43,6 +43,7 @@ module.exports = {
       include: [User, Role, Permissions]
     })
     .then(function(memberships) {
+      // console.log(memberships);
       cb(memberships[0].dataValues);
     })
     .catch(function (error) {

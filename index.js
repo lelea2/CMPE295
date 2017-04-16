@@ -141,6 +141,15 @@ app.post('/api/memberships', api.createMembership);
 app.get('/api/membership_stats', membership.show_membership_stat);
 app.put('/api/memberships/:id', api.updateMembership);
 app.delete('/api/memberships/:id', api.deleteMembership);
+app.get('/api/agent_membership', function(req, res) {
+  membership.show_agent_membership(security.getUserId(req), function(resp) {
+    console.log(resp);
+    res.status(200).json(resp);
+  }, function(err) {
+    console.log(err);
+    res.status(500).json({err: err});
+  });
+});
 
 //Permission
 app.put('/api/permission/:id', permission.update);
@@ -172,6 +181,10 @@ app.post('/api/process_notes', api.createProcessNote);
 app.put('/api/process_notes/:id', api.updateProcessNote);
 app.delete('/api/process_notes/:id', api.deleteProcessNote);
 app.get('/api/process_admin', tasks.show_task_admin);
+app.get('/api/process_office', function(req, res) {
+  var office_id = req.query.office_id;
+  tasks.process_per_office(office_id, res);
+});
 
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);

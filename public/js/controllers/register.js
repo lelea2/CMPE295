@@ -92,7 +92,7 @@ App.controller('registerController', ['$scope', '$http', function ($scope, $http
       url: '/api/memberships',
       data: $scope.generateMembershipData()
     }).then(function(data) {
-      window.location = '/dashboard';
+      window.location = '/'; //decide where to 302 by server
     }, function(err) {
       $scope.errMembershipMessage = 'Register membership failed. Please try again!';
       $scope.errMembershipMessageShow = true;
