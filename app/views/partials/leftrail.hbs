@@ -44,13 +44,13 @@
       <!-- /.nav-second-level -->
       </li>
       {{/if}}
+      {{#if _isAdmin}}
       <li>
         <a data-toggle="collapse" href="#manageGroups" aria-expanded="false" aria-controls="manageGroups"><i class="fa fa fa-group fa-fw"></i> Manage Groups <span class="fa fa-angle-down pull-right"></span></a>
         <ul class="nav nav-second-level collapse" id="manageGroups">
           <li>
             <a href="/offices">View Offices</a>
           </li>
-          {{#if _isAdmin}}
           <li>
             <a href="/departments">View Departments</a>
           </li>
@@ -60,10 +60,10 @@
           <li>
             <a href="/create_office">Configure Office</a>
           </li>
-          {{/if}}
         </ul>
       <!-- /.nav-second-level -->
       </li>
+      {{/if}}
       <li>
         <a data-toggle="collapse" href="#manageAgents" aria-expanded="false" aria-controls="manageAgents"><i class="fa fa-user-plus fa-fw"></i> Manage Agents <span class="fa fa-angle-down pull-right"></span></a>
         <ul class="nav nav-second-level collapse" id="manageAgents">

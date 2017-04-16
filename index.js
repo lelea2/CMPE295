@@ -42,6 +42,8 @@ var express = require('express'),
     membership = require('./server/controllers/membership'),
     notifications = require('./server/controllers/notification');
 
+require('newrelic'); //Require newrelic startup
+
 //Initialize AWS region
 aws.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,

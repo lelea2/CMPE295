@@ -153,7 +153,11 @@ exports.agents = function(req, res, next) {
 
 //Display report page
 exports.report = function(req, res, next) {
-  res.render('report', { title: 'Report', layout: 'main', controller: 'report' }, function (err, html) {
+  var renderer = 'report_agent';
+  if (security.isAdmin(req)) {
+    renderer = 'report';
+  }
+  res.render(renderer, { title: 'Report', layout: 'main', controller: 'report' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);

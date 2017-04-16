@@ -15,6 +15,7 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
       $scope.membership = resp.data;
       if ($scope.membership.group_type === 'office') {
         $scope.getOffice();
+        $scope.getAgents();
       } else {
         alert('Current member has not assigned membership for office');
         $(document).trigger('linkedgov:loading_stop');
@@ -31,12 +32,22 @@ App.controller('agentsController', ['$scope', '$http', function ($scope, $http) 
       console.log(resp.data);
       $scope.membership.Office = resp.data;
       console.log($scope.membership);
-      $(document).trigger('linkedgov:loading_stop');
+      // $(document).trigger('linkedgov:loading_stop');
     });
   };
 
   $scope.getAgents = function() {
-
+    $(document).trigger('linkedgov:loading_start');
+    $scope.agents = [];
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/memberships?group_type=office&group_id=' + $scope.membership.group_id
+    }).then(function(resp) {
+      //success, load to view process
+      $(document).trigger('linkedgov:loading_stop');
+      $scope.agents = resp.data;
+    });
   };
 
 
