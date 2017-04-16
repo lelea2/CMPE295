@@ -4,16 +4,22 @@
 
 'use strict';
 
+console.log(process.env.REDIS_URL);
+
 var RedisSMQ = require('rsmq');
-var rsmq = new RedisSMQ( {host: process.env.REDIS_URL, port: 6379, ns: 'rsmq'} );
+var rsmq = new RedisSMQ( {host: '127.0.0.1', port: 6379, ns: 'rsmq'} );
+var RSMQWorker = require( 'rsmq-worker' );
+var worker = new RSMQWorker( 'cmpe295test' );
 
 console.log('testing connect to redis queue');
 
-rsmq.createQueue( {qname: 'cmpe295test'}, function (err, resp) {
-  if (resp === 1) {
-    console.log('>>> Create queue cmpe295test <<<<');
-  }
-});
+// rsmq.createQueue( {qname: 'cmpe295test'}, function (err, resp) {
+//   console.log(resp);
+//   console.log(err);
+//   if (resp === 1) {
+//     console.log('>>> Create queue cmpe295test <<<<');
+//   }
+// });
 
 
 //function to create new queue

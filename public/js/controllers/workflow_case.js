@@ -69,6 +69,7 @@ App.controller('workflowCaseController', ['$scope', '$http', function ($scope, $
         $scope.tasks[arr.indexOf(obj.process_id)].admin = obj;
       }
       $scope.processShow = true;
+      $(".middle-rail").scrollTop(0); //scroll top for middle-rails
     });
   };
 
