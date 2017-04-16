@@ -335,7 +335,7 @@ app.get('/sign-s3', function(req, res) {
       logger.error(err);
       return res.status(500).json({err: err});
     }
-    console.log(data);
+    // console.log(data);
     var returnData = {
       signedRequest: data,
       url: 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + fileName

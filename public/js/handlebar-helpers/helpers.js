@@ -48,15 +48,6 @@
         var options = arguments[arguments.length - 1];
         console.log(options);
         // throw new Handlebars.Exception('Unknown field: ' + options.name);
-      },
-
-      'if': function(value, options) {
-        console.log(value);
-        if (!!value) {
-          options.fn(this);
-        } else {
-          options.inverse(this);
-        }
       }
     };
 
