@@ -1,6 +1,7 @@
 'use strict';
 
 var minify = require('html-minifier').minify;
+var security = require('../../server/helpers/security');
 
 /**
  * Function minify HTML response
@@ -192,7 +193,11 @@ exports.tags = function(req, res, next) {
 
 //Display tasks page
 exports.tasks = function(req, res, next) {
-  res.render('tasks', { title: 'Tasks', layout: 'main', controller: 'tasks' }, function (err, html) {
+  var renderer = 'tasks_agent';
+  if (security.isAdmin(req)) {
+    renderer = 'tasks';
+  }
+  res.render(renderer, { title: 'Tasks', layout: 'main', controller: 'tasks' }, function (err, html) {
     if (err) {
       console.log(err);
       return next(err);
