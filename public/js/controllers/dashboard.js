@@ -103,13 +103,13 @@ App.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
         shape: 'dot',
         size: 30,
         font: {
-            size: 32,
-            color: '#444'
+          size: 32,
+          color: '#444'
         },
         borderWidth: 2
       },
       edges: {
-          width: 2
+        width: 2
       }
     };
     network = new vis.Network(container, data, options);

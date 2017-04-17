@@ -1,4 +1,14 @@
 {{> leftrail}}
+<style>
+#mynetwork {
+  width: 90%;
+  height: 500px;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  background: #fff;
+  margin: 15px auto;
+}
+</style>
 <div class="middle-rail" ng-controller="agentsController" data-ng-init="init()">
   {{{{raw-helper}}}}
   <div class="col-md-6">
@@ -9,12 +19,12 @@
   <div class="col-md-6">
     {{> membership_agent}}
   </div>
+  <div class="col-md-12" id="mynetwork"></div>
   {{> loading}}
   {{> notification}}
 </div>
 {{> rightrail}}
 <!-- JS for chart -->
-<script src="../lib/raphael/raphael.min.js"></script>
-<script src="../lib/morrisjs/morris.min.js"></script>
+<script src="../lib/vis/dist/vis.min.js"></script>
 <!-- End JS for chart -->
 <script src="../js/controllers/agents_office.js"></script>
