@@ -187,6 +187,10 @@ app.get('/api/process_office', function(req, res) {
   var office_id = req.query.office_id;
   tasks.process_per_office(office_id, res);
 });
+app.get('/api/process_stat', function(req, res) {
+  var office_id = req.query.office_id;
+  tasks.process_stat_per_office(office_id, res);
+});
 
 //Workflows
 app.get('/api/workflow_configure', api.getWorkflowTypes);

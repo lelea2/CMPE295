@@ -1,15 +1,17 @@
 <link rel="stylesheet" type="text/css" href="../css/report.css">
 {{> leftrail}}
 <div class="middle-rail" ng-controller="reportController" data-ng-init="init()">
-  <h3>Reports</h3>
+  {{{{raw-helper}}}}
+  <h3>Reports for {{membership.Office.unique_code}}</h3>
   <div class="col-md-4 panel-report">
     <h5>Tasks</h5>
     <div id="task-donut-chart"></div>
   </div>
   <div class="col-md-7 panel-report pull-right">
-    <h5>Task Progress</h5>
+    <h5>Task Velocity</h5>
     <div id="task-chart"></div>
   </div>
+  {{{{/raw-helper}}}}
   {{> loading}}
 </div>
 {{> rightrail}}

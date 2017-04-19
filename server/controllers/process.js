@@ -258,6 +258,26 @@ module.exports = {
     });
   },
 
+  process_stat_per_office(office_id, res) {
+    console.log('>>>> Process per office_id: ' + office_id);
+    Process.findAll({
+      attributes: [
+        'critical',
+        [sequelize.literal('COUNT(DISTINCT(Processes.id))'), 'critical_count']
+      ],
+      group: 'Processes.critical',
+      where: {
+        office_id: office_id
+      }
+    })
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function(err) {
+      res.status(500).json(err);
+    });
+  },
+
   //Getting process per workflow
   process_per_workflow(req, res) {
     Process.findAll({

@@ -110,13 +110,12 @@ App.controller('reportController', ['$scope', '$http', function ($scope, $http) 
         ykeys: ['a', 'b'],
         labels: ['Total done', 'Total created'],
         fillOpacity: 0.6,
-        hideHover: 'auto',
         behaveLikeLine: true,
         resize: true,
         redraw: true,
         pointFillColors:['#ffffff'],
         pointStrokeColors: ['black'],
-        lineColors:['gray','red']
+        lineColors:["#E74856", "#FF8C00"]
       };
     Morris.Area(config);
   }
