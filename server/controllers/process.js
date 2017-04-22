@@ -170,6 +170,39 @@ module.exports = {
     });
   },
 
+  //Assign process to member
+  assign_process(req, res) {
+    var data = req.body;
+    var reqBody = {
+      process_id: req.params.process_id,
+      user_id: data.agent_id,
+      office_id: data.office_id
+    };
+    ProcessAdmin.create(reqBody)
+      .then(function (newProcessType) {
+        res.status(201).json(newProcessType);
+      })
+      .catch(function (error) {
+        res.status(500).json(error);
+      });
+  },
+
+  //Function to get process assignee if applied
+  get_process_assignee(req, res) {
+    ProcessAdmin.findAll({
+      where: {
+        process_id: req.params.process_id
+      },
+      include: [User]
+    })
+    .then(function (data) {
+      res.status(200).json(data);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
+  },
+
   show_per_agent(req, res) {
     ProcessAdmin.findAll({
       where: {

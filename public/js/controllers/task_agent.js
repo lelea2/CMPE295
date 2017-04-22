@@ -3,7 +3,8 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   $scope.membership = {};
   $scope.tasks = [];
   $scope.agents = [];
-  $scope.task_assignee = {};
+  $scope.task_assignee = [];
+  $scope.assignee = {};
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -64,10 +65,40 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     });
   };
 
+  $scope.getProcessAdmin = function(process_id) {
+    $http({
+      method: 'GET',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/processes/' + process_id + '/admin'
+    }).then(function(resp) {
+      //success, load to view process
+      $scope.task_assignee = resp.data || [];
+    });
+  };
+
+  $scope.assignProcessAdmin = function(process_id) {
+    $http({
+      method: 'POST',
+      headers: LINKEDGOV.getHeaders(true),
+      url: '/api/processes/' + process_id + '/admin'
+      data: $scope.assignee
+    }).then(function(resp) {
+      //success, load to view process
+      // window.location.reload('/?department_id=' + $scope.formTask.department_id);
+      //hide modal
+      $('#myTaskModal').modal({
+        show: false
+      });
+    });
+  };
+
   $scope.viewDetail = function(item) {
     console.log('view task detail...');
     console.log(item);
     $scope.getAgents();
+    $('#myTaskModal').modal({
+      show: true
+    });
   };
 
   $scope.formatDate = function(date) {

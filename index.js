@@ -179,14 +179,19 @@ app.put('/api/task/:id', api.updateTask);
 
 //Process note
 app.get('/api/processes/:process_id/notes', api.getProcessNotes);
+app.get('/api/processes/:process_id/admin', tasks.get_process_assignee); //getting process admin
+app.post('/api/processes/:process_id/admin', tasks.assign_process); //assign process admin
+
 app.post('/api/process_notes', api.createProcessNote);
 app.put('/api/process_notes/:id', api.updateProcessNote);
 app.delete('/api/process_notes/:id', api.deleteProcessNote);
 app.get('/api/process_admin', tasks.show_task_admin);
+//Getting process per office
 app.get('/api/process_office', function(req, res) {
   var office_id = req.query.office_id;
   tasks.process_per_office(office_id, res);
 });
+//Get process statistic
 app.get('/api/process_stat', function(req, res) {
   var office_id = req.query.office_id;
   tasks.process_stat_per_office(office_id, res);

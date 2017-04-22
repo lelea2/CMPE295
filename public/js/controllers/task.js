@@ -99,6 +99,10 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
       //success, load to view process
       // window.location.reload('/?department_id=' + $scope.formTask.department_id);
       $scope.loadTasksPerDepartment();
+      //hide modal
+      $('#myTaskModal').modal({
+        show: false
+      });
     });
   };
 
