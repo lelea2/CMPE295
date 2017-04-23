@@ -35,6 +35,32 @@
   {{{{/raw-helper}}}}
   {{> loading}}
   {{> notification}}
+   <div id="myTaskModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Assign Agent</h4>
+        </div>
+        <div class="modal-body">
+          {{{{raw-helper}}}}
+          <form ng-submit="updateTask()">
+            <select>
+              <option value="">Assign to new agent</option>
+              <option ng-repeat="agent in agents" value={{agent.user_id}}>{{agent.User.firstName + ' ' + agent.User.lastName}}</option>
+            </select>
+            <br/>
+            <button type="submit" class="btn btn-primary submit-form">Assign Agent</button>
+          </form>
+          {{{{/raw-helper}}}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{> rightrail}}
 <!-- JS for chart -->

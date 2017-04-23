@@ -52,6 +52,7 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   };
 
   $scope.getAgents = function() {
+    console.log('>>>>> Get agent <<<<<');
     $(document).trigger('linkedgov:loading_start');
     $scope.agents = [];
     $http({
@@ -61,11 +62,13 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     }).then(function(resp) {
       //success, load to view process
       $(document).trigger('linkedgov:loading_stop');
+      console.log(resp.data);
       $scope.agents = resp.data;
     });
   };
 
   $scope.getProcessAdmin = function(process_id) {
+    console.log('>>> Get process admin <<<<');
     $http({
       method: 'GET',
       headers: LINKEDGOV.getHeaders(true),
@@ -73,18 +76,18 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     }).then(function(resp) {
       //success, load to view process
       $scope.task_assignee = resp.data || [];
+      $scope.assignee = ($scope.task_assignee.length > 0) ? $scope.task_assignee[0].id : {}
     });
   };
 
   $scope.assignProcessAdmin = function(process_id) {
+    console.log('>>> assign process admin <<<<');
     $http({
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
-      url: '/api/processes/' + process_id + '/admin'
+      url: '/api/processes/' + process_id + '/admin',
       data: $scope.assignee
     }).then(function(resp) {
-      //success, load to view process
-      // window.location.reload('/?department_id=' + $scope.formTask.department_id);
       //hide modal
       $('#myTaskModal').modal({
         show: false
@@ -92,10 +95,16 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     });
   };
 
+  $scope.currentTaskType = function(item) {
+    var type = item.ProcessType.type;
+    return type;
+  };
+
   $scope.viewDetail = function(item) {
     console.log('view task detail...');
     console.log(item);
     $scope.getAgents();
+    $scope.getProcessAdmin();
     $('#myTaskModal').modal({
       show: true
     });
