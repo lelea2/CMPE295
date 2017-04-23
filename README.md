@@ -15,7 +15,7 @@
 ![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/register.png)
 
 
-![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/register.png)
+![alt tag](https://github.com/lelea2/CMPE295/blob/master/demo/network.png)
 
 ###### How to run application
 
