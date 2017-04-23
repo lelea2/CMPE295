@@ -45,12 +45,19 @@
         </div>
         <div class="modal-body">
           {{{{raw-helper}}}}
-          <form ng-submit="updateTask()">
-            <select>
-              <option value="">Assign to new agent</option>
-              <option ng-repeat="agent in agents" value={{agent.user_id}}>{{agent.User.firstName + ' ' + agent.User.lastName}}</option>
-            </select>
-            <br/>
+          <form ng-submit="assignProcessAdmin()">
+            <div>
+              <h5>Task details</h5>
+              <p><em>Office: </em>{{membership.Office.unique_code}}</p>
+              <p><em>Due date: </em>{{formatDate(currentTask.due_date)}}</p>
+              <p><em>Task type: </em>{{currentTask.ProcessType.type}}</p>
+            </div>
+            <div>
+              <select ng-model="assignee.id">
+                <option value="">Assign to new agent</option>
+                <option ng-repeat="agent in agents" value={{agent.user_id}}>{{agent.User.firstName + ' ' + agent.User.lastName}}</option>
+              </select>
+            </div>
             <button type="submit" class="btn btn-primary submit-form">Assign Agent</button>
           </form>
           {{{{/raw-helper}}}}

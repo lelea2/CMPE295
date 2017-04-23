@@ -5,6 +5,7 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   $scope.agents = [];
   $scope.task_assignee = [];
   $scope.assignee = {};
+  $scope.currentTask = {};
 
   $scope.init = function() {
     $(document).trigger('linkedgov:loading_start');
@@ -76,7 +77,8 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     }).then(function(resp) {
       //success, load to view process
       $scope.task_assignee = resp.data || [];
-      $scope.assignee = ($scope.task_assignee.length > 0) ? $scope.task_assignee[0].id : {}
+      $scope.assignee = ($scope.task_assignee.length > 0) ? $scope.task_assignee[0].id : {};
+      console.log($scope.assignee);
     });
   };
 
@@ -85,13 +87,18 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
     $http({
       method: 'POST',
       headers: LINKEDGOV.getHeaders(true),
-      url: '/api/processes/' + process_id + '/admin',
-      data: $scope.assignee
+      url: '/api/processes/' + $scope.currentTask.id + '/admin',
+      data: {
+        office_id: $scope.membership.Office.id,
+        user_id: $scope.assignee.id
+      }
     }).then(function(resp) {
       //hide modal
-      $('#myTaskModal').modal({
-        show: false
+      $(document).bind('linkedgov:notification_shown', {
+        type: 'success',
+        message: 'Task assigned to new agent successfully'
       });
+      $('#myTaskModal').modal('hide');
     });
   };
 
@@ -103,6 +110,7 @@ App.controller('tasksController', ['$scope', '$http', function ($scope, $http) {
   $scope.viewDetail = function(item) {
     console.log('view task detail...');
     console.log(item);
+    $scope.currentTask = item;
     $scope.getAgents();
     $scope.getProcessAdmin();
     $('#myTaskModal').modal({

@@ -175,7 +175,7 @@ module.exports = {
     var data = req.body;
     var reqBody = {
       process_id: req.params.process_id,
-      user_id: data.agent_id,
+      user_id: data.user_id,
       office_id: data.office_id
     };
     ProcessAdmin.create(reqBody)
