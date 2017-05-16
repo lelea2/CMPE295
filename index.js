@@ -286,7 +286,8 @@ app.put('/api/account/:id', function(req, res) {
   } else if (data.account_type === 'resident') {
     api.updateCustomer(req, res);
   } else {
-    res.status(403).json({err: 'Invalid account type'});
+    api.updateCustomer(req, res);
+    // res.status(403).json({err: 'Invalid account type'});
   }
 });
 
